@@ -1,0 +1,37 @@
+<RCC>
+    <qresource prefix="/">
+        <file alias="translations/ModelViewer_zh_CN.qm">../translations/ModelViewer_zh_CN.qm</file>
+        <file alias="translations/ModelViewer_en.qm">../translations/ModelViewer_en.qm</file>
+        <file alias="style/dark.qss">style/dark.qss</file>
+        <file alias="style/light.qss">style/light.qss</file>
+        <file alias="style/nord.qss">style/nord.qss</file>
+        <file alias="style/solarized.qss">style/solarized.qss</file>
+        <file alias="icons/open.svg">icons/open.svg</file>
+        <file alias="icons/home.svg">icons/home.svg</file>
+        <file alias="icons/solid.svg">icons/solid.svg</file>
+        <file alias="icons/wireframe.svg">icons/wireframe.svg</file>
+        <file alias="icons/points.svg">icons/points.svg</file>
+        <file alias="icons/solidwireframe.svg">icons/solidwireframe.svg</file>
+        <file alias="icons/screenshot.svg">icons/screenshot.svg</file>
+        <file alias="icons/fullscreen.svg">icons/fullscreen.svg</file>
+        <file alias="icons/light.svg">icons/light.svg</file>
+        <file alias="icons/close.svg">icons/close.svg</file>
+        <file alias="icons/about.svg">icons/about.svg</file>
+        <file alias="icons/model-info.svg">icons/model-info.svg</file>
+        <file alias="icons/scene-tree.svg">icons/scene-tree.svg</file>
+        <file alias="icons/light-control.svg">icons/light-control.svg</file>
+        <file alias="icons/recent.svg">icons/recent.svg</file>
+        <file alias="icons/exit.svg">icons/exit.svg</file>
+        <file alias="icons/prev.svg">icons/prev.svg</file>
+        <file alias="icons/next.svg">icons/next.svg</file>
+        <file alias="icons/theme.svg">icons/theme.svg</file>
+        <file alias="icons/welcome-model.svg">icons/welcome-model.svg</file>
+        <file alias="icons/handler-stats.svg">icons/handler-stats.svg</file>
+        <file alias="icons/handler-light.svg">icons/handler-light.svg</file>
+        <file alias="icons/handler-wireframe.svg">icons/handler-wireframe.svg</file>
+        <file alias="icons/handler-axes.svg">icons/handler-axes.svg</file>
+        <file alias="icons/handler-texture.svg">icons/handler-texture.svg</file>
+        <file alias="icons/handler-threading.svg">icons/handler-threading.svg</file>
+        <file alias="icons/handler-screencapture.svg">icons/handler-screencapture.svg</file>
+    </qresource>
+</RCC>
