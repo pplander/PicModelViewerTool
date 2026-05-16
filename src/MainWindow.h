@@ -8,6 +8,7 @@
 #include <QAction>
 #include <QActionGroup>
 #include <QStackedWidget>
+#include <QUndoStack>
 
 #include <osg/ref_ptr>
 #include <osg/Node>
@@ -16,7 +17,7 @@ class OSGWidget;
 class ModelLoader;
 class ModelInfoDock;
 class SceneTreeDock;
-class LightControlDock;
+class NodeEditorDock;
 class WelcomeWidget;
 class ModelConverter;
 
@@ -69,6 +70,8 @@ private:
     void loadStyleSheet(const QString& path);
     QString themeStyleSheetPath(Theme theme) const;
     QString themeName(Theme theme) const;
+    QString themeAccentColor(Theme theme) const;
+    void updateWindowIcon();
 
     void updateRecentFiles();
     void addToRecentFiles(const QString& filePath);
@@ -87,10 +90,14 @@ private:
     // Dock widgets
     ModelInfoDock* m_modelInfoDock = nullptr;
     SceneTreeDock* m_sceneTreeDock = nullptr;
-    LightControlDock* m_lightControlDock = nullptr;
+    NodeEditorDock* m_nodeEditorDock = nullptr;
+
+    // Undo system
+    QUndoStack* m_undoStack = nullptr;
 
     // Menu
     QMenu* m_fileMenu = nullptr;
+    QMenu* m_editMenu = nullptr;
     QMenu* m_viewMenu = nullptr;
     QMenu* m_toolsMenu = nullptr;
     QMenu* m_languageMenu = nullptr;
@@ -104,6 +111,11 @@ private:
     QAction* m_openAction = nullptr;
     QAction* m_closeAction = nullptr;
     QAction* m_exitAction = nullptr;
+    QAction* m_undoAction = nullptr;
+    QAction* m_redoAction = nullptr;
+    QAction* m_deleteNodeAction = nullptr;
+    QAction* m_hideNodeAction = nullptr;
+    QAction* m_duplicateNodeAction = nullptr;
     QAction* m_resetViewAction = nullptr;
     QAction* m_fullScreenAction = nullptr;
     QAction* m_screenshotAction = nullptr;
@@ -154,4 +166,6 @@ private:
     QStringList m_dirFiles;       // model files in current directory
     int m_currentFileIndex = -1;  // index in m_dirFiles
     Theme m_currentTheme = Dark;
+    bool m_silentLoad = false;
+    bool m_loading = false;
 };

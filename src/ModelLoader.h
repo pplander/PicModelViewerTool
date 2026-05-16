@@ -46,7 +46,6 @@ public:
     static bool isAssimpFormat(const QString& extension);
 
 signals:
-    void loadProgress(const QString& message, int percent);
     void loadFinished(bool success, const QString& message);
 
 private:

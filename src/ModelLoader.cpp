@@ -57,7 +57,6 @@ osg::Node* ModelLoader::loadFile(const QString& filePath)
     }
 
     QString ext = fileInfo.suffix().toLower();
-    emit loadProgress(tr("Loading model: %1").arg(fileInfo.fileName()), 10);
 
     osg::Node* node = nullptr;
     QString loaderUsed;
@@ -65,7 +64,6 @@ osg::Node* ModelLoader::loadFile(const QString& filePath)
     // Try OSG first for all formats it supports
     if (isOSGFormat(ext))
     {
-        emit loadProgress(tr("Trying OSG loader..."), 30);
         node = loadWithOSG(filePath);
         if (node)
         {
@@ -76,7 +74,6 @@ osg::Node* ModelLoader::loadFile(const QString& filePath)
     // If OSG failed, or it's an Assimp format, try Assimp
     if (!node && isAssimpFormat(ext))
     {
-        emit loadProgress(tr("Trying Assimp loader..."), 50);
         node = loadWithAssimp(filePath);
         if (node)
         {
@@ -87,7 +84,6 @@ osg::Node* ModelLoader::loadFile(const QString& filePath)
     if (!node)
     {
         // Last resort: try OSG for any format
-        emit loadProgress(tr("Trying OSG as fallback..."), 70);
         node = loadWithOSG(filePath);
         if (node)
         {
@@ -97,7 +93,6 @@ osg::Node* ModelLoader::loadFile(const QString& filePath)
 
     if (node)
     {
-        emit loadProgress(tr("Calculating model info..."), 90);
         calculateModelInfo(node, filePath, loaderUsed);
         emit loadFinished(true, tr("Model loaded successfully: %1").arg(fileInfo.fileName()));
     }

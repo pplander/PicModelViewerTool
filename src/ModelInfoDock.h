@@ -35,33 +35,38 @@ private:
     QTreeWidgetItem* m_formatItem;
     QTreeWidgetItem* m_loaderItem;
 
-    // Geometry info items
+    // Model geometry info items
     QTreeWidgetItem* m_vertexCountItem;
     QTreeWidgetItem* m_faceCountItem;
     QTreeWidgetItem* m_meshCountItem;
     QTreeWidgetItem* m_materialCountItem;
     QTreeWidgetItem* m_textureCountItem;
 
-    // Bounding box items
+    // Model bounding box items
     QTreeWidgetItem* m_bbMinItem;
     QTreeWidgetItem* m_bbMaxItem;
     QTreeWidgetItem* m_bbSizeItem;
 
-    // Node info items
+    // Selected node info group
     QTreeWidgetItem* m_nodeInfoGroup;
     QTreeWidgetItem* m_nodeNameItem;
     QTreeWidgetItem* m_nodeTypeItem;
     QTreeWidgetItem* m_nodeChildrenItem;
     QTreeWidgetItem* m_nodeDescItem;
+
+    // Selected node geometry info group (top-level)
+    QTreeWidgetItem* m_nodeGeoGroup;
+    QTreeWidgetItem* m_nodeDrawableItem;
     QTreeWidgetItem* m_nodeVertexItem;
     QTreeWidgetItem* m_nodeFaceItem;
-    QTreeWidgetItem* m_nodeDrawableItem;
+
+    // Selected node bounding box group (top-level)
+    QTreeWidgetItem* m_nodeBbGroup;
     QTreeWidgetItem* m_nodeBbMinItem;
     QTreeWidgetItem* m_nodeBbMaxItem;
     QTreeWidgetItem* m_nodeBbSizeItem;
 
     void collectNodeStats(const osg::Node* node, unsigned int& vertexCount, unsigned int& faceCount, unsigned int& drawableCount);
 
-    ModelInfo m_wholeModelInfo;  // saved for restoring when node deselected
     bool m_hasNodeSelected = false;
 };

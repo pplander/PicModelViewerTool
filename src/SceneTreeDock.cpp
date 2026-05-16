@@ -1,4 +1,5 @@
 #include "SceneTreeDock.h"
+#include "OSGWidget.h"
 
 #include <osg/Node>
 #include <osg/Group>
@@ -72,6 +73,12 @@ void SceneTreeDock::clearTree()
 void SceneTreeDock::buildTree(const osg::Node* node, QStandardItem* parentItem)
 {
     if (!node) return;
+
+    // Skip highlight overlay nodes (mask is exactly HIGHLIGHT_NODE_MASK = 0x80000000).
+    // Normal nodes have mask 0xFFFFFFFF which also has this bit set,
+    // so we must use == not & to only filter overlay nodes.
+    if (node->getNodeMask() == OSGWidget::HIGHLIGHT_NODE_MASK)
+        return;
 
     QString name = node->getName().empty() ? tr("(unnamed)") : QString::fromStdString(node->getName());
 

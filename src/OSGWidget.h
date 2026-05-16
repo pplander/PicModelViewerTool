@@ -13,6 +13,8 @@
 #include <osg/Light>
 #include <osg/Material>
 #include <osg/Geode>
+#include <osg/Geometry>
+#include <osg/LineWidth>
 #include <osgUtil/LineSegmentIntersector>
 
 class OSGWidget : public QOpenGLWidget
@@ -68,6 +70,9 @@ public:
     void clearSelection();
     osg::Node* getSelectedNode() const { return m_selectedNode.get(); }
 
+    // Node mask for highlight overlay geodes (excluded from picking and scene tree)
+    static const unsigned int HIGHLIGHT_NODE_MASK = 0x80000000u;
+
     // Send a key event to OSG event handlers (ASCII key code)
     void sendOSGKeyEvent(int key);
 
@@ -107,6 +112,7 @@ private:
     void highlightNode(osg::Node* node);
     void unhighlightNode(osg::Node* node);
     osg::Geode* createAxesGeode();
+    osg::Geode* createBoundingBoxGeode(const osg::BoundingBox& bb);
 
     osg::ref_ptr<osgViewer::Viewer> m_viewer;
     osg::ref_ptr<osgViewer::GraphicsWindowEmbedded> m_graphicsWindow;
@@ -115,8 +121,8 @@ private:
 
     // Selection state
     osg::ref_ptr<osg::Node> m_selectedNode;
-    osg::ref_ptr<osg::StateSet> m_savedStateSet;
-    osg::ref_ptr<osg::Material> m_highlightMaterial;
+    osg::ref_ptr<osg::Geode> m_highlightGeode;
+    osg::ref_ptr<osg::Group> m_overlayGroup;  // Persistent overlay layer for highlight visuals
 
     // Click detection for pick
     QPoint m_mousePressPos;
