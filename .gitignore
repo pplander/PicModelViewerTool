@@ -1,0 +1,104 @@
+/.claude
+# ==============================================
+# 通用 Git 忽略文件（C++ / OSG / Qt / CMake / VS）
+# ==============================================
+
+# ----------------------
+# 编译输出目录
+# ----------------------
+build/
+Build/
+bin/
+Bin/
+lib/
+Lib/
+out/
+output/
+x64/
+x86/
+Debug/
+debug/
+Release/
+release/
+RelWithDebInfo/
+MinSizeRel/
+.vs/
+.vscode/
+.idea/
+CMakeFiles/
+CMakeScripts/
+cmake-build-*/
+*.dir/
+
+# ----------------------
+# CMake 生成文件
+# ----------------------
+CMakeCache.txt
+CMakeLists.txt.user
+CMakeLists.txt.user.*
+cmake_install.cmake
+CTestTestfile.cmake
+CPackConfig.cmake
+CPackSourceConfig.cmake
+compile_commands.json
+
+# ----------------------
+# 编译器生成文件
+# ----------------------
+*.o
+*.obj
+*.a
+*.lib
+*.so
+*.so.*
+*.dylib
+*.dll
+*.exe
+*.pdb
+*.idb
+*.ilk
+*.exp
+*.sdf
+*.opensdf
+*.suo
+*.user
+*.unsuccessfulbuild
+*.log
+
+# ----------------------
+# Qt 生成文件
+# ----------------------
+*.autosave
+*.pro.user
+*.pro.user.*
+moc_*.cpp
+qrc_*.cpp
+ui_*.h
+qmake_*.sh
+.qmake.stash
+
+# ----------------------
+# OSG / 3D 相关
+# ----------------------
+*.osgb
+*.ive
+*.jpg
+*.png
+*.bmp
+*.tga
+!models/
+!textures/
+!assets/
+
+# ----------------------
+# 临时/日志/缓存
+# ----------------------
+*.log
+*.tmp
+*.temp
+.DS_Store
+Thumbs.db
+*.swp
+*.bak
+*.backup
+.cache/
