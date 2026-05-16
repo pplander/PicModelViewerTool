@@ -16,6 +16,7 @@
 #include <osg/ComputeBoundsVisitor>
 
 #include <OpenThreads/Thread>
+#include <vector>
 
 OSGWidget::OSGWidget(QWidget* parent)
     : QOpenGLWidget(parent)
@@ -26,13 +27,6 @@ OSGWidget::OSGWidget(QWidget* parent)
 
     // Ensure widget expands to fill available space
     setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Expanding);
-
-    // Create highlight material
-    m_highlightMaterial = new osg::Material;
-    m_highlightMaterial->setAmbient(osg::Material::FRONT_AND_BACK, osg::Vec4(0.3f, 0.6f, 1.0f, 1.0f));
-    m_highlightMaterial->setDiffuse(osg::Material::FRONT_AND_BACK, osg::Vec4(0.3f, 0.6f, 1.0f, 1.0f));
-    m_highlightMaterial->setSpecular(osg::Material::FRONT_AND_BACK, osg::Vec4(0.5f, 0.7f, 1.0f, 1.0f));
-    m_highlightMaterial->setEmission(osg::Material::FRONT_AND_BACK, osg::Vec4(0.1f, 0.2f, 0.4f, 1.0f));
 
     initViewer();
 
@@ -113,18 +107,51 @@ void OSGWidget::setSceneData(osg::Node* node)
 {
     if (!m_viewer) return;
 
+    // Stop rendering timer while replacing scene to avoid race condition
+    m_timer.stop();
+
+    // Clear any existing selection highlight
+    clearSelection();
+
+    // Remove overlay group from old scene
+    if (m_overlayGroup && m_overlayGroup->getNumParents() > 0)
+    {
+        m_overlayGroup->getParent(0)->removeChild(m_overlayGroup);
+    }
+
+    // Re-create overlay group
+    m_overlayGroup = new osg::Group;
+    m_overlayGroup->setNodeMask(HIGHLIGHT_NODE_MASK);
+    m_overlayGroup->setName("_highlight_overlay");
+
     if (node)
     {
         osgUtil::Optimizer optimizer;
         optimizer.optimize(node, osgUtil::Optimizer::DEFAULT_OPTIMIZATIONS);
-    }
 
-    m_viewer->setSceneData(node);
-    if (node)
-    {
+        // Set new scene data BEFORE detaching old root,
+        // so the viewer always holds a valid scene graph.
+        osg::Group* root = node->asGroup();
+        if (!root)
+        {
+            // Wrap non-Group root (e.g. a single Geode) so overlay can be attached
+            root = new osg::Group;
+            root->addChild(node);
+        }
+        root->addChild(m_overlayGroup);
+        m_viewer->setSceneData(root);
         fitToView();
     }
+    else
+    {
+        m_viewer->setSceneData(nullptr);
+    }
+
     updateDisplayMode();
+
+    // Restart rendering
+    m_timer.start(16);
+
     emit sceneChanged();
 }
 
@@ -491,7 +518,7 @@ void OSGWidget::pickNode(int x, int y)
     osg::ref_ptr<osgUtil::LineSegmentIntersector> intersector =
         new osgUtil::LineSegmentIntersector(osgUtil::LineSegmentIntersector::WINDOW, px, py);
     osgUtil::IntersectionVisitor iv(intersector.get());
-    iv.setTraversalMask(~0);
+    iv.setTraversalMask(~OSGWidget::HIGHLIGHT_NODE_MASK);
 
     // Must apply on camera - the visitor traverses from camera through scene
     const_cast<osg::Camera*>(m_viewer->getCamera())->accept(iv);
@@ -502,11 +529,16 @@ void OSGWidget::pickNode(int x, int y)
         for (auto& hit : intersections)
         {
             const osg::NodePath& nodePath = hit.nodePath;
-            // Walk from leaf to root, skip the root scene node
+            // Walk from leaf to root, find the most specific selectable node
+            // Prefer Geode or leaf nodes over intermediate Group nodes
+            // so that editing material only affects the clicked sub-object
             for (int i = static_cast<int>(nodePath.size()) - 1; i >= 0; --i)
             {
                 osg::Node* node = nodePath[i];
-                if (node && node != m_viewer->getSceneData())
+                // Skip the scene root, overlay group, and highlight nodes
+                if (node && node != m_viewer->getSceneData() &&
+                    node->getName() != "_highlight_overlay" &&
+                    (node->getNodeMask() & ~HIGHLIGHT_NODE_MASK) != 0)
                 {
                     selectNode(node);
                     emit nodeClicked(node);
@@ -544,40 +576,120 @@ void OSGWidget::clearSelection()
         unhighlightNode(m_selectedNode.get());
     }
     m_selectedNode = nullptr;
-    m_savedStateSet = nullptr;
 }
 
 void OSGWidget::highlightNode(osg::Node* node)
 {
-    if (!node) return;
+    if (!node || !m_overlayGroup) return;
 
-    // Save original state set
-    m_savedStateSet = node->getStateSet();
+    // Compute bounding box in the node's OWN local coordinate system.
+    // For Group/Transform nodes: traverse children directly (skip the node's
+    // own transform so the BB is in local space, not parent space).
+    // For leaf nodes (Geode etc.): accept the node directly.
+    osg::ComputeBoundsVisitor cbv;
+    cbv.setTraversalMask(~HIGHLIGHT_NODE_MASK);
 
-    // Create a new state set that inherits from the original
-    osg::StateSet* highlightSS = new osg::StateSet;
-    if (m_savedStateSet.valid())
+    osg::Group* group = node->asGroup();
+    if (group)
     {
-        highlightSS->merge(*m_savedStateSet);
+        for (unsigned int i = 0; i < group->getNumChildren(); ++i)
+        {
+            osg::Node* child = group->getChild(i);
+            if ((child->getNodeMask() & ~HIGHLIGHT_NODE_MASK) != 0)
+                child->accept(cbv);
+        }
     }
-    highlightSS->setAttributeAndModes(m_highlightMaterial.get(), osg::StateAttribute::ON | osg::StateAttribute::OVERRIDE);
-    highlightSS->setMode(GL_LIGHTING, osg::StateAttribute::ON);
+    else
+    {
+        node->accept(cbv);
+    }
 
-    node->setStateSet(highlightSS);
+    osg::BoundingBox localBB = cbv.getBoundingBox();
+    if (!localBB.valid()) return;
+
+    // Build the world matrix from the node's local space to the scene root
+    // (explicitly exclude the camera's view matrix by stopping at scene root).
+    osg::Matrix worldMat;
+    worldMat.makeIdentity();
+    {
+        osg::Node* root = m_viewer->getSceneData();
+        std::vector<osg::Transform*> transforms;
+        for (osg::Node* cur = node; cur && cur != root; )
+        {
+            osg::Transform* xform = dynamic_cast<osg::Transform*>(cur);
+            if (xform)
+                transforms.push_back(xform);
+            cur = (cur->getNumParents() > 0) ? cur->getParent(0) : nullptr;
+        }
+        // Apply root-to-node order (reverse of the collected path)
+        for (auto it = transforms.rbegin(); it != transforms.rend(); ++it)
+            (*it)->computeLocalToWorldMatrix(worldMat, nullptr);
+    }
+
+    // Transform local bounds to world space (overlay group coordinates)
+    osg::BoundingBox worldBB;
+    for (unsigned int i = 0; i < 8; ++i)
+        worldBB.expandBy(localBB.corner(i) * worldMat);
+
+    m_highlightGeode = createBoundingBoxGeode(worldBB);
+    m_overlayGroup->addChild(m_highlightGeode);
 }
 
 void OSGWidget::unhighlightNode(osg::Node* node)
 {
-    if (!node) return;
+    if (!m_highlightGeode || !m_overlayGroup) return;
 
-    // Restore original state set
-    if (m_savedStateSet.valid())
-    {
-        node->setStateSet(m_savedStateSet.get());
-    }
-    else
-    {
-        node->setStateSet(nullptr);
-    }
-    m_savedStateSet = nullptr;
+    // Remove from the overlay group (safe: overlay group is persistent and never null)
+    m_overlayGroup->removeChild(m_highlightGeode);
+    m_highlightGeode = nullptr;
+}
+
+osg::Geode* OSGWidget::createBoundingBoxGeode(const osg::BoundingBox& bb)
+{
+    osg::Geode* geode = new osg::Geode;
+    geode->setNodeMask(HIGHLIGHT_NODE_MASK);
+
+    float xmin = bb.xMin(), xmax = bb.xMax();
+    float ymin = bb.yMin(), ymax = bb.yMax();
+    float zmin = bb.zMin(), zmax = bb.zMax();
+
+    // 12 edges of a box (24 vertices for GL_LINES)
+    osg::ref_ptr<osg::Vec3Array> verts = new osg::Vec3Array;
+    // Bottom face
+    verts->push_back(osg::Vec3(xmin,ymin,zmin)); verts->push_back(osg::Vec3(xmax,ymin,zmin));
+    verts->push_back(osg::Vec3(xmax,ymin,zmin)); verts->push_back(osg::Vec3(xmax,ymax,zmin));
+    verts->push_back(osg::Vec3(xmax,ymax,zmin)); verts->push_back(osg::Vec3(xmin,ymax,zmin));
+    verts->push_back(osg::Vec3(xmin,ymax,zmin)); verts->push_back(osg::Vec3(xmin,ymin,zmin));
+    // Top face
+    verts->push_back(osg::Vec3(xmin,ymin,zmax)); verts->push_back(osg::Vec3(xmax,ymin,zmax));
+    verts->push_back(osg::Vec3(xmax,ymin,zmax)); verts->push_back(osg::Vec3(xmax,ymax,zmax));
+    verts->push_back(osg::Vec3(xmax,ymax,zmax)); verts->push_back(osg::Vec3(xmin,ymax,zmax));
+    verts->push_back(osg::Vec3(xmin,ymax,zmax)); verts->push_back(osg::Vec3(xmin,ymin,zmax));
+    // Vertical edges
+    verts->push_back(osg::Vec3(xmin,ymin,zmin)); verts->push_back(osg::Vec3(xmin,ymin,zmax));
+    verts->push_back(osg::Vec3(xmax,ymin,zmin)); verts->push_back(osg::Vec3(xmax,ymin,zmax));
+    verts->push_back(osg::Vec3(xmax,ymax,zmin)); verts->push_back(osg::Vec3(xmax,ymax,zmax));
+    verts->push_back(osg::Vec3(xmin,ymax,zmin)); verts->push_back(osg::Vec3(xmin,ymax,zmax));
+
+    osg::ref_ptr<osg::Vec4Array> colors = new osg::Vec4Array;
+    colors->push_back(osg::Vec4(0.3f, 0.6f, 1.0f, 1.0f));  // Blue highlight color
+
+    osg::ref_ptr<osg::Geometry> geom = new osg::Geometry;
+    geom->setVertexArray(verts);
+    geom->setColorArray(colors, osg::Array::BIND_OVERALL);
+    geom->addPrimitiveSet(new osg::DrawArrays(osg::PrimitiveSet::LINES, 0, 24));
+    geom->setUseDisplayList(false);
+
+    geode->addDrawable(geom);
+
+    // StateSet: unlit blue lines, render on top
+    osg::StateSet* ss = geode->getOrCreateStateSet();
+    ss->setMode(GL_LIGHTING, osg::StateAttribute::OFF);
+    ss->setAttributeAndModes(new osg::LineWidth(2.0f), osg::StateAttribute::ON);
+    ss->setMode(GL_DEPTH_TEST, osg::StateAttribute::ON);
+    osg::PolygonOffset* po = new osg::PolygonOffset(-1.0f, -1.0f);
+    ss->setAttributeAndModes(po, osg::StateAttribute::ON);
+    ss->setRenderBinDetails(11, "RenderBin");
+
+    return geode;
 }

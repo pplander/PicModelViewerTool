@@ -9,7 +9,7 @@ set(CMAKE_AUTOUIC ON)
 
 # ===================== Qt6 =====================
 set(Qt6_DIR "D:/qt/6.10.1/msvc2022_64/lib/cmake/Qt6")
-find_package(Qt6 REQUIRED COMPONENTS Core Gui Widgets OpenGL OpenGLWidgets Xml LinguistTools)
+find_package(Qt6 REQUIRED COMPONENTS Core Gui Widgets OpenGL OpenGLWidgets Xml LinguistTools Svg)
 
 # ===================== OSG =====================
 set(OSG_DIR "E:/Program/osg/osg")
@@ -66,11 +66,11 @@ set(SOURCES
     src/AssimpToOSGConverter.cpp
     src/ModelInfoDock.cpp
     src/SceneTreeDock.cpp
-    src/LightControlDock.cpp
     src/I18nManager.cpp
     src/WelcomeWidget.cpp
     src/ModelConverter.cpp
     src/BatchConvertDialog.cpp
+    src/NodeEditorDock.cpp
 )
 
 set(HEADERS
@@ -80,11 +80,12 @@ set(HEADERS
     src/AssimpToOSGConverter.h
     src/ModelInfoDock.h
     src/SceneTreeDock.h
-    src/LightControlDock.h
     src/I18nManager.h
     src/WelcomeWidget.h
     src/ModelConverter.h
     src/BatchConvertDialog.h
+    src/NodeEditorDock.h
+    src/EditCommand.h
 )
 
 # ===================== Translations =====================
@@ -122,6 +123,7 @@ target_link_libraries(PicModelViewerTool PRIVATE
     Qt6::OpenGL
     Qt6::OpenGLWidgets
     Qt6::Xml
+    Qt6::Svg
     ${OSG_LIBRARY}
     ${OSGDB_LIBRARY}
     ${OSGGA_LIBRARY}

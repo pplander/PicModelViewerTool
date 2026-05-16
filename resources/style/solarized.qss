@@ -19,6 +19,29 @@ QMainWindow {
     background-color: #002b36;
 }
 
+/* ---- Base Widgets ---- */
+QWidget {
+    background-color: #002b36;
+    color: #93a1a1;
+}
+
+QScrollArea {
+    background-color: #002b36;
+    border: none;
+}
+
+QScrollArea > QWidget > QWidget {
+    background-color: #002b36;
+}
+
+QFrame {
+    border: none;
+}
+
+QFrame[frameShape="4"] {
+    color: #586e75;
+}
+
 QMenuBar {
     background-color: #073642;
     color: #93a1a1;

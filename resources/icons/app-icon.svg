@@ -1,0 +1,18 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 256">
+  <!-- Background rounded square -->
+  <rect x="16" y="16" width="224" height="224" rx="48" fill="__THEME_COLOR__"/>
+  <!-- 3D Cube - front face -->
+  <path d="M128 60L200 100V180L128 220L56 180V100Z" fill="white" opacity="0.95"/>
+  <!-- 3D Cube - top face -->
+  <path d="M128 60L200 100L128 140L56 100Z" fill="white" opacity="0.7"/>
+  <!-- 3D Cube - right face -->
+  <path d="M200 100V180L128 220V140Z" fill="white" opacity="0.45"/>
+  <!-- Grid lines on front face -->
+  <line x1="92" y1="120" x2="164" y2="120" stroke="__THEME_COLOR__" stroke-width="2" opacity="0.3"/>
+  <line x1="92" y1="150" x2="164" y2="150" stroke="__THEME_COLOR__" stroke-width="2" opacity="0.3"/>
+  <line x1="110" y1="100" x2="110" y2="210" stroke="__THEME_COLOR__" stroke-width="2" opacity="0.3"/>
+  <line x1="146" y1="100" x2="146" y2="210" stroke="__THEME_COLOR__" stroke-width="2" opacity="0.3"/>
+  <!-- Eye/View symbol -->
+  <ellipse cx="128" cy="130" rx="30" ry="18" fill="none" stroke="__THEME_COLOR__" stroke-width="4"/>
+  <circle cx="128" cy="130" r="8" fill="__THEME_COLOR__"/>
+</svg>

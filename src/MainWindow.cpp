@@ -3,7 +3,8 @@
 #include "ModelLoader.h"
 #include "ModelInfoDock.h"
 #include "SceneTreeDock.h"
-#include "LightControlDock.h"
+#include "NodeEditorDock.h"
+#include "EditCommand.h"
 #include "I18nManager.h"
 #include "WelcomeWidget.h"
 #include "ModelConverter.h"
@@ -24,9 +25,14 @@
 #include <QFrame>
 #include <QDir>
 #include <QDirIterator>
+#include <QBuffer>
+#include <QPainter>
+#include <QSvgRenderer>
+#include <QTimer>
 
 #include <osgDB/WriteFile>
 #include <osg/Node>
+#include <osg/Group>
 
 MainWindow::MainWindow(QWidget* parent)
     : QMainWindow(parent)
@@ -63,6 +69,7 @@ MainWindow::~MainWindow()
 void MainWindow::setupUI()
 {
     setWindowTitle("PicModelViewer");
+    updateWindowIcon();
     resize(1280, 800);
 
     // Center the window
@@ -153,6 +160,37 @@ void MainWindow::setupMenuBar()
     m_exitAction->setShortcut(QKeySequence::Quit);
     m_exitAction->setStatusTip(tr("Exit application"));
     m_fileMenu->addAction(m_exitAction);
+
+    // Edit menu
+    m_editMenu = menuBar()->addMenu(tr("&Edit"));
+
+    m_undoStack = new QUndoStack(this);
+    m_undoAction = m_undoStack->createUndoAction(this, tr("&Undo"));
+    m_undoAction->setShortcut(QKeySequence::Undo);
+    m_undoAction->setStatusTip(tr("Undo last edit"));
+    m_editMenu->addAction(m_undoAction);
+
+    m_redoAction = m_undoStack->createRedoAction(this, tr("&Redo"));
+    m_redoAction->setShortcut(QKeySequence::Redo);
+    m_redoAction->setStatusTip(tr("Redo last undone edit"));
+    m_editMenu->addAction(m_redoAction);
+
+    m_editMenu->addSeparator();
+
+    m_deleteNodeAction = new QAction(tr("Delete Node"), this);
+    m_deleteNodeAction->setShortcut(QKeySequence::Delete);
+    m_deleteNodeAction->setStatusTip(tr("Delete selected node from scene"));
+    m_editMenu->addAction(m_deleteNodeAction);
+
+    m_hideNodeAction = new QAction(tr("Hide/Show Node"), this);
+    m_hideNodeAction->setShortcut(QKeySequence("Ctrl+H"));
+    m_hideNodeAction->setStatusTip(tr("Toggle visibility of selected node"));
+    m_editMenu->addAction(m_hideNodeAction);
+
+    m_duplicateNodeAction = new QAction(tr("Duplicate Node"), this);
+    m_duplicateNodeAction->setShortcut(QKeySequence("Ctrl+D"));
+    m_duplicateNodeAction->setStatusTip(tr("Duplicate selected node"));
+    m_editMenu->addAction(m_duplicateNodeAction);
 
     // View menu
     m_viewMenu = menuBar()->addMenu(tr("&View"));
@@ -402,12 +440,13 @@ void MainWindow::setupDockWidgets()
     addDockWidget(Qt::LeftDockWidgetArea, m_sceneTreeDock);
     m_viewMenu->addAction(m_sceneTreeDock->toggleViewAction());
 
-    // Light Control dock
-    m_lightControlDock = new LightControlDock(m_osgWidget, this);
-    m_lightControlDock->setAllowedAreas(Qt::LeftDockWidgetArea | Qt::RightDockWidgetArea);
-    m_lightControlDock->setWindowIcon(QIcon(":/icons/light-control.svg"));
-    addDockWidget(Qt::RightDockWidgetArea, m_lightControlDock);
-    m_viewMenu->addAction(m_lightControlDock->toggleViewAction());
+    // Node Editor dock - tabify with Model Info
+    m_nodeEditorDock = new NodeEditorDock(m_osgWidget, m_undoStack, this);
+    m_nodeEditorDock->setAllowedAreas(Qt::LeftDockWidgetArea | Qt::RightDockWidgetArea);
+    tabifyDockWidget(m_modelInfoDock, m_nodeEditorDock);
+    m_viewMenu->addAction(m_nodeEditorDock->toggleViewAction());
+
+    m_modelInfoDock->raise();
 }
 
 void MainWindow::setupConnections()
@@ -490,51 +529,183 @@ void MainWindow::setupConnections()
         }
     });
 
-    // Model loader progress
-    connect(m_modelLoader, &ModelLoader::loadProgress, [this](const QString& msg, int percent) {
-        m_statusLabel->setText(msg);
-        Q_UNUSED(percent);
-    });
-
     connect(m_modelLoader, &ModelLoader::loadFinished, [this](bool success, const QString& msg) {
-        m_statusLabel->setText(msg);
-        if (!success)
+        if (success)
         {
-            QMessageBox::warning(this, tr("Error"), msg);
+            m_statusLabel->setStyleSheet(QString());
+            m_statusLabel->setText(msg);
         }
+        else
+        {
+            // Show error in status bar with red color for visibility
+            m_statusLabel->setStyleSheet("color: #ff6b6b; font-weight: bold;");
+            m_statusLabel->setText(msg);
+
+            if (!m_silentLoad)
+                QMessageBox::warning(this, tr("Error"), msg);
+
+            // Auto-clear error style after 4 seconds
+            QTimer::singleShot(4000, this, [this]() {
+                m_statusLabel->setStyleSheet(QString());
+            });
+        }
+        m_silentLoad = false;
     });
 
-    // Scene tree selection -> highlight & info
+    // Scene tree selection -> highlight & info & editor
     connect(m_sceneTreeDock, &SceneTreeDock::nodeSelected, this, [this](osg::Node* node) {
         if (node)
         {
             m_osgWidget->selectNode(node);
             m_modelInfoDock->updateNodeInfo(node);
+            m_nodeEditorDock->setNode(node);
         }
         else
         {
             m_osgWidget->clearSelection();
             m_modelInfoDock->updateNodeInfo(nullptr);
+            m_nodeEditorDock->setNode(nullptr);
         }
     });
 
-    // OSG 3D pick -> sync with tree & info
+    // OSG 3D pick -> sync with tree & info & editor
     connect(m_osgWidget, &OSGWidget::nodeClicked, this, [this](osg::Node* node) {
         if (node)
         {
             m_sceneTreeDock->selectNode(node);
             m_modelInfoDock->updateNodeInfo(node);
+            m_nodeEditorDock->setNode(node);
         }
         else
         {
             m_sceneTreeDock->selectNode(nullptr);
             m_modelInfoDock->updateNodeInfo(nullptr);
+            m_nodeEditorDock->setNode(nullptr);
+        }
+    });
+
+    // Node editor auto-wrap -> refresh scene tree and select wrapper
+    connect(m_nodeEditorDock, &NodeEditorDock::nodeEdited, this, [this](osg::Node* node) {
+        osg::Node* root = m_osgWidget->getSceneData();
+        if (root)
+            m_sceneTreeDock->updateTree(root);
+        if (node)
+        {
+            m_sceneTreeDock->selectNode(node);
+            m_modelInfoDock->updateNodeInfo(node);
+        }
+    });
+
+    // Undo/redo may change scene graph structure -> refresh scene tree
+    connect(m_undoStack, &QUndoStack::indexChanged, this, [this]() {
+        osg::Node* root = m_osgWidget->getSceneData();
+        if (root)
+            m_sceneTreeDock->updateTree(root);
+
+        // Check if current selected node is still in the scene graph
+        osg::Node* selected = m_osgWidget->getSelectedNode();
+        if (selected)
+        {
+            bool inScene = false;
+            for (osg::Node* cur = selected; cur; )
+            {
+                if (cur == root) { inScene = true; break; }
+                cur = (cur->getNumParents() > 0) ? cur->getParent(0) : nullptr;
+            }
+            if (!inScene)
+            {
+                m_osgWidget->clearSelection();
+                m_modelInfoDock->updateNodeInfo(nullptr);
+                m_nodeEditorDock->setNode(nullptr);
+                m_sceneTreeDock->selectNode(nullptr);
+            }
         }
     });
 
     // Welcome page
     connect(m_welcomeWidget, &WelcomeWidget::openClicked, this, &MainWindow::openFile);
     connect(m_welcomeWidget, &WelcomeWidget::recentFileClicked, this, &MainWindow::loadModel);
+
+    // Edit menu - node operations
+    connect(m_deleteNodeAction, &QAction::triggered, this, [this]() {
+        osg::Node* node = m_osgWidget->getSelectedNode();
+        if (!node) return;
+        // Find parent
+        osg::Node* root = m_osgWidget->getSceneData();
+        if (node == root)
+        {
+            QMessageBox::information(this, tr("Info"), tr("Cannot delete the root node."));
+            return;
+        }
+        // Search for parent
+        struct ParentFinder : public osg::NodeVisitor
+        {
+            osg::Node* target;
+            osg::Group* parent = nullptr;
+            ParentFinder(osg::Node* t) : osg::NodeVisitor(TRAVERSE_ALL_CHILDREN), target(t) {}
+            void apply(osg::Group& group) override
+            {
+                for (unsigned int i = 0; i < group.getNumChildren(); ++i)
+                {
+                    if (group.getChild(i) == target)
+                    {
+                        parent = &group;
+                        return;
+                    }
+                }
+                traverse(group);
+            }
+        } finder(node);
+        if (root) root->accept(finder);
+        if (finder.parent)
+        {
+            m_undoStack->push(new DeleteNodeCommand(finder.parent, node));
+            m_osgWidget->clearSelection();
+            m_nodeEditorDock->setNode(nullptr);
+        }
+    });
+
+    connect(m_hideNodeAction, &QAction::triggered, this, [this]() {
+        osg::Node* node = m_osgWidget->getSelectedNode();
+        if (!node) return;
+        bool visible = (node->getNodeMask() != 0);
+        m_undoStack->push(new VisibilityCommand(node, !visible));
+    });
+
+    connect(m_duplicateNodeAction, &QAction::triggered, this, [this]() {
+        osg::Node* node = m_osgWidget->getSelectedNode();
+        if (!node) return;
+        osg::Node* root = m_osgWidget->getSceneData();
+        if (node == root) return;
+        // Find parent and clone
+        struct ParentFinder : public osg::NodeVisitor
+        {
+            osg::Node* target;
+            osg::Group* parent = nullptr;
+            ParentFinder(osg::Node* t) : osg::NodeVisitor(TRAVERSE_ALL_CHILDREN), target(t) {}
+            void apply(osg::Group& group) override
+            {
+                for (unsigned int i = 0; i < group.getNumChildren(); ++i)
+                {
+                    if (group.getChild(i) == target)
+                    {
+                        parent = &group;
+                        return;
+                    }
+                }
+                traverse(group);
+            }
+        } finder(node);
+        if (root) root->accept(finder);
+        if (finder.parent)
+        {
+            osg::ref_ptr<osg::Node> clone = dynamic_cast<osg::Node*>(node->clone(osg::CopyOp::DEEP_COPY_ALL));
+            if (clone)
+            {
+                m_undoStack->push(new DuplicateNodeCommand(finder.parent, clone.get()));
+            }
+        }
+    });
 }
 
 void MainWindow::openFile()
@@ -551,9 +722,14 @@ void MainWindow::openFile()
 
 void MainWindow::closeModel()
 {
+    if (m_loading) return;
+
+    m_osgWidget->clearSelection();
     m_osgWidget->setSceneData(nullptr);
+    m_nodeEditorDock->setNode(nullptr);
     m_modelInfoDock->clearInfo();
     m_sceneTreeDock->clearTree();
+    m_undoStack->clear();
     m_currentFilePath.clear();
     m_dirFiles.clear();
     m_currentFileIndex = -1;
@@ -570,7 +746,16 @@ void MainWindow::closeModel()
 
 void MainWindow::loadModel(const QString& filePath)
 {
+    // Prevent re-entry during rapid navigation
+    if (m_loading)
+        return;
+    m_loading = true;
+
     m_statusLabel->setText(tr("Loading..."));
+
+    // Clear node editor reference before replacing scene
+    m_nodeEditorDock->setNode(nullptr);
+    m_sceneTreeDock->clearTree();
 
     osg::Node* node = m_modelLoader->loadFile(filePath);
     if (node)
@@ -595,6 +780,8 @@ void MainWindow::loadModel(const QString& filePath)
         // Add to recent files
         addToRecentFiles(filePath);
     }
+
+    m_loading = false;
 }
 
 void MainWindow::takeScreenshot()
@@ -785,7 +972,6 @@ void MainWindow::changeEvent(QEvent* event)
         // Retranslate dock widgets
         m_modelInfoDock->setWindowTitle(tr("Model Info"));
         m_sceneTreeDock->setWindowTitle(tr("Scene Tree"));
-        m_lightControlDock->setWindowTitle(tr("Light Control"));
 
         // Update recent files menu
         updateRecentFiles();
@@ -846,6 +1032,7 @@ void MainWindow::setTheme(Theme theme)
 {
     m_currentTheme = theme;
     loadStyleSheet(themeStyleSheetPath(theme));
+    updateWindowIcon();
 
     // Update checked action
     QList<QAction*> actions = m_themeGroup->actions();
@@ -894,6 +1081,7 @@ void MainWindow::prevFile()
     if (m_dirFiles.isEmpty() || m_currentFileIndex <= 0)
         return;
     m_currentFileIndex--;
+    m_silentLoad = true;
     loadModel(m_dirFiles[m_currentFileIndex]);
 }
 
@@ -902,6 +1090,7 @@ void MainWindow::nextFile()
     if (m_dirFiles.isEmpty() || m_currentFileIndex >= m_dirFiles.size() - 1)
         return;
     m_currentFileIndex++;
+    m_silentLoad = true;
     loadModel(m_dirFiles[m_currentFileIndex]);
 }
 
@@ -921,4 +1110,53 @@ void MainWindow::updateFileNavState()
     {
         m_fileIndexLabel->setText("");
     }
+}
+
+QString MainWindow::themeAccentColor(Theme theme) const
+{
+    switch (theme)
+    {
+    case Dark:      return "#89b4fa";
+    case Light:     return "#4dabf7";
+    case Nord:      return "#88c0d0";
+    case Solarized: return "#268bd2";
+    default:        return "#89b4fa";
+    }
+}
+
+void MainWindow::updateWindowIcon()
+{
+    // Load the SVG template from resources
+    QFile svgFile(":/icons/app-icon.svg");
+    if (!svgFile.open(QIODevice::ReadOnly | QIODevice::Text))
+        return;
+
+    QString svgContent = QString::fromUtf8(svgFile.readAll());
+    svgFile.close();
+
+    // Replace the color placeholder with the current theme accent color
+    QString accentColor = themeAccentColor(m_currentTheme);
+    svgContent.replace("__THEME_COLOR__", accentColor);
+
+    // Render SVG to pixmap at multiple sizes for a crisp icon
+    QSvgRenderer renderer(svgContent.toUtf8());
+    if (!renderer.isValid())
+        return;
+
+    QPixmap basePixmap(256, 256);
+    basePixmap.fill(Qt::transparent);
+    QPainter painter(&basePixmap);
+    renderer.render(&painter);
+    painter.end();
+
+    QIcon icon;
+    icon.addPixmap(basePixmap.scaled(16, 16, Qt::IgnoreAspectRatio, Qt::SmoothTransformation));
+    icon.addPixmap(basePixmap.scaled(24, 24, Qt::IgnoreAspectRatio, Qt::SmoothTransformation));
+    icon.addPixmap(basePixmap.scaled(32, 32, Qt::IgnoreAspectRatio, Qt::SmoothTransformation));
+    icon.addPixmap(basePixmap.scaled(48, 48, Qt::IgnoreAspectRatio, Qt::SmoothTransformation));
+    icon.addPixmap(basePixmap.scaled(64, 64, Qt::IgnoreAspectRatio, Qt::SmoothTransformation));
+    icon.addPixmap(basePixmap.scaled(128, 128, Qt::IgnoreAspectRatio, Qt::SmoothTransformation));
+    icon.addPixmap(basePixmap);
+
+    setWindowIcon(icon);
 }
