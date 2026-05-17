@@ -44,6 +44,15 @@ set(ASSIMP_INCLUDE_DIR "${ASSIMP_DIR}/include")
 set(ASSIMP_LIB_DIR "${ASSIMP_DIR}/lib")
 set(ASSIMP_BIN_DIR "${ASSIMP_DIR}/bin")
 
+# ===================== GDAL (vcpkg) =====================
+set(GDAL_ROOT "E:/Program/vcpkg/vcpkg-2025.10.17/installed/x64-windows")
+set(GDAL_INCLUDE_DIR "${GDAL_ROOT}/include")
+set(GDAL_LIB_DIR     "${GDAL_ROOT}/lib")
+set(GDAL_BIN_DIR     "${GDAL_ROOT}/bin")
+set(GDAL_DATA_DIR    "${GDAL_ROOT}/share/gdal")
+set(PROJ_DATA_DIR    "${GDAL_ROOT}/share/proj")
+find_library(GDAL_LIBRARY gdal HINTS "${GDAL_LIB_DIR}")
+
 find_library(ASSIMP_LIBRARY_DEBUG NAMES assimp-vc143-mtd PATHS ${ASSIMP_LIB_DIR} NO_DEFAULT_PATH)
 find_library(ASSIMP_LIBRARY_RELEASE NAMES assimp-vc143-mt PATHS ${ASSIMP_LIB_DIR} NO_DEFAULT_PATH)
 
@@ -73,6 +82,10 @@ set(SOURCES
     src/NodeEditorDock.cpp
     src/PreProcessManager.cpp
     src/PreProcessDock.cpp
+    src/GdalRasterLoader.cpp
+    src/GdalVectorLoader.cpp
+    src/ImageViewerWidget.cpp
+    src/VectorViewerWidget.cpp
 )
 
 set(HEADERS
@@ -90,6 +103,12 @@ set(HEADERS
     src/EditCommand.h
     src/PreProcessManager.h
     src/PreProcessDock.h
+    src/GdalInit.h
+    src/GdalRasterLoader.h
+    src/GdalVectorLoader.h
+    src/GdalVectorData.h
+    src/ImageViewerWidget.h
+    src/VectorViewerWidget.h
 )
 
 # ===================== Translations =====================
@@ -117,6 +136,7 @@ qt_add_executable(PicModelViewerTool
 target_include_directories(PicModelViewerTool PRIVATE
     ${OSG_INCLUDE_DIR}
     ${ASSIMP_INCLUDE_DIR}
+    ${GDAL_INCLUDE_DIR}
     src
 )
 
@@ -135,6 +155,7 @@ target_link_libraries(PicModelViewerTool PRIVATE
     ${OSGVIEWER_LIBRARY}
     ${OPENTHREADS_LIBRARY}
     ${ASSIMP_LIBRARY}
+    ${GDAL_LIBRARY}
 )
 
 # ===================== Windows specific =====================
@@ -173,6 +194,45 @@ if(WIN32)
                 "${ASSIMP_BIN_DIR}/assimp-vc143-mt.dll"
                 "$<TARGET_FILE_DIR:${target}>/"
             COMMENT "Copying Assimp DLL"
+        )
+
+        # Copy GDAL DLL + transitive runtime dependencies (vcpkg x64-windows)
+        set(GDAL_RUNTIME_DLLS
+            gdal.dll
+            proj_9.dll geos.dll geos_c.dll geotiff.dll tiff.dll
+            sqlite3.dll libpng16.dll jpeg62.dll openjp2.dll
+            netcdf.dll hdf5.dll hdf5_cpp.dll hdf5_hl.dll hdf5_hl_cpp.dll
+            libcurl.dll libexpat.dll libxml2.dll
+            libssl-3-x64.dll libcrypto-3-x64.dll
+            zlib1.dll zstd.dll liblzma.dll libwebp.dll libsharpyuv.dll
+            freexl-1.dll json-c.dll iconv-2.dll charset-1.dll
+            Lerc.dll aec.dll szip.dll deflate.dll bz2.dll
+            brotlicommon.dll brotlidec.dll brotlienc.dll
+            spatialite.dll minizip.dll pcre2-8.dll
+        )
+        foreach(_dll ${GDAL_RUNTIME_DLLS})
+            if(EXISTS "${GDAL_BIN_DIR}/${_dll}")
+                add_custom_command(TARGET ${target} POST_BUILD
+                    COMMAND ${CMAKE_COMMAND} -E copy_if_different
+                        "${GDAL_BIN_DIR}/${_dll}"
+                        "$<TARGET_FILE_DIR:${target}>/"
+                    COMMENT "Copying ${_dll}"
+                )
+            endif()
+        endforeach()
+
+        # Copy GDAL/PROJ data directories so runtime can resolve drivers and CRS
+        add_custom_command(TARGET ${target} POST_BUILD
+            COMMAND ${CMAKE_COMMAND} -E copy_directory
+                "${GDAL_DATA_DIR}"
+                "$<TARGET_FILE_DIR:${target}>/gdal-data/"
+            COMMENT "Copying GDAL data..."
+        )
+        add_custom_command(TARGET ${target} POST_BUILD
+            COMMAND ${CMAKE_COMMAND} -E copy_directory
+                "${PROJ_DATA_DIR}"
+                "$<TARGET_FILE_DIR:${target}>/proj-data/"
+            COMMENT "Copying PROJ data..."
         )
     endfunction()
     copy_dlls_to_output(PicModelViewerTool)

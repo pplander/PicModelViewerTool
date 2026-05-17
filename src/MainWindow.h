@@ -13,6 +13,8 @@
 #include <osg/ref_ptr>
 #include <osg/Node>
 
+#include <memory>
+
 class OSGWidget;
 class ModelLoader;
 class ModelInfoDock;
@@ -21,6 +23,9 @@ class NodeEditorDock;
 class WelcomeWidget;
 class ModelConverter;
 class PreProcessDock;
+class ImageViewerWidget;
+class VectorViewerWidget;
+struct GdalVectorData;
 
 class MainWindow : public QMainWindow
 {
@@ -56,6 +61,20 @@ private:
 
     void openFile();
     void closeModel();
+
+    // File type dispatch helpers
+    static QStringList imageExtensions();
+    static QStringList allSupportedExtensions();
+    static QString     allSupportedFilter();
+    static bool isImageExt (const QString& ext);
+    static bool isRasterExt(const QString& ext);
+    static bool isVectorExt(const QString& ext);
+    static bool isModelExt (const QString& ext);
+
+    void doLoadModel (const QString& filePath);
+    void doLoadImage (const QString& filePath);
+    void doLoadRaster(const QString& filePath);
+    void doLoadVector(const QString& filePath);
     void takeScreenshot();
     void toggleFullScreen();
     void batchConvert();
@@ -85,8 +104,13 @@ private:
     QStackedWidget* m_stackWidget = nullptr;
     WelcomeWidget* m_welcomeWidget = nullptr;
     OSGWidget* m_osgWidget = nullptr;
+    ImageViewerWidget* m_imageViewer = nullptr;
+    VectorViewerWidget* m_vectorViewer = nullptr;
     ModelLoader* m_modelLoader = nullptr;
     ModelConverter* m_modelConverter = nullptr;
+
+    // Owned vector data for the current vector page (kept alive while displayed)
+    std::unique_ptr<GdalVectorData> m_currentVectorData;
 
     // Dock widgets
     ModelInfoDock* m_modelInfoDock = nullptr;

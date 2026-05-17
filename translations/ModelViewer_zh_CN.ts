@@ -135,499 +135,573 @@
 <context>
     <name>MainWindow</name>
     <message>
-        <location filename="../src/MainWindow.cpp" line="120"/>
-        <location filename="../src/MainWindow.cpp" line="953"/>
+        <location filename="../src/MainWindow.cpp" line="138"/>
+        <location filename="../src/MainWindow.cpp" line="1222"/>
         <source>&amp;File</source>
         <translation>文件(&amp;F)</translation>
     </message>
     <message>
-        <location filename="../src/MainWindow.cpp" line="199"/>
-        <location filename="../src/MainWindow.cpp" line="954"/>
+        <location filename="../src/MainWindow.cpp" line="219"/>
+        <location filename="../src/MainWindow.cpp" line="1223"/>
         <source>&amp;View</source>
         <translation>视图(&amp;V)</translation>
     </message>
     <message>
-        <location filename="../src/MainWindow.cpp" line="249"/>
-        <location filename="../src/MainWindow.cpp" line="955"/>
+        <location filename="../src/MainWindow.cpp" line="269"/>
+        <location filename="../src/MainWindow.cpp" line="1224"/>
         <source>&amp;Tools</source>
         <translation>工具(&amp;T)</translation>
     </message>
     <message>
-        <location filename="../src/MainWindow.cpp" line="321"/>
-        <location filename="../src/MainWindow.cpp" line="956"/>
+        <location filename="../src/MainWindow.cpp" line="341"/>
+        <location filename="../src/MainWindow.cpp" line="1225"/>
         <source>&amp;Language</source>
         <translation>语言(&amp;L)</translation>
     </message>
     <message>
-        <location filename="../src/MainWindow.cpp" line="363"/>
-        <location filename="../src/MainWindow.cpp" line="957"/>
+        <location filename="../src/MainWindow.cpp" line="383"/>
+        <location filename="../src/MainWindow.cpp" line="1226"/>
         <source>&amp;Help</source>
         <translation>帮助(&amp;H)</translation>
     </message>
     <message>
-        <location filename="../src/MainWindow.cpp" line="122"/>
-        <location filename="../src/MainWindow.cpp" line="960"/>
+        <location filename="../src/MainWindow.cpp" line="140"/>
+        <location filename="../src/MainWindow.cpp" line="1229"/>
         <source>&amp;Open...</source>
         <translation>打开(&amp;O)...</translation>
     </message>
     <message>
-        <location filename="../src/MainWindow.cpp" line="125"/>
-        <location filename="../src/MainWindow.cpp" line="961"/>
+        <location filename="../src/MainWindow.cpp" line="143"/>
+        <location filename="../src/MainWindow.cpp" line="1230"/>
         <source>Open a model file</source>
         <translation>打开模型文件</translation>
     </message>
     <message>
-        <location filename="../src/MainWindow.cpp" line="151"/>
-        <location filename="../src/MainWindow.cpp" line="966"/>
+        <location filename="../src/MainWindow.cpp" line="171"/>
+        <location filename="../src/MainWindow.cpp" line="1235"/>
         <source>&amp;Close</source>
         <translation>关闭(&amp;C)</translation>
     </message>
     <message>
-        <location filename="../src/MainWindow.cpp" line="154"/>
-        <location filename="../src/MainWindow.cpp" line="967"/>
+        <location filename="../src/MainWindow.cpp" line="174"/>
+        <location filename="../src/MainWindow.cpp" line="1236"/>
         <source>Close current model</source>
         <translation>关闭当前模型</translation>
     </message>
     <message>
-        <location filename="../src/MainWindow.cpp" line="159"/>
-        <location filename="../src/MainWindow.cpp" line="968"/>
+        <location filename="../src/MainWindow.cpp" line="179"/>
+        <location filename="../src/MainWindow.cpp" line="1237"/>
         <source>E&amp;xit</source>
         <translation>退出(&amp;X)</translation>
     </message>
     <message>
-        <location filename="../src/MainWindow.cpp" line="162"/>
-        <location filename="../src/MainWindow.cpp" line="969"/>
+        <location filename="../src/MainWindow.cpp" line="182"/>
+        <location filename="../src/MainWindow.cpp" line="1238"/>
         <source>Exit application</source>
         <translation>退出应用程序</translation>
     </message>
     <message>
-        <location filename="../src/MainWindow.cpp" line="201"/>
-        <location filename="../src/MainWindow.cpp" line="970"/>
+        <location filename="../src/MainWindow.cpp" line="221"/>
+        <location filename="../src/MainWindow.cpp" line="1239"/>
         <source>Reset View</source>
         <translation>重置视图</translation>
     </message>
     <message>
-        <location filename="../src/MainWindow.cpp" line="204"/>
-        <location filename="../src/MainWindow.cpp" line="971"/>
+        <location filename="../src/MainWindow.cpp" line="224"/>
+        <location filename="../src/MainWindow.cpp" line="1240"/>
         <source>Reset camera to default position</source>
         <translation>重置相机到默认位置</translation>
     </message>
     <message>
-        <location filename="../src/MainWindow.cpp" line="211"/>
-        <location filename="../src/MainWindow.cpp" line="982"/>
+        <location filename="../src/MainWindow.cpp" line="231"/>
+        <location filename="../src/MainWindow.cpp" line="1251"/>
         <source>Solid</source>
         <translation>实体</translation>
     </message>
     <message>
-        <location filename="../src/MainWindow.cpp" line="218"/>
-        <location filename="../src/MainWindow.cpp" line="983"/>
+        <location filename="../src/MainWindow.cpp" line="238"/>
+        <location filename="../src/MainWindow.cpp" line="1252"/>
         <source>Wireframe</source>
         <translation>线框</translation>
     </message>
     <message>
-        <location filename="../src/MainWindow.cpp" line="224"/>
-        <location filename="../src/MainWindow.cpp" line="984"/>
+        <location filename="../src/MainWindow.cpp" line="244"/>
+        <location filename="../src/MainWindow.cpp" line="1253"/>
         <source>Points</source>
         <translation>点云</translation>
     </message>
     <message>
-        <location filename="../src/MainWindow.cpp" line="230"/>
-        <location filename="../src/MainWindow.cpp" line="985"/>
+        <location filename="../src/MainWindow.cpp" line="250"/>
+        <location filename="../src/MainWindow.cpp" line="1254"/>
         <source>Solid + Wireframe</source>
         <translation>实体+线框</translation>
     </message>
     <message>
-        <location filename="../src/MainWindow.cpp" line="207"/>
-        <location filename="../src/MainWindow.cpp" line="980"/>
+        <location filename="../src/MainWindow.cpp" line="227"/>
+        <location filename="../src/MainWindow.cpp" line="1249"/>
         <source>Display Mode</source>
         <translation>显示模式</translation>
     </message>
     <message>
-        <location filename="../src/MainWindow.cpp" line="998"/>
-        <source>Model Info</source>
-        <translation>模型信息</translation>
+        <location filename="../src/MainWindow.cpp" line="768"/>
+        <source>Open File</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/MainWindow.cpp" line="999"/>
+        <source>Model Info</source>
+        <translation type="vanished">模型信息</translation>
+    </message>
+    <message>
+        <location filename="../src/MainWindow.cpp" line="1268"/>
         <source>Scene Tree</source>
         <translation>场景树</translation>
     </message>
     <message>
-        <location filename="../src/MainWindow.cpp" line="238"/>
-        <location filename="../src/MainWindow.cpp" line="972"/>
+        <location filename="../src/MainWindow.cpp" line="258"/>
+        <location filename="../src/MainWindow.cpp" line="1241"/>
         <source>Full Screen</source>
         <translation>全屏</translation>
     </message>
     <message>
-        <location filename="../src/MainWindow.cpp" line="135"/>
-        <location filename="../src/MainWindow.cpp" line="962"/>
+        <location filename="../src/MainWindow.cpp" line="153"/>
+        <location filename="../src/MainWindow.cpp" line="1231"/>
         <source>Previous File</source>
         <translation>上一个文件</translation>
     </message>
     <message>
-        <location filename="../src/MainWindow.cpp" line="138"/>
-        <location filename="../src/MainWindow.cpp" line="963"/>
+        <location filename="../src/MainWindow.cpp" line="156"/>
+        <location filename="../src/MainWindow.cpp" line="1232"/>
         <source>Open previous model file in directory</source>
         <translation>打开目录中上一个模型文件</translation>
     </message>
     <message>
-        <location filename="../src/MainWindow.cpp" line="142"/>
-        <location filename="../src/MainWindow.cpp" line="964"/>
+        <location filename="../src/MainWindow.cpp" line="161"/>
+        <location filename="../src/MainWindow.cpp" line="1233"/>
         <source>Next File</source>
         <translation>下一个文件</translation>
     </message>
     <message>
-        <location filename="../src/MainWindow.cpp" line="145"/>
-        <location filename="../src/MainWindow.cpp" line="965"/>
+        <location filename="../src/MainWindow.cpp" line="164"/>
+        <location filename="../src/MainWindow.cpp" line="1234"/>
         <source>Open next model file in directory</source>
         <translation>打开目录中下一个模型文件</translation>
     </message>
     <message>
-        <location filename="../src/MainWindow.cpp" line="166"/>
+        <location filename="../src/MainWindow.cpp" line="186"/>
         <source>&amp;Edit</source>
         <translation>编辑(&amp;E)</translation>
     </message>
     <message>
-        <location filename="../src/MainWindow.cpp" line="169"/>
+        <location filename="../src/MainWindow.cpp" line="189"/>
         <source>&amp;Undo</source>
         <translation>撤销(&amp;U)</translation>
     </message>
     <message>
-        <location filename="../src/MainWindow.cpp" line="171"/>
+        <location filename="../src/MainWindow.cpp" line="191"/>
         <source>Undo last edit</source>
         <translation>撤销上次编辑</translation>
     </message>
     <message>
-        <location filename="../src/MainWindow.cpp" line="175"/>
+        <location filename="../src/MainWindow.cpp" line="195"/>
         <source>&amp;Redo</source>
         <translation>重做(&amp;R)</translation>
     </message>
     <message>
-        <location filename="../src/MainWindow.cpp" line="177"/>
+        <location filename="../src/MainWindow.cpp" line="197"/>
         <source>Redo last undone edit</source>
         <translation>重做上次撤销的编辑</translation>
     </message>
     <message>
-        <location filename="../src/MainWindow.cpp" line="183"/>
+        <location filename="../src/MainWindow.cpp" line="203"/>
         <source>Delete Node</source>
         <translation>删除节点</translation>
     </message>
     <message>
-        <location filename="../src/MainWindow.cpp" line="185"/>
+        <location filename="../src/MainWindow.cpp" line="205"/>
         <source>Delete selected node from scene</source>
         <translation>从场景中删除选中节点</translation>
     </message>
     <message>
-        <location filename="../src/MainWindow.cpp" line="188"/>
+        <location filename="../src/MainWindow.cpp" line="208"/>
         <source>Hide/Show Node</source>
         <translation>隐藏/显示节点</translation>
     </message>
     <message>
-        <location filename="../src/MainWindow.cpp" line="190"/>
+        <location filename="../src/MainWindow.cpp" line="210"/>
         <source>Toggle visibility of selected node</source>
         <translation>切换选中节点的可见性</translation>
     </message>
     <message>
-        <location filename="../src/MainWindow.cpp" line="193"/>
+        <location filename="../src/MainWindow.cpp" line="213"/>
         <source>Duplicate Node</source>
         <translation>复制节点</translation>
     </message>
     <message>
-        <location filename="../src/MainWindow.cpp" line="195"/>
+        <location filename="../src/MainWindow.cpp" line="215"/>
         <source>Duplicate selected node</source>
         <translation>复制选中节点</translation>
     </message>
     <message>
-        <location filename="../src/MainWindow.cpp" line="242"/>
-        <location filename="../src/MainWindow.cpp" line="973"/>
+        <location filename="../src/MainWindow.cpp" line="262"/>
+        <location filename="../src/MainWindow.cpp" line="1242"/>
         <source>Toggle full screen mode</source>
         <translation>切换全屏模式</translation>
     </message>
     <message>
-        <location filename="../src/MainWindow.cpp" line="251"/>
-        <location filename="../src/MainWindow.cpp" line="974"/>
+        <location filename="../src/MainWindow.cpp" line="271"/>
+        <location filename="../src/MainWindow.cpp" line="1243"/>
         <source>Take Screenshot</source>
         <translation>截图</translation>
     </message>
     <message>
-        <location filename="../src/MainWindow.cpp" line="254"/>
-        <location filename="../src/MainWindow.cpp" line="975"/>
+        <location filename="../src/MainWindow.cpp" line="274"/>
+        <location filename="../src/MainWindow.cpp" line="1244"/>
         <source>Save screenshot to file</source>
         <translation>保存截图到文件</translation>
     </message>
     <message>
-        <location filename="../src/MainWindow.cpp" line="257"/>
+        <location filename="../src/MainWindow.cpp" line="277"/>
         <source>Batch Convert...</source>
         <translation>批量转换...</translation>
     </message>
     <message>
-        <location filename="../src/MainWindow.cpp" line="259"/>
+        <location filename="../src/MainWindow.cpp" line="279"/>
         <source>Convert models between different formats</source>
         <translation>在不同格式之间转换模型</translation>
     </message>
     <message>
-        <location filename="../src/MainWindow.cpp" line="263"/>
+        <location filename="../src/MainWindow.cpp" line="283"/>
         <source>OSG &amp;Handlers</source>
         <translation>OSG处理器(&amp;H)</translation>
     </message>
     <message>
-        <location filename="../src/MainWindow.cpp" line="265"/>
+        <location filename="../src/MainWindow.cpp" line="285"/>
         <source>Toggle Stats (S)</source>
         <translation>切换统计信息 (S)</translation>
     </message>
     <message>
-        <location filename="../src/MainWindow.cpp" line="268"/>
+        <location filename="../src/MainWindow.cpp" line="288"/>
         <source>Toggle on-screen statistics display</source>
         <translation>切换屏幕统计信息显示</translation>
     </message>
     <message>
-        <location filename="../src/MainWindow.cpp" line="272"/>
+        <location filename="../src/MainWindow.cpp" line="292"/>
         <source>Toggle Help (H)</source>
         <translation>切换帮助 (H)</translation>
     </message>
     <message>
-        <location filename="../src/MainWindow.cpp" line="275"/>
+        <location filename="../src/MainWindow.cpp" line="295"/>
         <source>Toggle on-screen help display</source>
         <translation>切换屏幕帮助显示</translation>
     </message>
     <message>
-        <location filename="../src/MainWindow.cpp" line="279"/>
+        <location filename="../src/MainWindow.cpp" line="299"/>
         <source>Screen Capture (C)</source>
         <translation>屏幕截图 (C)</translation>
     </message>
     <message>
-        <location filename="../src/MainWindow.cpp" line="282"/>
+        <location filename="../src/MainWindow.cpp" line="302"/>
         <source>Capture screenshot via OSG handler</source>
         <translation>通过OSG处理器截图</translation>
     </message>
     <message>
-        <location filename="../src/MainWindow.cpp" line="288"/>
+        <location filename="../src/MainWindow.cpp" line="308"/>
         <source>Cycle Threading Model (M)</source>
         <translation>切换线程模型 (M)</translation>
     </message>
     <message>
-        <location filename="../src/MainWindow.cpp" line="291"/>
+        <location filename="../src/MainWindow.cpp" line="311"/>
         <source>Change OSG threading model</source>
         <translation>更改OSG线程模型</translation>
     </message>
     <message>
-        <location filename="../src/MainWindow.cpp" line="297"/>
+        <location filename="../src/MainWindow.cpp" line="317"/>
         <source>Increase LOD Scale (+)</source>
         <translation>增加LOD比例 (+)</translation>
     </message>
     <message>
-        <location filename="../src/MainWindow.cpp" line="300"/>
+        <location filename="../src/MainWindow.cpp" line="320"/>
         <source>Increase level-of-detail scale</source>
         <translation>增加细节层次比例</translation>
     </message>
     <message>
-        <location filename="../src/MainWindow.cpp" line="304"/>
+        <location filename="../src/MainWindow.cpp" line="324"/>
         <source>Decrease LOD Scale (-)</source>
         <translation>减少LOD比例 (-)</translation>
     </message>
     <message>
-        <location filename="../src/MainWindow.cpp" line="307"/>
+        <location filename="../src/MainWindow.cpp" line="327"/>
         <source>Decrease level-of-detail scale</source>
         <translation>减少细节层次比例</translation>
     </message>
     <message>
-        <location filename="../src/MainWindow.cpp" line="313"/>
+        <location filename="../src/MainWindow.cpp" line="333"/>
         <source>Toggle Fullscreen (F)</source>
         <translation>切换全屏 (F)</translation>
     </message>
     <message>
-        <location filename="../src/MainWindow.cpp" line="316"/>
+        <location filename="../src/MainWindow.cpp" line="336"/>
         <source>Toggle fullscreen via OSG handler</source>
         <translation>通过OSG处理器切换全屏</translation>
     </message>
     <message>
-        <location filename="../src/MainWindow.cpp" line="326"/>
-        <location filename="../src/MainWindow.cpp" line="987"/>
+        <location filename="../src/MainWindow.cpp" line="346"/>
+        <location filename="../src/MainWindow.cpp" line="1256"/>
         <source>中文</source>
         <translation>中文</translation>
     </message>
     <message>
-        <location filename="../src/MainWindow.cpp" line="331"/>
-        <location filename="../src/MainWindow.cpp" line="988"/>
+        <location filename="../src/MainWindow.cpp" line="351"/>
+        <location filename="../src/MainWindow.cpp" line="1257"/>
         <source>English</source>
         <translation>English</translation>
     </message>
     <message>
-        <location filename="../src/MainWindow.cpp" line="336"/>
-        <location filename="../src/MainWindow.cpp" line="958"/>
+        <location filename="../src/MainWindow.cpp" line="356"/>
+        <location filename="../src/MainWindow.cpp" line="1227"/>
         <source>&amp;Theme</source>
         <translation>主题(&amp;T)</translation>
     </message>
     <message>
-        <location filename="../src/MainWindow.cpp" line="341"/>
-        <location filename="../src/MainWindow.cpp" line="990"/>
-        <location filename="../src/MainWindow.cpp" line="1050"/>
-        <location filename="../src/MainWindow.cpp" line="1054"/>
+        <location filename="../src/MainWindow.cpp" line="361"/>
+        <location filename="../src/MainWindow.cpp" line="1259"/>
+        <location filename="../src/MainWindow.cpp" line="1319"/>
+        <location filename="../src/MainWindow.cpp" line="1323"/>
         <source>Dark</source>
         <translation>暗色</translation>
     </message>
     <message>
-        <location filename="../src/MainWindow.cpp" line="347"/>
-        <location filename="../src/MainWindow.cpp" line="991"/>
-        <location filename="../src/MainWindow.cpp" line="1051"/>
+        <location filename="../src/MainWindow.cpp" line="367"/>
+        <location filename="../src/MainWindow.cpp" line="1260"/>
+        <location filename="../src/MainWindow.cpp" line="1320"/>
         <source>Light</source>
         <translation>亮色</translation>
     </message>
     <message>
-        <location filename="../src/MainWindow.cpp" line="352"/>
-        <location filename="../src/MainWindow.cpp" line="992"/>
-        <location filename="../src/MainWindow.cpp" line="1052"/>
+        <location filename="../src/MainWindow.cpp" line="372"/>
+        <location filename="../src/MainWindow.cpp" line="1261"/>
+        <location filename="../src/MainWindow.cpp" line="1321"/>
         <source>Nord</source>
         <translation>北欧</translation>
     </message>
     <message>
-        <location filename="../src/MainWindow.cpp" line="357"/>
-        <location filename="../src/MainWindow.cpp" line="993"/>
-        <location filename="../src/MainWindow.cpp" line="1053"/>
+        <location filename="../src/MainWindow.cpp" line="377"/>
+        <location filename="../src/MainWindow.cpp" line="1262"/>
+        <location filename="../src/MainWindow.cpp" line="1322"/>
         <source>Solarized</source>
         <translation>日晒</translation>
     </message>
     <message>
-        <location filename="../src/MainWindow.cpp" line="368"/>
-        <location filename="../src/MainWindow.cpp" line="976"/>
+        <location filename="../src/MainWindow.cpp" line="388"/>
+        <location filename="../src/MainWindow.cpp" line="1245"/>
         <source>About</source>
         <translation>关于</translation>
     </message>
     <message>
-        <location filename="../src/MainWindow.cpp" line="370"/>
-        <location filename="../src/MainWindow.cpp" line="859"/>
+        <location filename="../src/MainWindow.cpp" line="390"/>
+        <location filename="../src/MainWindow.cpp" line="1128"/>
         <source>About PicModelViewer</source>
         <translation>关于 PicModelViewer</translation>
     </message>
     <message>
-        <location filename="../src/MainWindow.cpp" line="376"/>
+        <location filename="../src/MainWindow.cpp" line="396"/>
         <source>Main Toolbar</source>
         <translation>主工具栏</translation>
     </message>
     <message>
-        <location filename="../src/MainWindow.cpp" line="404"/>
-        <location filename="../src/MainWindow.cpp" line="757"/>
-        <location filename="../src/MainWindow.cpp" line="995"/>
+        <location filename="../src/MainWindow.cpp" line="424"/>
+        <location filename="../src/MainWindow.cpp" line="795"/>
+        <location filename="../src/MainWindow.cpp" line="1264"/>
         <source>Ready</source>
         <translation>就绪</translation>
     </message>
     <message>
-        <location filename="../src/MainWindow.cpp" line="406"/>
-        <location filename="../src/MainWindow.cpp" line="758"/>
+        <location filename="../src/MainWindow.cpp" line="426"/>
+        <location filename="../src/MainWindow.cpp" line="796"/>
         <source>Vertices: 0</source>
         <translation>顶点数: 0</translation>
     </message>
     <message>
-        <location filename="../src/MainWindow.cpp" line="407"/>
-        <location filename="../src/MainWindow.cpp" line="759"/>
+        <location filename="../src/MainWindow.cpp" line="427"/>
+        <location filename="../src/MainWindow.cpp" line="797"/>
         <source>Faces: 0</source>
         <translation>面数: 0</translation>
     </message>
     <message>
-        <location filename="../src/MainWindow.cpp" line="566"/>
-        <location filename="../src/MainWindow.cpp" line="827"/>
+        <location filename="../src/MainWindow.cpp" line="586"/>
+        <location filename="../src/MainWindow.cpp" line="1096"/>
         <source>Error</source>
         <translation>错误</translation>
     </message>
     <message>
-        <location filename="../src/MainWindow.cpp" line="658"/>
+        <location filename="../src/MainWindow.cpp" line="690"/>
         <source>Info</source>
         <translation>信息</translation>
     </message>
     <message>
-        <location filename="../src/MainWindow.cpp" line="658"/>
+        <location filename="../src/MainWindow.cpp" line="690"/>
         <source>Cannot delete the root node.</source>
         <translation>无法删除根节点。</translation>
     </message>
     <message>
-        <location filename="../src/MainWindow.cpp" line="736"/>
         <source>Open Model File</source>
-        <translation>打开模型文件</translation>
+        <translation type="vanished">打开模型文件</translation>
     </message>
     <message>
-        <location filename="../src/MainWindow.cpp" line="775"/>
+        <location filename="../src/MainWindow.cpp" line="815"/>
         <source>Loading...</source>
         <translation>加载中...</translation>
     </message>
     <message>
-        <location filename="../src/MainWindow.cpp" line="793"/>
+        <location filename="../src/MainWindow.cpp" line="851"/>
+        <source>Failed to load: %1</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/MainWindow.cpp" line="860"/>
         <source>Vertices: %1</source>
         <translation>顶点数: %1</translation>
     </message>
     <message>
-        <location filename="../src/MainWindow.cpp" line="794"/>
+        <location filename="../src/MainWindow.cpp" line="861"/>
         <source>Faces: %1</source>
         <translation>面数: %1</translation>
     </message>
     <message>
-        <location filename="../src/MainWindow.cpp" line="815"/>
+        <location filename="../src/MainWindow.cpp" line="876"/>
+        <location filename="../src/MainWindow.cpp" line="922"/>
+        <source>Loaded: %1</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/MainWindow.cpp" line="888"/>
+        <source>Failed to load image: %1</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/MainWindow.cpp" line="911"/>
+        <source>Image: %1 x %2</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/MainWindow.cpp" line="932"/>
+        <source>Failed to load raster: %1</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/MainWindow.cpp" line="949"/>
+        <source>Raster: %1x%2  bands=%3</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/MainWindow.cpp" line="960"/>
+        <source>Loaded raster: %1</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/MainWindow.cpp" line="969"/>
+        <source>Failed to load vector: %1</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/MainWindow.cpp" line="988"/>
+        <source>Features: %1%2</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/MainWindow.cpp" line="1001"/>
+        <source>Loaded vector: %1</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/MainWindow.cpp" line="1068"/>
+        <source>All Supported (%1)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/MainWindow.cpp" line="1069"/>
+        <source>3D Models (%1)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/MainWindow.cpp" line="1072"/>
+        <source>Images (%1)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/MainWindow.cpp" line="1077"/>
+        <source>All Files (*)</source>
+        <translation type="unfinished">所有文件 (*)</translation>
+    </message>
+    <message>
+        <location filename="../src/MainWindow.cpp" line="1084"/>
         <source>Save Screenshot</source>
         <translation>保存截图</translation>
     </message>
     <message>
-        <location filename="../src/MainWindow.cpp" line="816"/>
+        <location filename="../src/MainWindow.cpp" line="1085"/>
         <source>PNG Image (*.png);;JPEG Image (*.jpg);;BMP Image (*.bmp)</source>
         <translation>PNG图片 (*.png);;JPEG图片 (*.jpg);;BMP图片 (*.bmp)</translation>
     </message>
     <message>
-        <location filename="../src/MainWindow.cpp" line="823"/>
+        <location filename="../src/MainWindow.cpp" line="1092"/>
         <source>Screenshot saved: %1</source>
         <translation>截图已保存: %1</translation>
     </message>
     <message>
-        <location filename="../src/MainWindow.cpp" line="827"/>
+        <location filename="../src/MainWindow.cpp" line="1096"/>
         <source>Failed to save screenshot</source>
         <translation>截图保存失败</translation>
     </message>
     <message>
-        <location filename="../src/MainWindow.cpp" line="860"/>
+        <location filename="../src/MainWindow.cpp" line="1129"/>
         <source>Universal 3D Model Viewer</source>
         <translation>万能3D模型浏览器</translation>
     </message>
     <message>
-        <location filename="../src/MainWindow.cpp" line="861"/>
+        <location filename="../src/MainWindow.cpp" line="1130"/>
         <source>Version</source>
         <translation>版本</translation>
     </message>
     <message>
-        <location filename="../src/MainWindow.cpp" line="862"/>
+        <location filename="../src/MainWindow.cpp" line="1131"/>
         <source>A universal 3D model viewer based on Qt, OSG and Assimp.</source>
         <translation>基于Qt、OSG和Assimp的万能3D模型浏览器。</translation>
     </message>
     <message>
-        <location filename="../src/MainWindow.cpp" line="1000"/>
+        <location filename="../src/MainWindow.cpp" line="1269"/>
         <source>Node Editor</source>
         <translation>节点编辑器</translation>
     </message>
     <message>
-        <location filename="../src/MainWindow.cpp" line="1001"/>
+        <location filename="../src/MainWindow.cpp" line="1270"/>
         <source>Pre-Process Effects</source>
         <translation>前处理特效</translation>
     </message>
     <message>
-        <location filename="../src/MainWindow.cpp" line="1075"/>
+        <location filename="../src/MainWindow.cpp" line="1344"/>
         <source>Theme: %1</source>
         <translation>主题: %1</translation>
     </message>
     <message>
-        <location filename="../src/MainWindow.cpp" line="1134"/>
+        <location filename="../src/MainWindow.cpp" line="1405"/>
         <source>%1 / %2</source>
         <translation>%1 / %2</translation>
     </message>
     <message>
-        <location filename="../src/MainWindow.cpp" line="128"/>
-        <location filename="../src/MainWindow.cpp" line="978"/>
+        <location filename="../src/MainWindow.cpp" line="146"/>
+        <location filename="../src/MainWindow.cpp" line="1247"/>
         <source>&amp;Recent Files</source>
         <translation>最近文件(&amp;R)</translation>
     </message>
     <message>
-        <location filename="../src/MainWindow.cpp" line="130"/>
-        <location filename="../src/MainWindow.cpp" line="979"/>
+        <location filename="../src/MainWindow.cpp" line="148"/>
+        <location filename="../src/MainWindow.cpp" line="1248"/>
         <source>Clear Recent</source>
         <translation>清除最近记录</translation>
     </message>
     <message>
-        <location filename="../src/MainWindow.cpp" line="871"/>
+        <location filename="../src/MainWindow.cpp" line="1140"/>
         <source>No recent files</source>
         <translation>无最近文件</translation>
     </message>
@@ -690,156 +764,371 @@
 <context>
     <name>ModelInfoDock</name>
     <message>
-        <location filename="../src/ModelInfoDock.cpp" line="11"/>
         <source>Model Info</source>
-        <translation>模型信息</translation>
+        <translation type="vanished">模型信息</translation>
     </message>
     <message>
-        <location filename="../src/ModelInfoDock.cpp" line="19"/>
+        <location filename="../src/MainWindow.cpp" line="1267"/>
+        <location filename="../src/ModelInfoDock.cpp" line="13"/>
+        <source>Info</source>
+        <translation>属性信息</translation>
+    </message>
+    <message>
+        <location filename="../src/ModelInfoDock.cpp" line="21"/>
         <source>Property</source>
         <translation>属性</translation>
     </message>
     <message>
-        <location filename="../src/ModelInfoDock.cpp" line="19"/>
+        <location filename="../src/ModelInfoDock.cpp" line="21"/>
         <source>Value</source>
         <translation>值</translation>
     </message>
     <message>
-        <location filename="../src/ModelInfoDock.cpp" line="29"/>
+        <location filename="../src/ModelInfoDock.cpp" line="103"/>
+        <location filename="../src/ModelInfoDock.cpp" line="180"/>
+        <location filename="../src/ModelInfoDock.cpp" line="206"/>
+        <location filename="../src/ModelInfoDock.cpp" line="239"/>
         <source>File Info</source>
         <translation>文件信息</translation>
     </message>
     <message>
-        <location filename="../src/ModelInfoDock.cpp" line="33"/>
+        <location filename="../src/ModelInfoDock.cpp" line="104"/>
+        <location filename="../src/ModelInfoDock.cpp" line="181"/>
+        <location filename="../src/ModelInfoDock.cpp" line="207"/>
+        <location filename="../src/ModelInfoDock.cpp" line="240"/>
         <source>File Name</source>
         <translation>文件名</translation>
     </message>
     <message>
-        <location filename="../src/ModelInfoDock.cpp" line="34"/>
+        <location filename="../src/ModelInfoDock.cpp" line="105"/>
+        <location filename="../src/ModelInfoDock.cpp" line="182"/>
+        <location filename="../src/ModelInfoDock.cpp" line="208"/>
+        <location filename="../src/ModelInfoDock.cpp" line="241"/>
         <source>File Path</source>
         <translation>文件路径</translation>
     </message>
     <message>
-        <location filename="../src/ModelInfoDock.cpp" line="35"/>
+        <location filename="../src/ModelInfoDock.cpp" line="106"/>
+        <location filename="../src/ModelInfoDock.cpp" line="183"/>
+        <location filename="../src/ModelInfoDock.cpp" line="209"/>
+        <location filename="../src/ModelInfoDock.cpp" line="242"/>
         <source>File Size</source>
         <translation>文件大小</translation>
     </message>
     <message>
-        <location filename="../src/ModelInfoDock.cpp" line="36"/>
+        <location filename="../src/ModelInfoDock.cpp" line="107"/>
+        <location filename="../src/ModelInfoDock.cpp" line="184"/>
+        <location filename="../src/ModelInfoDock.cpp" line="210"/>
+        <location filename="../src/ModelInfoDock.cpp" line="243"/>
         <source>Format</source>
         <translation>格式</translation>
     </message>
     <message>
-        <location filename="../src/ModelInfoDock.cpp" line="37"/>
+        <location filename="../src/ModelInfoDock.cpp" line="108"/>
+        <location filename="../src/ModelInfoDock.cpp" line="211"/>
+        <location filename="../src/ModelInfoDock.cpp" line="244"/>
         <source>Loader</source>
         <translation>加载器</translation>
     </message>
     <message>
-        <location filename="../src/ModelInfoDock.cpp" line="40"/>
+        <location filename="../src/ModelInfoDock.cpp" line="110"/>
+        <location filename="../src/ModelInfoDock.cpp" line="275"/>
         <source>Geometry</source>
         <translation>几何信息</translation>
     </message>
     <message>
-        <location filename="../src/ModelInfoDock.cpp" line="44"/>
-        <location filename="../src/ModelInfoDock.cpp" line="77"/>
+        <location filename="../src/ModelInfoDock.cpp" line="111"/>
+        <location filename="../src/ModelInfoDock.cpp" line="155"/>
         <source>Vertices</source>
         <translation>顶点数</translation>
     </message>
     <message>
-        <location filename="../src/ModelInfoDock.cpp" line="45"/>
-        <location filename="../src/ModelInfoDock.cpp" line="78"/>
+        <location filename="../src/ModelInfoDock.cpp" line="112"/>
+        <location filename="../src/ModelInfoDock.cpp" line="156"/>
         <source>Faces</source>
         <translation>面数</translation>
     </message>
     <message>
-        <location filename="../src/ModelInfoDock.cpp" line="46"/>
+        <location filename="../src/ModelInfoDock.cpp" line="113"/>
         <source>Meshes</source>
         <translation>网格数</translation>
     </message>
     <message>
-        <location filename="../src/ModelInfoDock.cpp" line="47"/>
+        <location filename="../src/ModelInfoDock.cpp" line="114"/>
         <source>Materials</source>
         <translation>材质数</translation>
     </message>
     <message>
-        <location filename="../src/ModelInfoDock.cpp" line="48"/>
+        <location filename="../src/ModelInfoDock.cpp" line="115"/>
         <source>Textures</source>
         <translation>纹理数</translation>
     </message>
     <message>
-        <location filename="../src/ModelInfoDock.cpp" line="51"/>
+        <location filename="../src/ModelInfoDock.cpp" line="117"/>
         <source>Bounding Box</source>
         <translation>包围盒</translation>
     </message>
     <message>
-        <location filename="../src/ModelInfoDock.cpp" line="55"/>
-        <location filename="../src/ModelInfoDock.cpp" line="86"/>
+        <location filename="../src/ModelInfoDock.cpp" line="118"/>
         <source>Min</source>
         <translation>最小值</translation>
     </message>
     <message>
-        <location filename="../src/ModelInfoDock.cpp" line="56"/>
-        <location filename="../src/ModelInfoDock.cpp" line="87"/>
+        <location filename="../src/ModelInfoDock.cpp" line="122"/>
         <source>Max</source>
         <translation>最大值</translation>
     </message>
     <message>
-        <location filename="../src/ModelInfoDock.cpp" line="57"/>
-        <location filename="../src/ModelInfoDock.cpp" line="88"/>
+        <location filename="../src/ModelInfoDock.cpp" line="126"/>
         <source>Size</source>
         <translation>尺寸</translation>
     </message>
     <message>
-        <location filename="../src/ModelInfoDock.cpp" line="60"/>
+        <location filename="../src/ModelInfoDock.cpp" line="137"/>
         <source>Selected Node</source>
         <translation>选中节点</translation>
     </message>
     <message>
-        <location filename="../src/ModelInfoDock.cpp" line="65"/>
+        <location filename="../src/ModelInfoDock.cpp" line="140"/>
         <source>Name</source>
         <translation>名称</translation>
     </message>
     <message>
-        <location filename="../src/ModelInfoDock.cpp" line="66"/>
+        <location filename="../src/ModelInfoDock.cpp" line="144"/>
         <source>Type</source>
         <translation>类型</translation>
     </message>
     <message>
-        <location filename="../src/ModelInfoDock.cpp" line="67"/>
+        <location filename="../src/ModelInfoDock.cpp" line="147"/>
         <source>Children</source>
         <translation>子节点</translation>
     </message>
     <message>
-        <location filename="../src/ModelInfoDock.cpp" line="68"/>
+        <location filename="../src/ModelInfoDock.cpp" line="149"/>
         <source>Node Mask</source>
         <translation>节点掩码</translation>
     </message>
     <message>
-        <location filename="../src/ModelInfoDock.cpp" line="71"/>
-        <source>Node Geometry</source>
-        <translation>节点几何</translation>
+        <location filename="../src/ModelInfoDock.cpp" line="162"/>
+        <source>BBox Min</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/ModelInfoDock.cpp" line="76"/>
+        <location filename="../src/ModelInfoDock.cpp" line="164"/>
+        <source>BBox Max</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/ModelInfoDock.cpp" line="166"/>
+        <source>BBox Size</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/ModelInfoDock.cpp" line="186"/>
+        <source>Image</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/ModelInfoDock.cpp" line="189"/>
+        <location filename="../src/ModelInfoDock.cpp" line="214"/>
+        <location filename="../src/ModelInfoDock.cpp" line="225"/>
+        <location filename="../src/ModelInfoDock.cpp" line="261"/>
+        <source>Width</source>
+        <translation type="unfinished">宽度</translation>
+    </message>
+    <message>
+        <location filename="../src/ModelInfoDock.cpp" line="190"/>
+        <location filename="../src/ModelInfoDock.cpp" line="215"/>
+        <location filename="../src/ModelInfoDock.cpp" line="226"/>
+        <location filename="../src/ModelInfoDock.cpp" line="262"/>
+        <source>Height</source>
+        <translation type="unfinished">高度</translation>
+    </message>
+    <message>
+        <location filename="../src/ModelInfoDock.cpp" line="191"/>
+        <location filename="../src/ModelInfoDock.cpp" line="227"/>
+        <source>Pixel Format</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/ModelInfoDock.cpp" line="192"/>
+        <source>Pixel Size</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/ModelInfoDock.cpp" line="193"/>
+        <location filename="../src/ModelInfoDock.cpp" line="228"/>
+        <source>Image Size</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/ModelInfoDock.cpp" line="197"/>
+        <source>Status</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/ModelInfoDock.cpp" line="197"/>
+        <source>(no image)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/ModelInfoDock.cpp" line="213"/>
+        <source>Raster</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/ModelInfoDock.cpp" line="216"/>
+        <source>Bands</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/ModelInfoDock.cpp" line="217"/>
+        <source>Data Type</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/ModelInfoDock.cpp" line="218"/>
+        <source>Pixel Size X</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/ModelInfoDock.cpp" line="219"/>
+        <source>Pixel Size Y</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/ModelInfoDock.cpp" line="220"/>
+        <location filename="../src/ModelInfoDock.cpp" line="254"/>
+        <source>CRS</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/ModelInfoDock.cpp" line="220"/>
+        <location filename="../src/ModelInfoDock.cpp" line="254"/>
+        <source>(none)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/ModelInfoDock.cpp" line="224"/>
+        <source>Display</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/ModelInfoDock.cpp" line="246"/>
+        <source>Vector</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/ModelInfoDock.cpp" line="247"/>
+        <source>Geometry Type</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/ModelInfoDock.cpp" line="248"/>
+        <source>Layer Count</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/ModelInfoDock.cpp" line="249"/>
+        <source>Feature Count</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/ModelInfoDock.cpp" line="250"/>
+        <source>Displayed Count</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/ModelInfoDock.cpp" line="252"/>
+        <source>%1 (truncated)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/ModelInfoDock.cpp" line="256"/>
+        <source>Extent</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/ModelInfoDock.cpp" line="257"/>
+        <source>Min X</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/ModelInfoDock.cpp" line="258"/>
+        <source>Min Y</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/ModelInfoDock.cpp" line="259"/>
+        <source>Max X</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/ModelInfoDock.cpp" line="260"/>
+        <source>Max Y</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/ModelInfoDock.cpp" line="268"/>
+        <source>Selected Feature</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/ModelInfoDock.cpp" line="270"/>
+        <source>FID</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/ModelInfoDock.cpp" line="271"/>
+        <source>(unknown)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/ModelInfoDock.cpp" line="273"/>
+        <source>Layer</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/ModelInfoDock.cpp" line="279"/>
+        <source>Coord</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/ModelInfoDock.cpp" line="286"/>
+        <source>Rings</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/ModelInfoDock.cpp" line="287"/>
+        <source>Points</source>
+        <translation type="unfinished">点云</translation>
+    </message>
+    <message>
+        <location filename="../src/ModelInfoDock.cpp" line="292"/>
+        <source>Attributes</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Node Geometry</source>
+        <translation type="vanished">节点几何</translation>
+    </message>
+    <message>
+        <location filename="../src/ModelInfoDock.cpp" line="154"/>
         <source>Drawables</source>
         <translation>绘制体</translation>
     </message>
     <message>
-        <location filename="../src/ModelInfoDock.cpp" line="81"/>
         <source>Node Bounding Box</source>
-        <translation>节点包围盒</translation>
+        <translation type="vanished">节点包围盒</translation>
     </message>
     <message>
-        <location filename="../src/ModelInfoDock.cpp" line="173"/>
+        <location filename="../src/ModelInfoDock.cpp" line="141"/>
         <source>(unnamed)</source>
         <translation>(未命名)</translation>
     </message>
     <message>
-        <location filename="../src/ModelInfoDock.cpp" line="213"/>
-        <location filename="../src/ModelInfoDock.cpp" line="214"/>
-        <location filename="../src/ModelInfoDock.cpp" line="215"/>
         <source>N/A</source>
-        <translation>不适用</translation>
+        <translation type="vanished">不适用</translation>
     </message>
 </context>
 <context>
@@ -2119,6 +2408,19 @@ Triangles: %2</source>
     </message>
 </context>
 <context>
+    <name>VectorViewerWidget</name>
+    <message>
+        <location filename="../src/VectorViewerWidget.cpp" line="133"/>
+        <source>No features to display</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/VectorViewerWidget.cpp" line="133"/>
+        <source>No data loaded</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
     <name>WelcomeWidget</name>
     <message>
         <location filename="../src/WelcomeWidget.cpp" line="40"/>
@@ -2127,16 +2429,24 @@ Triangles: %2</source>
         <translation>欢迎使用 PicModelViewer</translation>
     </message>
     <message>
+        <source>Universal 3D Model Viewer</source>
+        <translation type="vanished">万能3D模型浏览器</translation>
+    </message>
+    <message>
         <location filename="../src/WelcomeWidget.cpp" line="50"/>
         <location filename="../src/WelcomeWidget.cpp" line="143"/>
-        <source>Universal 3D Model Viewer</source>
-        <translation>万能3D模型浏览器</translation>
+        <source>Image / Vector / Model File Viewer</source>
+        <translation>矢量模型文件浏览器</translation>
+    </message>
+    <message>
+        <source>Open Model</source>
+        <translation type="vanished">打开模型</translation>
     </message>
     <message>
         <location filename="../src/WelcomeWidget.cpp" line="62"/>
         <location filename="../src/WelcomeWidget.cpp" line="144"/>
-        <source>Open Model</source>
-        <translation>打开模型</translation>
+        <source>Open Image / Vector / Model File</source>
+        <translation>打开图片、矢量、模型文件</translation>
     </message>
     <message>
         <location filename="../src/WelcomeWidget.cpp" line="77"/>
@@ -2145,10 +2455,14 @@ Triangles: %2</source>
         <translation>最近文件</translation>
     </message>
     <message>
+        <source>Tip: Drag any model file into the window to open it</source>
+        <translation type="vanished">提示：将任意模型文件拖入窗口即可打开</translation>
+    </message>
+    <message>
         <location filename="../src/WelcomeWidget.cpp" line="93"/>
         <location filename="../src/WelcomeWidget.cpp" line="146"/>
-        <source>Tip: Drag any model file into the window to open it</source>
-        <translation>提示：将任意模型文件拖入窗口即可打开</translation>
+        <source>Tip: Drag any image, vector or model file into the window to open it</source>
+        <translation>提示：将任意图片、矢量或模型文件拖入窗口即可打开</translation>
     </message>
 </context>
 </TS>

@@ -10,6 +10,11 @@
 #include "WelcomeWidget.h"
 #include "ModelConverter.h"
 #include "BatchConvertDialog.h"
+#include "ImageViewerWidget.h"
+#include "VectorViewerWidget.h"
+#include "GdalRasterLoader.h"
+#include "GdalVectorLoader.h"
+#include "GdalVectorData.h"
 
 #include <QFileDialog>
 #include <QMessageBox>
@@ -30,8 +35,13 @@
 #include <QPainter>
 #include <QSvgRenderer>
 #include <QTimer>
+#include <QFileInfo>
+#include <QSet>
+#include <cstring>
 
+#include <osgDB/ReadFile>
 #include <osgDB/WriteFile>
+#include <osg/Image>
 #include <osg/Node>
 #include <osg/Group>
 
@@ -98,6 +108,14 @@ void MainWindow::setupUI()
     m_osgWidget = new OSGWidget(this);
     m_stackWidget->addWidget(m_osgWidget);
 
+    // Create image viewer (raster + image, page 2)
+    m_imageViewer = new ImageViewerWidget(this);
+    m_stackWidget->addWidget(m_imageViewer);
+
+    // Create vector viewer (page 3)
+    m_vectorViewer = new VectorViewerWidget(this);
+    m_stackWidget->addWidget(m_vectorViewer);
+
     // Start on welcome page
     m_stackWidget->setCurrentIndex(0);
 
@@ -137,6 +155,7 @@ void MainWindow::setupMenuBar()
     m_prevFileAction->setShortcut(QKeySequence("Alt+Left"));
     m_prevFileAction->setStatusTip(tr("Open previous model file in directory"));
     m_prevFileAction->setEnabled(false);
+    m_prevFileAction->setAutoRepeat(false);
     m_fileMenu->addAction(m_prevFileAction);
 
     m_nextFileAction = new QAction(tr("Next File"), this);
@@ -144,6 +163,7 @@ void MainWindow::setupMenuBar()
     m_nextFileAction->setShortcut(QKeySequence("Alt+Right"));
     m_nextFileAction->setStatusTip(tr("Open next model file in directory"));
     m_nextFileAction->setEnabled(false);
+    m_nextFileAction->setAutoRepeat(false);
     m_fileMenu->addAction(m_nextFileAction);
 
     m_fileMenu->addSeparator();
@@ -647,6 +667,18 @@ void MainWindow::setupConnections()
     connect(m_welcomeWidget, &WelcomeWidget::openClicked, this, &MainWindow::openFile);
     connect(m_welcomeWidget, &WelcomeWidget::recentFileClicked, this, &MainWindow::loadModel);
 
+    // Vector viewer: show selected feature info in the info dock
+    connect(m_vectorViewer, &VectorViewerWidget::featureSelected, this, [this](int index) {
+        if (!m_currentVectorData) return;
+        if (index < 0 || index >= m_currentVectorData->features.size())
+        {
+            m_modelInfoDock->updateNodeInfo(nullptr); // reuse selection-clear path
+            return;
+        }
+        m_modelInfoDock->showVectorFeatureInfo(m_currentVectorData->features[index]);
+        m_modelInfoDock->raise();
+    });
+
     // Edit menu - node operations
     connect(m_deleteNodeAction, &QAction::triggered, this, [this]() {
         osg::Node* node = m_osgWidget->getSelectedNode();
@@ -731,9 +763,9 @@ void MainWindow::setupConnections()
 
 void MainWindow::openFile()
 {
-    QStringList filters = ModelLoader::getSupportedFormatsFilter();
+    const QString filter = allSupportedFilter();
     QString filePath = QFileDialog::getOpenFileName(this,
-        tr("Open Model File"), QString(), filters.join(";;"));
+        tr("Open File"), QString(), filter);
 
     if (!filePath.isEmpty())
     {
@@ -751,6 +783,12 @@ void MainWindow::closeModel()
     m_modelInfoDock->clearInfo();
     m_sceneTreeDock->clearTree();
     m_undoStack->clear();
+
+    // Also clear 2D viewers
+    if (m_imageViewer)  m_imageViewer->clearImage();
+    if (m_vectorViewer) m_vectorViewer->clearData();
+    m_currentVectorData.reset();
+
     m_currentFilePath.clear();
     m_dirFiles.clear();
     m_currentFileIndex = -1;
@@ -770,43 +808,274 @@ void MainWindow::loadModel(const QString& filePath)
     // Prevent re-entry during rapid navigation
     if (m_loading)
         return;
-    m_loading = true;
 
+    const QString ext = QFileInfo(filePath).suffix().toLower();
+
+    m_loading = true;
     m_statusLabel->setText(tr("Loading..."));
 
+    // Disable nav actions during load to stop click/shortcut events from
+    // piling up in the event queue while a heavy loader is running.
+    m_prevFileAction->setEnabled(false);
+    m_nextFileAction->setEnabled(false);
+
+    if (isVectorExt(ext))
+        doLoadVector(filePath);
+    else if (isRasterExt(ext))
+        doLoadRaster(filePath);
+    else if (isImageExt(ext))
+        doLoadImage(filePath);
+    else
+        doLoadModel(filePath);
+
+    m_loading = false;
+
+    // Restore nav action enable-state based on the (possibly updated) index.
+    updateFileNavState();
+
+    // Drop any nav clicks/keys that piled up while loading was in progress,
+    // so the user does not get a delayed avalanche of "next/prev" actions.
+    QCoreApplication::removePostedEvents(m_prevFileAction, 0);
+    QCoreApplication::removePostedEvents(m_nextFileAction, 0);
+}
+
+void MainWindow::doLoadModel(const QString& filePath)
+{
     // Clear node editor reference before replacing scene
     m_nodeEditorDock->setNode(nullptr);
     m_sceneTreeDock->clearTree();
 
     osg::Node* node = m_modelLoader->loadFile(filePath);
-    if (node)
+    if (!node)
     {
-        m_osgWidget->setSceneData(node);
-
-        // Refresh node editor so node-level tabs become available, falling back
-        // to the scene root when no explicit selection is made.
-        m_nodeEditorDock->setNode(nullptr);
-
-        // Update info
-        ModelInfo info = m_modelLoader->getModelInfo();
-        m_modelInfoDock->updateInfo(info);
-        m_vertexLabel->setText(tr("Vertices: %1").arg(info.vertexCount));
-        m_faceLabel->setText(tr("Faces: %1").arg(info.faceCount));
-
-        m_currentFilePath = filePath;
-        setWindowTitle(QString("PicModelViewer - %1").arg(QFileInfo(filePath).fileName()));
-
-        // Switch to OSG view
-        m_stackWidget->setCurrentIndex(1);
-
-        // Scan directory for file navigation
-        scanDirectoryFiles(filePath);
-
-        // Add to recent files
-        addToRecentFiles(filePath);
+        m_statusLabel->setText(tr("Failed to load: %1").arg(QFileInfo(filePath).fileName()));
+        return;
     }
 
-    m_loading = false;
+    m_osgWidget->setSceneData(node);
+    m_nodeEditorDock->setNode(nullptr);
+
+    ModelInfo info = m_modelLoader->getModelInfo();
+    m_modelInfoDock->updateInfo(info);
+    m_vertexLabel->setText(tr("Vertices: %1").arg(info.vertexCount));
+    m_faceLabel->setText(tr("Faces: %1").arg(info.faceCount));
+
+    m_currentFilePath = filePath;
+    setWindowTitle(QString("PicModelViewer - %1").arg(QFileInfo(filePath).fileName()));
+
+    // Switch to OSG view (page 1)
+    m_stackWidget->setCurrentIndex(1);
+
+    // Clear other viewers
+    if (m_imageViewer)  m_imageViewer->clearImage();
+    if (m_vectorViewer) m_vectorViewer->clearData();
+    m_currentVectorData.reset();
+
+    scanDirectoryFiles(filePath);
+    addToRecentFiles(filePath);
+    m_statusLabel->setText(tr("Loaded: %1").arg(QFileInfo(filePath).fileName()));
+}
+
+void MainWindow::doLoadImage(const QString& filePath)
+{
+    osg::ref_ptr<osg::Image> image = osgDB::readImageFile(filePath.toStdString());
+    if (!image.valid())
+    {
+        // Fallback: load via QImage and convert to RGBA osg::Image
+        QImage qimg(filePath);
+        if (qimg.isNull())
+        {
+            m_statusLabel->setText(tr("Failed to load image: %1").arg(QFileInfo(filePath).fileName()));
+            return;
+        }
+        QImage rgba = qimg.convertToFormat(QImage::Format_RGBA8888).mirrored(false, true);
+        image = new osg::Image;
+        image->allocateImage(rgba.width(), rgba.height(), 1, GL_RGBA, GL_UNSIGNED_BYTE);
+        std::memcpy(image->data(), rgba.constBits(), static_cast<size_t>(rgba.sizeInBytes()));
+        image->setPixelFormat(GL_RGBA);
+    }
+
+    // Clear other viewers
+    m_osgWidget->clearSelection();
+    m_osgWidget->setSceneData(nullptr);
+    m_nodeEditorDock->setNode(nullptr);
+    m_modelInfoDock->clearInfo();
+    m_sceneTreeDock->clearTree();
+    if (m_vectorViewer) m_vectorViewer->clearData();
+    m_currentVectorData.reset();
+
+    m_imageViewer->loadImage(image.get(), filePath);
+    m_currentFilePath = filePath;
+    setWindowTitle(QString("PicModelViewer - %1").arg(QFileInfo(filePath).fileName()));
+
+    m_vertexLabel->setText(tr("Image: %1 x %2").arg(image->s()).arg(image->t()));
+    m_faceLabel->setText("");
+
+    // Switch to image page (2)
+    m_stackWidget->setCurrentIndex(2);
+
+    // Populate info dock
+    m_modelInfoDock->showImageInfo(filePath, image.get());
+
+    scanDirectoryFiles(filePath);
+    addToRecentFiles(filePath);
+    m_statusLabel->setText(tr("Loaded: %1").arg(QFileInfo(filePath).fileName()));
+}
+
+void MainWindow::doLoadRaster(const QString& filePath)
+{
+    GdalRasterMeta meta;
+    QString err;
+    osg::ref_ptr<osg::Image> image = GdalRasterLoader::load(filePath, &meta, &err);
+    if (!image.valid())
+    {
+        m_statusLabel->setText(tr("Failed to load raster: %1").arg(err.isEmpty() ? QFileInfo(filePath).fileName() : err));
+        return;
+    }
+
+    // Clear other viewers
+    m_osgWidget->clearSelection();
+    m_osgWidget->setSceneData(nullptr);
+    m_nodeEditorDock->setNode(nullptr);
+    m_modelInfoDock->clearInfo();
+    m_sceneTreeDock->clearTree();
+    if (m_vectorViewer) m_vectorViewer->clearData();
+    m_currentVectorData.reset();
+
+    m_imageViewer->loadImage(image.get(), filePath);
+    m_currentFilePath = filePath;
+    setWindowTitle(QString("PicModelViewer - %1").arg(QFileInfo(filePath).fileName()));
+
+    m_vertexLabel->setText(tr("Raster: %1x%2  bands=%3").arg(meta.width).arg(meta.height).arg(meta.bandCount));
+    m_faceLabel->setText(meta.dataType);
+
+    // Switch to image page (2)
+    m_stackWidget->setCurrentIndex(2);
+
+    // Populate info dock
+    m_modelInfoDock->showRasterInfo(filePath, meta, image.get());
+
+    scanDirectoryFiles(filePath);
+    addToRecentFiles(filePath);
+    m_statusLabel->setText(tr("Loaded raster: %1").arg(QFileInfo(filePath).fileName()));
+}
+
+void MainWindow::doLoadVector(const QString& filePath)
+{
+    QString err;
+    auto data = GdalVectorLoader::load(filePath, &err);
+    if (!data)
+    {
+        m_statusLabel->setText(tr("Failed to load vector: %1").arg(err.isEmpty() ? QFileInfo(filePath).fileName() : err));
+        return;
+    }
+
+    // Clear other viewers
+    m_osgWidget->clearSelection();
+    m_osgWidget->setSceneData(nullptr);
+    m_nodeEditorDock->setNode(nullptr);
+    m_modelInfoDock->clearInfo();
+    m_sceneTreeDock->clearTree();
+    if (m_imageViewer) m_imageViewer->clearImage();
+
+    // Take ownership and keep alive while viewer references it
+    m_currentVectorData = std::move(data);
+    m_vectorViewer->loadData(m_currentVectorData.get());
+
+    m_currentFilePath = filePath;
+    setWindowTitle(QString("PicModelViewer - %1").arg(QFileInfo(filePath).fileName()));
+
+    m_vertexLabel->setText(tr("Features: %1%2")
+        .arg(m_currentVectorData->displayedCount)
+        .arg(m_currentVectorData->truncated ? " (truncated)" : ""));
+    m_faceLabel->setText(m_currentVectorData->geomType);
+
+    // Switch to vector page (3)
+    m_stackWidget->setCurrentIndex(3);
+
+    // Populate info dock
+    m_modelInfoDock->showVectorInfo(*m_currentVectorData);
+
+    scanDirectoryFiles(filePath);
+    addToRecentFiles(filePath);
+    m_statusLabel->setText(tr("Loaded vector: %1").arg(QFileInfo(filePath).fileName()));
+}
+
+// ===== File type helpers =====
+QStringList MainWindow::imageExtensions()
+{
+    return { "jpg","jpeg","png","bmp","gif","tga","webp","pgm","ppm","pbm","pnm" };
+}
+
+bool MainWindow::isImageExt(const QString& ext)
+{
+    static const QSet<QString> S = []{
+        const QStringList list = imageExtensions();
+        return QSet<QString>(list.begin(), list.end());
+    }();
+    return S.contains(ext.toLower());
+}
+
+bool MainWindow::isRasterExt(const QString& ext)
+{
+    return GdalRasterLoader::isRasterFile(ext);
+}
+
+bool MainWindow::isVectorExt(const QString& ext)
+{
+    return GdalVectorLoader::isVectorFile(ext);
+}
+
+bool MainWindow::isModelExt(const QString& ext)
+{
+    static const QSet<QString> S = []{
+        const QStringList list = ModelLoader::getSupportedFormats();
+        return QSet<QString>(list.begin(), list.end());
+    }();
+    return S.contains(ext.toLower());
+}
+
+QStringList MainWindow::allSupportedExtensions()
+{
+    QSet<QString> all;
+    for (const QString& e : ModelLoader::getSupportedFormats()) all.insert(e.toLower());
+    for (const QString& e : imageExtensions())                  all.insert(e.toLower());
+    // Raster/Vector extensions: leverage the loader filters (parse "*.ext" patterns)
+    auto addFromFilter = [&](const QString& filter) {
+        // Strip leading group label like "Raster (" and trailing ");;All Files (*)"
+        QString s = filter;
+        s.replace('(', ' ').replace(')', ' ').replace(';', ' ');
+        const QStringList parts = s.split(' ', Qt::SkipEmptyParts);
+        for (const QString& p : parts) {
+            if (p.startsWith("*.")) all.insert(p.mid(2).toLower());
+        }
+    };
+    addFromFilter(GdalRasterLoader::supportedFormatsFilter());
+    addFromFilter(GdalVectorLoader::supportedFormatsFilter());
+
+    QStringList out = all.values();
+    out.sort();
+    return out;
+}
+
+QString MainWindow::allSupportedFilter()
+{
+    QStringList exts = allSupportedExtensions();
+    QStringList pat;
+    for (const QString& e : exts) pat << "*." + e;
+
+    QStringList filters;
+    filters << tr("All Supported (%1)").arg(pat.join(' '));
+    filters << tr("3D Models (%1)").arg([] {
+        QStringList p; for (const QString& e : ModelLoader::getSupportedFormats()) p << "*." + e.toLower(); return p.join(' ');
+    }());
+    filters << tr("Images (%1)").arg([] {
+        QStringList p; for (const QString& e : imageExtensions()) p << "*." + e; return p.join(' ');
+    }());
+    filters << GdalRasterLoader::supportedFormatsFilter().split(";;").value(0);
+    filters << GdalVectorLoader::supportedFormatsFilter().split(";;").value(0);
+    filters << tr("All Files (*)");
+    return filters.join(";;");
 }
 
 void MainWindow::takeScreenshot()
@@ -995,7 +1264,7 @@ void MainWindow::changeEvent(QEvent* event)
         m_statusLabel->setText(tr("Ready"));
 
         // Retranslate dock widgets
-        m_modelInfoDock->setWindowTitle(tr("Model Info"));
+        m_modelInfoDock->setWindowTitle(ModelInfoDock::tr("Info"));
         m_sceneTreeDock->setWindowTitle(tr("Scene Tree"));
         if (m_nodeEditorDock) m_nodeEditorDock->setWindowTitle(tr("Node Editor"));
         if (m_preProcessDock) m_preProcessDock->setWindowTitle(tr("Pre-Process Effects"));
@@ -1080,15 +1349,15 @@ void MainWindow::scanDirectoryFiles(const QString& filePath)
     QFileInfo fileInfo(filePath);
     QDir dir = fileInfo.absoluteDir();
 
-    // Get supported extensions
-    QStringList supportedExts = ModelLoader::getSupportedFormats();
+    // Get all supported extensions (models + images + raster + vector)
+    QStringList supportedExts = allSupportedExtensions();
     QStringList nameFilters;
     for (const QString& ext : supportedExts)
     {
         nameFilters << QString("*.%1").arg(ext.toLower());
     }
 
-    // Scan directory for model files
+    // Scan directory for supported files
     m_dirFiles.clear();
     QStringList entries = dir.entryList(nameFilters, QDir::Files, QDir::Name | QDir::IgnoreCase);
     for (const QString& entry : entries)
@@ -1105,6 +1374,7 @@ void MainWindow::scanDirectoryFiles(const QString& filePath)
 
 void MainWindow::prevFile()
 {
+    if (m_loading) return;
     if (m_dirFiles.isEmpty() || m_currentFileIndex <= 0)
         return;
     m_currentFileIndex--;
@@ -1114,6 +1384,7 @@ void MainWindow::prevFile()
 
 void MainWindow::nextFile()
 {
+    if (m_loading) return;
     if (m_dirFiles.isEmpty() || m_currentFileIndex >= m_dirFiles.size() - 1)
         return;
     m_currentFileIndex++;

@@ -30,6 +30,10 @@ int main(int argc, char* argv[])
     QString appDir = QCoreApplication::applicationDirPath();
     qputenv("OSG_LIBRARY_PATH", appDir.toUtf8().constData());
 
+    // GDAL/PROJ data directories (deployed by CMake POST_BUILD)
+    qputenv("GDAL_DATA", (appDir + "/gdal-data").toUtf8().constData());
+    qputenv("PROJ_LIB",  (appDir + "/proj-data").toUtf8().constData());
+
     // Initialize i18n with system language (default Chinese)
     I18nManager::Language lang = I18nManager::systemLanguage();
     I18nManager::instance().setLanguage(lang);

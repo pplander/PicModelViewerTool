@@ -2,13 +2,15 @@
 
 #include <QHeaderView>
 #include <QFileInfo>
+#include <QFont>
 
 #include <osg/Group>
 #include <osg/Geode>
+#include <osg/Geometry>
 #include <osg/BoundingBox>
 
 ModelInfoDock::ModelInfoDock(QWidget* parent)
-    : QDockWidget(tr("Model Info"), parent)
+    : QDockWidget(tr("Info"), parent)
 {
     setupUI();
 }
@@ -22,205 +24,289 @@ void ModelInfoDock::setupUI()
     m_treeWidget->header()->setSectionResizeMode(0, QHeaderView::ResizeToContents);
     m_treeWidget->header()->setStretchLastSection(true);
 
-    QFont boldFont;
-    boldFont.setBold(true);
-
-    // File info group
-    QTreeWidgetItem* fileGroup = new QTreeWidgetItem(m_treeWidget, QStringList() << tr("File Info"));
-    fileGroup->setExpanded(true);
-    fileGroup->setFont(0, boldFont);
-
-    m_fileNameItem = new QTreeWidgetItem(fileGroup, QStringList() << tr("File Name") << "");
-    m_filePathItem = new QTreeWidgetItem(fileGroup, QStringList() << tr("File Path") << "");
-    m_fileSizeItem = new QTreeWidgetItem(fileGroup, QStringList() << tr("File Size") << "");
-    m_formatItem = new QTreeWidgetItem(fileGroup, QStringList() << tr("Format") << "");
-    m_loaderItem = new QTreeWidgetItem(fileGroup, QStringList() << tr("Loader") << "");
-
-    // Model geometry info group
-    QTreeWidgetItem* geoGroup = new QTreeWidgetItem(m_treeWidget, QStringList() << tr("Geometry"));
-    geoGroup->setExpanded(true);
-    geoGroup->setFont(0, boldFont);
-
-    m_vertexCountItem = new QTreeWidgetItem(geoGroup, QStringList() << tr("Vertices") << "");
-    m_faceCountItem = new QTreeWidgetItem(geoGroup, QStringList() << tr("Faces") << "");
-    m_meshCountItem = new QTreeWidgetItem(geoGroup, QStringList() << tr("Meshes") << "");
-    m_materialCountItem = new QTreeWidgetItem(geoGroup, QStringList() << tr("Materials") << "");
-    m_textureCountItem = new QTreeWidgetItem(geoGroup, QStringList() << tr("Textures") << "");
-
-    // Model bounding box group
-    QTreeWidgetItem* bbGroup = new QTreeWidgetItem(m_treeWidget, QStringList() << tr("Bounding Box"));
-    bbGroup->setExpanded(true);
-    bbGroup->setFont(0, boldFont);
-
-    m_bbMinItem = new QTreeWidgetItem(bbGroup, QStringList() << tr("Min") << "");
-    m_bbMaxItem = new QTreeWidgetItem(bbGroup, QStringList() << tr("Max") << "");
-    m_bbSizeItem = new QTreeWidgetItem(bbGroup, QStringList() << tr("Size") << "");
-
-    // Selected node info group (top-level, hidden by default)
-    m_nodeInfoGroup = new QTreeWidgetItem(m_treeWidget, QStringList() << tr("Selected Node"));
-    m_nodeInfoGroup->setExpanded(true);
-    m_nodeInfoGroup->setFont(0, boldFont);
-    m_nodeInfoGroup->setHidden(true);
-
-    m_nodeNameItem = new QTreeWidgetItem(m_nodeInfoGroup, QStringList() << tr("Name") << "");
-    m_nodeTypeItem = new QTreeWidgetItem(m_nodeInfoGroup, QStringList() << tr("Type") << "");
-    m_nodeChildrenItem = new QTreeWidgetItem(m_nodeInfoGroup, QStringList() << tr("Children") << "");
-    m_nodeDescItem = new QTreeWidgetItem(m_nodeInfoGroup, QStringList() << tr("Node Mask") << "");
-
-    // Selected node geometry info group (top-level, hidden by default)
-    m_nodeGeoGroup = new QTreeWidgetItem(m_treeWidget, QStringList() << tr("Node Geometry"));
-    m_nodeGeoGroup->setExpanded(true);
-    m_nodeGeoGroup->setFont(0, boldFont);
-    m_nodeGeoGroup->setHidden(true);
-
-    m_nodeDrawableItem = new QTreeWidgetItem(m_nodeGeoGroup, QStringList() << tr("Drawables") << "");
-    m_nodeVertexItem = new QTreeWidgetItem(m_nodeGeoGroup, QStringList() << tr("Vertices") << "");
-    m_nodeFaceItem = new QTreeWidgetItem(m_nodeGeoGroup, QStringList() << tr("Faces") << "");
-
-    // Selected node bounding box group (top-level, hidden by default)
-    m_nodeBbGroup = new QTreeWidgetItem(m_treeWidget, QStringList() << tr("Node Bounding Box"));
-    m_nodeBbGroup->setExpanded(true);
-    m_nodeBbGroup->setFont(0, boldFont);
-    m_nodeBbGroup->setHidden(true);
-
-    m_nodeBbMinItem = new QTreeWidgetItem(m_nodeBbGroup, QStringList() << tr("Min") << "");
-    m_nodeBbMaxItem = new QTreeWidgetItem(m_nodeBbGroup, QStringList() << tr("Max") << "");
-    m_nodeBbSizeItem = new QTreeWidgetItem(m_nodeBbGroup, QStringList() << tr("Size") << "");
-
     setWidget(m_treeWidget);
 }
 
-void ModelInfoDock::updateInfo(const ModelInfo& info)
+// ---------- helpers ----------
+
+QTreeWidgetItem* ModelInfoDock::addGroup(const QString& title)
 {
-    m_hasNodeSelected = false;
-
-    m_fileNameItem->setText(1, info.fileName);
-    m_filePathItem->setText(1, info.filePath);
-    m_filePathItem->setToolTip(1, info.filePath);
-
-    // Format file size
-    QString sizeStr;
-    if (info.fileSize > 1024 * 1024)
-    {
-        sizeStr = QString("%1 MB").arg(info.fileSize / (1024.0 * 1024.0), 0, 'f', 2);
-    }
-    else if (info.fileSize > 1024)
-    {
-        sizeStr = QString("%1 KB").arg(info.fileSize / 1024.0, 0, 'f', 2);
-    }
-    else
-    {
-        sizeStr = QString("%1 B").arg(info.fileSize);
-    }
-    m_fileSizeItem->setText(1, sizeStr);
-
-    m_formatItem->setText(1, info.format);
-    m_loaderItem->setText(1, info.loaderUsed);
-
-    m_vertexCountItem->setText(1, QString::number(info.vertexCount));
-    m_faceCountItem->setText(1, QString::number(info.faceCount));
-    m_meshCountItem->setText(1, QString::number(info.meshCount));
-    m_materialCountItem->setText(1, QString::number(info.materialCount));
-    m_textureCountItem->setText(1, QString::number(info.textureCount));
-
-    m_bbMinItem->setText(1, QString("(%1, %2, %3)")
-        .arg(info.boundingBoxMinX, 0, 'f', 4)
-        .arg(info.boundingBoxMinY, 0, 'f', 4)
-        .arg(info.boundingBoxMinZ, 0, 'f', 4));
-
-    m_bbMaxItem->setText(1, QString("(%1, %2, %3)")
-        .arg(info.boundingBoxMaxX, 0, 'f', 4)
-        .arg(info.boundingBoxMaxY, 0, 'f', 4)
-        .arg(info.boundingBoxMaxZ, 0, 'f', 4));
-
-    m_bbSizeItem->setText(1, QString("(%1, %2, %3)")
-        .arg(info.boundingBoxSizeX, 0, 'f', 4)
-        .arg(info.boundingBoxSizeY, 0, 'f', 4)
-        .arg(info.boundingBoxSizeZ, 0, 'f', 4));
-
-    m_nodeInfoGroup->setHidden(true);
-    m_nodeGeoGroup->setHidden(true);
-    m_nodeBbGroup->setHidden(true);
+    QTreeWidgetItem* g = new QTreeWidgetItem(m_treeWidget, QStringList() << title);
+    QFont f;
+    f.setBold(true);
+    g->setFont(0, f);
+    g->setExpanded(true);
+    return g;
 }
+
+void ModelInfoDock::addKV(QTreeWidgetItem* group, const QString& key, const QString& value)
+{
+    QTreeWidgetItem* it = new QTreeWidgetItem(group, QStringList() << key << value);
+    it->setToolTip(1, value);
+}
+
+QString ModelInfoDock::formatBytes(qint64 bytes)
+{
+    if (bytes <= 0) return "0 B";
+    if (bytes > 1024 * 1024 * 1024)
+        return QString("%1 GB").arg(bytes / (1024.0 * 1024.0 * 1024.0), 0, 'f', 2);
+    if (bytes > 1024 * 1024)
+        return QString("%1 MB").arg(bytes / (1024.0 * 1024.0), 0, 'f', 2);
+    if (bytes > 1024)
+        return QString("%1 KB").arg(bytes / 1024.0, 0, 'f', 2);
+    return QString("%1 B").arg(bytes);
+}
+
+QString ModelInfoDock::pixelFormatName(unsigned int glFormat)
+{
+    switch (glFormat)
+    {
+    case GL_RGB:             return "RGB";
+    case GL_RGBA:            return "RGBA";
+    case GL_BGR:             return "BGR";
+    case GL_BGRA:            return "BGRA";
+    case GL_LUMINANCE:       return "LUMINANCE";
+    case GL_LUMINANCE_ALPHA: return "LUMINANCE_ALPHA";
+    case GL_ALPHA:           return "ALPHA";
+    case GL_RED:             return "RED";
+    default:                 return QString("0x%1").arg(glFormat, 4, 16, QChar('0'));
+    }
+}
+
+void ModelInfoDock::clearSelectionGroup()
+{
+    if (m_selectionGroup)
+    {
+        const int idx = m_treeWidget->indexOfTopLevelItem(m_selectionGroup);
+        if (idx >= 0)
+        {
+            delete m_treeWidget->takeTopLevelItem(idx);
+        }
+        m_selectionGroup = nullptr;
+    }
+}
+
+// ---------- common ----------
 
 void ModelInfoDock::clearInfo()
 {
-    m_hasNodeSelected = false;
-    updateInfo(ModelInfo());
-    m_nodeInfoGroup->setHidden(true);
-    m_nodeGeoGroup->setHidden(true);
-    m_nodeBbGroup->setHidden(true);
+    if (m_treeWidget) m_treeWidget->clear();
+    m_selectionGroup = nullptr;
+}
+
+// ---------- 3D model ----------
+
+void ModelInfoDock::updateInfo(const ModelInfo& info)
+{
+    clearInfo();
+
+    QTreeWidgetItem* fileGroup = addGroup(tr("File Info"));
+    addKV(fileGroup, tr("File Name"), info.fileName);
+    addKV(fileGroup, tr("File Path"), info.filePath);
+    addKV(fileGroup, tr("File Size"), formatBytes(info.fileSize));
+    addKV(fileGroup, tr("Format"),    info.format);
+    addKV(fileGroup, tr("Loader"),    info.loaderUsed);
+
+    QTreeWidgetItem* geoGroup = addGroup(tr("Geometry"));
+    addKV(geoGroup, tr("Vertices"),  QString::number(info.vertexCount));
+    addKV(geoGroup, tr("Faces"),     QString::number(info.faceCount));
+    addKV(geoGroup, tr("Meshes"),    QString::number(info.meshCount));
+    addKV(geoGroup, tr("Materials"), QString::number(info.materialCount));
+    addKV(geoGroup, tr("Textures"),  QString::number(info.textureCount));
+
+    QTreeWidgetItem* bbGroup = addGroup(tr("Bounding Box"));
+    addKV(bbGroup, tr("Min"),  QString("(%1, %2, %3)")
+        .arg(info.boundingBoxMinX, 0, 'f', 4)
+        .arg(info.boundingBoxMinY, 0, 'f', 4)
+        .arg(info.boundingBoxMinZ, 0, 'f', 4));
+    addKV(bbGroup, tr("Max"),  QString("(%1, %2, %3)")
+        .arg(info.boundingBoxMaxX, 0, 'f', 4)
+        .arg(info.boundingBoxMaxY, 0, 'f', 4)
+        .arg(info.boundingBoxMaxZ, 0, 'f', 4));
+    addKV(bbGroup, tr("Size"), QString("(%1, %2, %3)")
+        .arg(info.boundingBoxSizeX, 0, 'f', 4)
+        .arg(info.boundingBoxSizeY, 0, 'f', 4)
+        .arg(info.boundingBoxSizeZ, 0, 'f', 4));
 }
 
 void ModelInfoDock::updateNodeInfo(osg::Node* node)
 {
-    if (!node)
-    {
-        m_nodeInfoGroup->setHidden(true);
-        m_nodeGeoGroup->setHidden(true);
-        m_nodeBbGroup->setHidden(true);
-        m_hasNodeSelected = false;
-        return;
-    }
+    clearSelectionGroup();
+    if (!node) return;
 
-    m_hasNodeSelected = true;
-    m_nodeInfoGroup->setHidden(false);
-    m_nodeGeoGroup->setHidden(false);
-    m_nodeBbGroup->setHidden(false);
+    m_selectionGroup = addGroup(tr("Selected Node"));
 
-    // Name
-    std::string nameStr = node->getName();
-    m_nodeNameItem->setText(1, nameStr.empty() ? tr("(unnamed)") : QString::fromStdString(nameStr));
+    const std::string nameStr = node->getName();
+    addKV(m_selectionGroup, tr("Name"),
+          nameStr.empty() ? tr("(unnamed)") : QString::fromStdString(nameStr));
 
-    // Type
     const char* typeName = node->className();
-    m_nodeTypeItem->setText(1, typeName ? QString(typeName) : "Node");
+    addKV(m_selectionGroup, tr("Type"), typeName ? QString(typeName) : "Node");
 
-    // Children count
     const osg::Group* group = node->asGroup();
-    m_nodeChildrenItem->setText(1, group ? QString::number(group->getNumChildren()) : "0");
+    addKV(m_selectionGroup, tr("Children"),
+          group ? QString::number(group->getNumChildren()) : "0");
+    addKV(m_selectionGroup, tr("Node Mask"),
+          QString("0x%1").arg(node->getNodeMask(), 4, 16, QChar('0')));
 
-    // Node Mask
-    m_nodeDescItem->setText(1, QString("0x%1").arg(node->getNodeMask(), 4, 16, QChar('0')));
-
-    // Geometry stats of selected node
     unsigned int vertexCount = 0, faceCount = 0, drawableCount = 0;
     collectNodeStats(node, vertexCount, faceCount, drawableCount);
-    m_nodeDrawableItem->setText(1, QString::number(drawableCount));
-    m_nodeVertexItem->setText(1, QString::number(vertexCount));
-    m_nodeFaceItem->setText(1, QString::number(faceCount));
+    addKV(m_selectionGroup, tr("Drawables"), QString::number(drawableCount));
+    addKV(m_selectionGroup, tr("Vertices"),  QString::number(vertexCount));
+    addKV(m_selectionGroup, tr("Faces"),     QString::number(faceCount));
 
-    // Bounding box of selected node
     osg::BoundingBox bb;
     bb.expandBy(node->computeBound());
     if (bb.valid())
     {
-        m_nodeBbMinItem->setText(1, QString("(%1, %2, %3)")
-            .arg(bb.xMin(), 0, 'f', 4)
-            .arg(bb.yMin(), 0, 'f', 4)
-            .arg(bb.zMin(), 0, 'f', 4));
-        m_nodeBbMaxItem->setText(1, QString("(%1, %2, %3)")
-            .arg(bb.xMax(), 0, 'f', 4)
-            .arg(bb.yMax(), 0, 'f', 4)
-            .arg(bb.zMax(), 0, 'f', 4));
-        m_nodeBbSizeItem->setText(1, QString("(%1, %2, %3)")
+        addKV(m_selectionGroup, tr("BBox Min"),  QString("(%1, %2, %3)")
+            .arg(bb.xMin(), 0, 'f', 4).arg(bb.yMin(), 0, 'f', 4).arg(bb.zMin(), 0, 'f', 4));
+        addKV(m_selectionGroup, tr("BBox Max"),  QString("(%1, %2, %3)")
+            .arg(bb.xMax(), 0, 'f', 4).arg(bb.yMax(), 0, 'f', 4).arg(bb.zMax(), 0, 'f', 4));
+        addKV(m_selectionGroup, tr("BBox Size"), QString("(%1, %2, %3)")
             .arg(bb.xMax() - bb.xMin(), 0, 'f', 4)
             .arg(bb.yMax() - bb.yMin(), 0, 'f', 4)
             .arg(bb.zMax() - bb.zMin(), 0, 'f', 4));
     }
+}
+
+// ---------- image / raster ----------
+
+void ModelInfoDock::showImageInfo(const QString& filePath, const osg::Image* image)
+{
+    clearInfo();
+
+    const QFileInfo fi(filePath);
+    QTreeWidgetItem* fileGroup = addGroup(tr("File Info"));
+    addKV(fileGroup, tr("File Name"), fi.fileName());
+    addKV(fileGroup, tr("File Path"), fi.absoluteFilePath());
+    addKV(fileGroup, tr("File Size"), formatBytes(fi.size()));
+    addKV(fileGroup, tr("Format"),    fi.suffix().toUpper());
+
+    QTreeWidgetItem* imgGroup = addGroup(tr("Image"));
+    if (image)
+    {
+        addKV(imgGroup, tr("Width"),         QString::number(image->s()));
+        addKV(imgGroup, tr("Height"),        QString::number(image->t()));
+        addKV(imgGroup, tr("Pixel Format"),  pixelFormatName(image->getPixelFormat()));
+        addKV(imgGroup, tr("Pixel Size"),    QString("%1 bit").arg(image->getPixelSizeInBits()));
+        addKV(imgGroup, tr("Image Size"),    formatBytes(image->getTotalSizeInBytes()));
+    }
     else
     {
-        m_nodeBbMinItem->setText(1, tr("N/A"));
-        m_nodeBbMaxItem->setText(1, tr("N/A"));
-        m_nodeBbSizeItem->setText(1, tr("N/A"));
+        addKV(imgGroup, tr("Status"), tr("(no image)"));
     }
 }
+
+void ModelInfoDock::showRasterInfo(const QString& filePath, const GdalRasterMeta& meta, const osg::Image* image)
+{
+    clearInfo();
+
+    const QFileInfo fi(filePath);
+    QTreeWidgetItem* fileGroup = addGroup(tr("File Info"));
+    addKV(fileGroup, tr("File Name"), fi.fileName());
+    addKV(fileGroup, tr("File Path"), fi.absoluteFilePath());
+    addKV(fileGroup, tr("File Size"), formatBytes(fi.size()));
+    addKV(fileGroup, tr("Format"),    fi.suffix().toUpper());
+    addKV(fileGroup, tr("Loader"),    "GDAL");
+
+    QTreeWidgetItem* rasGroup = addGroup(tr("Raster"));
+    addKV(rasGroup, tr("Width"),       QString::number(meta.width));
+    addKV(rasGroup, tr("Height"),      QString::number(meta.height));
+    addKV(rasGroup, tr("Bands"),       QString::number(meta.bandCount));
+    addKV(rasGroup, tr("Data Type"),   meta.dataType);
+    addKV(rasGroup, tr("Pixel Size X"), QString::number(meta.pixelSizeX, 'g', 8));
+    addKV(rasGroup, tr("Pixel Size Y"), QString::number(meta.pixelSizeY, 'g', 8));
+    addKV(rasGroup, tr("CRS"),         meta.crs.isEmpty() ? tr("(none)") : meta.crs);
+
+    if (image)
+    {
+        QTreeWidgetItem* dispGroup = addGroup(tr("Display"));
+        addKV(dispGroup, tr("Width"),        QString::number(image->s()));
+        addKV(dispGroup, tr("Height"),       QString::number(image->t()));
+        addKV(dispGroup, tr("Pixel Format"), pixelFormatName(image->getPixelFormat()));
+        addKV(dispGroup, tr("Image Size"),   formatBytes(image->getTotalSizeInBytes()));
+    }
+}
+
+// ---------- vector ----------
+
+void ModelInfoDock::showVectorInfo(const GdalVectorData& data)
+{
+    clearInfo();
+
+    const QFileInfo fi(data.filePath);
+    QTreeWidgetItem* fileGroup = addGroup(tr("File Info"));
+    addKV(fileGroup, tr("File Name"), fi.fileName());
+    addKV(fileGroup, tr("File Path"), fi.absoluteFilePath());
+    addKV(fileGroup, tr("File Size"), formatBytes(fi.size()));
+    addKV(fileGroup, tr("Format"),    data.format.isEmpty() ? fi.suffix().toUpper() : data.format);
+    addKV(fileGroup, tr("Loader"),    "GDAL/OGR");
+
+    QTreeWidgetItem* vecGroup = addGroup(tr("Vector"));
+    addKV(vecGroup, tr("Geometry Type"),   data.geomType);
+    addKV(vecGroup, tr("Layer Count"),     QString::number(data.layerCount));
+    addKV(vecGroup, tr("Feature Count"),   QString::number(data.featureCount));
+    addKV(vecGroup, tr("Displayed Count"),
+          data.truncated
+              ? tr("%1 (truncated)").arg(data.displayedCount)
+              : QString::number(data.displayedCount));
+    addKV(vecGroup, tr("CRS"), data.crs.isEmpty() ? tr("(none)") : data.crs);
+
+    QTreeWidgetItem* extGroup = addGroup(tr("Extent"));
+    addKV(extGroup, tr("Min X"), QString::number(data.minX, 'f', 6));
+    addKV(extGroup, tr("Min Y"), QString::number(data.minY, 'f', 6));
+    addKV(extGroup, tr("Max X"), QString::number(data.maxX, 'f', 6));
+    addKV(extGroup, tr("Max Y"), QString::number(data.maxY, 'f', 6));
+    addKV(extGroup, tr("Width"),  QString::number(data.maxX - data.minX, 'f', 6));
+    addKV(extGroup, tr("Height"), QString::number(data.maxY - data.minY, 'f', 6));
+}
+
+void ModelInfoDock::showVectorFeatureInfo(const GdalFeature& feat)
+{
+    clearSelectionGroup();
+    m_selectionGroup = addGroup(tr("Selected Feature"));
+
+    addKV(m_selectionGroup, tr("FID"),
+          feat.fid < 0 ? tr("(unknown)") : QString::number(feat.fid));
+    if (!feat.layerName.isEmpty())
+        addKV(m_selectionGroup, tr("Layer"), feat.layerName);
+    if (!feat.geometryType.isEmpty())
+        addKV(m_selectionGroup, tr("Geometry"), feat.geometryType);
+
+    if (feat.isPoint)
+    {
+        addKV(m_selectionGroup, tr("Coord"),
+              QString("(%1, %2)").arg(feat.point.x(), 0, 'f', 6).arg(feat.point.y(), 0, 'f', 6));
+    }
+    else
+    {
+        int totalPts = 0;
+        for (const QPolygonF& r : feat.rings) totalPts += r.size();
+        addKV(m_selectionGroup, tr("Rings"),  QString::number(feat.rings.size()));
+        addKV(m_selectionGroup, tr("Points"), QString::number(totalPts));
+    }
+
+    if (!feat.attributes.isEmpty())
+    {
+        QTreeWidgetItem* attrGroup = new QTreeWidgetItem(m_selectionGroup, QStringList() << tr("Attributes"));
+        attrGroup->setExpanded(true);
+        QFont f; f.setBold(true);
+        attrGroup->setFont(0, f);
+        for (const auto& kv : feat.attributes)
+        {
+            QTreeWidgetItem* it = new QTreeWidgetItem(attrGroup, QStringList() << kv.first << kv.second);
+            it->setToolTip(1, kv.second);
+        }
+    }
+}
+
+// ---------- node stats ----------
 
 void ModelInfoDock::collectNodeStats(const osg::Node* node, unsigned int& vertexCount, unsigned int& faceCount, unsigned int& drawableCount)
 {
     if (!node) return;
 
-    // If this node is a Geode, count its drawables
     const osg::Geode* geode = node->asGeode();
     if (geode)
     {
@@ -228,48 +314,30 @@ void ModelInfoDock::collectNodeStats(const osg::Node* node, unsigned int& vertex
         {
             drawableCount++;
             const osg::Drawable* drawable = geode->getDrawable(i);
-            if (drawable)
+            if (!drawable) continue;
+            const osg::Geometry* geom = drawable->asGeometry();
+            if (!geom) continue;
+
+            const osg::Array* verts = geom->getVertexArray();
+            if (verts) vertexCount += verts->getNumElements();
+
+            for (unsigned int p = 0; p < geom->getNumPrimitiveSets(); ++p)
             {
-                const osg::Geometry* geom = drawable->asGeometry();
-                if (geom)
+                const osg::PrimitiveSet* ps = geom->getPrimitiveSet(p);
+                if (!ps) continue;
+                switch (ps->getMode())
                 {
-                    const osg::Array* verts = geom->getVertexArray();
-                    if (verts)
-                        vertexCount += verts->getNumElements();
-                    for (unsigned int p = 0; p < geom->getNumPrimitiveSets(); ++p)
-                    {
-                        const osg::PrimitiveSet* ps = geom->getPrimitiveSet(p);
-                        if (ps)
-                        {
-                            switch (ps->getMode())
-                            {
-                            case GL_TRIANGLES:
-                                faceCount += ps->getNumIndices() / 3;
-                                break;
-                            case GL_TRIANGLE_STRIP:
-                                faceCount += ps->getNumIndices() > 2 ? (ps->getNumIndices() - 2) : 0;
-                                break;
-                            case GL_TRIANGLE_FAN:
-                                faceCount += ps->getNumIndices() > 2 ? (ps->getNumIndices() - 2) : 0;
-                                break;
-                            case GL_QUADS:
-                                faceCount += ps->getNumIndices() / 4 * 2;
-                                break;
-                            case GL_POLYGON:
-                                faceCount += 1;
-                                break;
-                            default:
-                                // Lines, points, etc. - not faces
-                                break;
-                            }
-                        }
-                    }
+                case GL_TRIANGLES:      faceCount += ps->getNumIndices() / 3; break;
+                case GL_TRIANGLE_STRIP:
+                case GL_TRIANGLE_FAN:   faceCount += ps->getNumIndices() > 2 ? (ps->getNumIndices() - 2) : 0; break;
+                case GL_QUADS:          faceCount += ps->getNumIndices() / 4 * 2; break;
+                case GL_POLYGON:        faceCount += 1; break;
+                default: break;
                 }
             }
         }
     }
 
-    // Recurse into children
     const osg::Group* group = node->asGroup();
     if (group)
     {

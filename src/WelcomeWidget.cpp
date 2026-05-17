@@ -47,7 +47,7 @@ void WelcomeWidget::setupUI()
     centerLayout->addWidget(m_titleLabel);
 
     // Subtitle
-    m_subtitleLabel = new QLabel(tr("Universal 3D Model Viewer"));
+    m_subtitleLabel = new QLabel(tr("Image / Vector / Model File Viewer"));
     m_subtitleLabel->setAlignment(Qt::AlignCenter);
     m_subtitleLabel->setObjectName("welcomeSubtitle");
     QFont subFont = m_subtitleLabel->font();
@@ -59,9 +59,9 @@ void WelcomeWidget::setupUI()
     centerLayout->addSpacing(16);
 
     // Open button
-    m_openButton = new QPushButton(tr("Open Model"));
+    m_openButton = new QPushButton(tr("Open Image / Vector / Model File"));
     m_openButton->setObjectName("welcomeOpenButton");
-    m_openButton->setFixedSize(220, 44);
+    m_openButton->setFixedSize(280, 44);
     m_openButton->setCursor(Qt::PointingHandCursor);
     connect(m_openButton, &QPushButton::clicked, this, &WelcomeWidget::openClicked);
     centerLayout->addWidget(m_openButton, 0, Qt::AlignCenter);
@@ -90,7 +90,7 @@ void WelcomeWidget::setupUI()
     mainLayout->addStretch(2);
 
     // Tip at bottom
-    m_tipLabel = new QLabel(tr("Tip: Drag any model file into the window to open it"));
+    m_tipLabel = new QLabel(tr("Tip: Drag any image, vector or model file into the window to open it"));
     m_tipLabel->setAlignment(Qt::AlignCenter);
     m_tipLabel->setObjectName("welcomeTip");
     QFont tipFont = m_tipLabel->font();
@@ -140,8 +140,8 @@ void WelcomeWidget::setRecentFiles(const QStringList& files)
 void WelcomeWidget::retranslateUI()
 {
     m_titleLabel->setText(tr("Welcome to PicModelViewer"));
-    m_subtitleLabel->setText(tr("Universal 3D Model Viewer"));
-    m_openButton->setText(tr("Open Model"));
+    m_subtitleLabel->setText(tr("Image / Vector / Model File Viewer"));
+    m_openButton->setText(tr("Open Image / Vector / Model File"));
     m_recentTitleLabel->setText(tr("Recent Files"));
-    m_tipLabel->setText(tr("Tip: Drag any model file into the window to open it"));
+    m_tipLabel->setText(tr("Tip: Drag any image, vector or model file into the window to open it"));
 }
