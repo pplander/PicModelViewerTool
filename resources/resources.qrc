@@ -36,5 +36,7 @@
         <file alias="icons/app-icon.svg">icons/app-icon.svg</file>
         <file alias="icons/batch-convert.svg">icons/batch-convert.svg</file>
         <file alias="icons/pre-process.svg">icons/pre-process.svg</file>
+        <file alias="icons/undo.svg">icons/undo.svg</file>
+        <file alias="icons/redo.svg">icons/redo.svg</file>
     </qresource>
 </RCC>

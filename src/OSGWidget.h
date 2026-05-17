@@ -129,6 +129,8 @@ private:
     osg::ref_ptr<osg::Node> m_selectedNode;
     osg::ref_ptr<osg::Geode> m_highlightGeode;
     osg::ref_ptr<osg::Group> m_overlayGroup;  // Persistent overlay layer for highlight visuals
+    osg::ref_ptr<osg::Group> m_wireframeOverlay;  // Lazily built second-pass wireframe (Solid+Wireframe only)
+    osg::ref_ptr<osg::Node> m_modelRoot;  // The user-supplied scene root, kept so we can clone on demand
 
     // Click detection for pick
     QPoint m_mousePressPos;

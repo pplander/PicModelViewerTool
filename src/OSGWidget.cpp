@@ -11,6 +11,8 @@
 #include <osg/PolygonMode>
 #include <osg/PolygonOffset>
 #include <osg/Material>
+#include <osg/LineWidth>
+#include <osg/CopyOp>
 #include <osgGA/TrackballManipulator>
 #include <osgUtil/Optimizer>
 #include <osgUtil/IntersectionVisitor>
@@ -166,6 +168,17 @@ void OSGWidget::setSceneData(osg::Node* node)
         m_overlayGroup->getParent(0)->removeChild(m_overlayGroup);
     }
 
+    // Detach wireframe overlay from old scene and clear its children so it
+    // does not hold a stale reference to the previous model. The overlay
+    // itself is rebuilt lazily on demand inside updateDisplayMode().
+    if (m_wireframeOverlay)
+    {
+        for (unsigned i = m_wireframeOverlay->getNumParents(); i > 0; --i)
+            m_wireframeOverlay->getParent(i - 1)->removeChild(m_wireframeOverlay);
+        m_wireframeOverlay->removeChildren(0, m_wireframeOverlay->getNumChildren());
+    }
+    m_modelRoot = nullptr;
+
     // Re-create overlay group
     m_overlayGroup = new osg::Group;
     m_overlayGroup->setNodeMask(HIGHLIGHT_NODE_MASK);
@@ -186,6 +199,13 @@ void OSGWidget::setSceneData(osg::Node* node)
             root->addChild(node);
         }
         root->addChild(m_overlayGroup);
+
+        // Remember the user-supplied node; the wireframe overlay (when used)
+        // will clone this on demand the first time the user switches to
+        // Solid+Wireframe mode, so loading a model does NOT alter the scene
+        // graph for the common Solid/Wireframe/Points display modes.
+        m_modelRoot = node;
+
         m_viewer->setSceneData(root);
         fitToView();
     }
@@ -232,6 +252,23 @@ void OSGWidget::updateDisplayMode()
     rootSS->removeAttribute(osg::StateAttribute::POLYGONOFFSET);
     rootSS->setMode(GL_POLYGON_OFFSET_FILL, osg::StateAttribute::OFF);
 
+    // Wireframe overlay (second pass) is off by default; only enabled when
+    // SolidAndWireframe is selected.
+    if (m_wireframeOverlay)
+        m_wireframeOverlay->setNodeMask(0u);
+
+    // Tear down the lazily-built wireframe overlay whenever we leave the
+    // Solid+Wireframe mode, so the scene graph stays exactly as the loader
+    // produced it for the standard display modes (no clones, no extra
+    // memory, no surprise side effects on picking / bounds / export).
+    auto destroyWireframeOverlay = [this]() {
+        if (!m_wireframeOverlay) return;
+        for (unsigned i = m_wireframeOverlay->getNumParents(); i > 0; --i)
+            m_wireframeOverlay->getParent(i - 1)->removeChild(m_wireframeOverlay);
+        m_wireframeOverlay->removeChildren(0, m_wireframeOverlay->getNumChildren());
+        m_wireframeOverlay = nullptr;
+    };
+
     switch (m_displayMode)
     {
     case Solid:
@@ -245,17 +282,73 @@ void OSGWidget::updateDisplayMode()
         break;
     case SolidAndWireframe:
     {
-        osg::ref_ptr<osg::PolygonMode> pm = new osg::PolygonMode(osg::PolygonMode::FRONT_AND_BACK, osg::PolygonMode::FILL);
-        rootSS->setAttributeAndModes(pm.get());
-        // Add polygon offset for wireframe overlay to avoid z-fighting
-        osg::ref_ptr<osg::PolygonOffset> po = new osg::PolygonOffset(1.0f, 1.0f);
-        rootSS->setAttributeAndModes(po.get());
+        // First pass: solid fill, pushed back via polygon offset so that the
+        // wireframe pass sits cleanly on top without z-fighting.
+        rootSS->setAttributeAndModes(
+            new osg::PolygonMode(osg::PolygonMode::FRONT_AND_BACK, osg::PolygonMode::FILL));
+        rootSS->setAttributeAndModes(new osg::PolygonOffset(2.0f, 2.0f));
         rootSS->setMode(GL_POLYGON_OFFSET_FILL, osg::StateAttribute::ON);
-        // Set rendering bin to draw wireframe on top
-        rootSS->setRenderBinDetails(1, "RenderBin");
+
+        // Second pass: lazily build (the first time we enter this mode) a
+        // sibling node that re-renders the same model with PolygonMode=LINE
+        // + bright emissive material. This stays attached only while this
+        // mode is selected; it is torn down below for any other mode.
+        if (!m_wireframeOverlay && m_modelRoot.valid())
+        {
+            m_wireframeOverlay = new osg::Group;
+            m_wireframeOverlay->setName("_wireframe_overlay");
+
+            auto* wss = m_wireframeOverlay->getOrCreateStateSet();
+            wss->setAttributeAndModes(
+                new osg::PolygonMode(osg::PolygonMode::FRONT_AND_BACK,
+                                     osg::PolygonMode::LINE),
+                osg::StateAttribute::ON | osg::StateAttribute::OVERRIDE);
+            wss->setAttributeAndModes(
+                new osg::LineWidth(1.5f),
+                osg::StateAttribute::ON | osg::StateAttribute::OVERRIDE);
+            wss->setMode(GL_LIGHTING,
+                osg::StateAttribute::OFF | osg::StateAttribute::OVERRIDE);
+            wss->setTextureMode(0, GL_TEXTURE_2D,
+                osg::StateAttribute::OFF | osg::StateAttribute::OVERRIDE);
+
+            auto* mat = new osg::Material;
+            mat->setColorMode(osg::Material::OFF);
+            mat->setEmission(osg::Material::FRONT_AND_BACK,
+                             osg::Vec4(1.0f, 0.85f, 0.1f, 1.0f));
+            mat->setAmbient(osg::Material::FRONT_AND_BACK,
+                            osg::Vec4(0.0f, 0.0f, 0.0f, 1.0f));
+            mat->setDiffuse(osg::Material::FRONT_AND_BACK,
+                            osg::Vec4(0.0f, 0.0f, 0.0f, 1.0f));
+            mat->setSpecular(osg::Material::FRONT_AND_BACK,
+                             osg::Vec4(0.0f, 0.0f, 0.0f, 1.0f));
+            wss->setAttributeAndModes(mat,
+                osg::StateAttribute::ON | osg::StateAttribute::OVERRIDE);
+
+            // Deep-copy node hierarchy only; drawables / state are shared,
+            // so we never multi-parent the original model node (which can
+            // crash OSG visitors that walk a node's parent chain).
+            osg::ref_ptr<osg::Object> objClone =
+                m_modelRoot->clone(osg::CopyOp(osg::CopyOp::DEEP_COPY_NODES));
+            osg::ref_ptr<osg::Node> wfClone =
+                dynamic_cast<osg::Node*>(objClone.get());
+            if (wfClone.valid())
+                m_wireframeOverlay->addChild(wfClone.get());
+        }
+        if (m_wireframeOverlay)
+        {
+            if (auto* sceneRoot = dynamic_cast<osg::Group*>(m_viewer->getSceneData()))
+            {
+                if (m_wireframeOverlay->getNumParents() == 0)
+                    sceneRoot->addChild(m_wireframeOverlay);
+            }
+            m_wireframeOverlay->setNodeMask(HIGHLIGHT_NODE_MASK);
+        }
         break;
     }
     }
+
+    if (m_displayMode != SolidAndWireframe)
+        destroyWireframeOverlay();
 }
 
 void OSGWidget::setBackgroundColor(const osg::Vec4& color)

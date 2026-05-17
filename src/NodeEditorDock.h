@@ -3,6 +3,7 @@
 #include <QDockWidget>
 #include <QTabWidget>
 #include <QDoubleSpinBox>
+#include <QSpinBox>
 #include <QCheckBox>
 #include <QComboBox>
 #include <QPushButton>
@@ -42,6 +43,7 @@ private:
     QWidget* createMaterialTab();
     QWidget* createTextureTab();
     QWidget* createSceneTab();
+    QWidget* createMeshTab();
 
     // Transform tab helpers
     osg::Node* getEffectiveTransformNode() const;
@@ -58,12 +60,24 @@ private:
     // Texture tab helpers
     void updateTextureUI();
     void applyTextureWrapFilter();
+    void applyTextureScale();
     void browseTexture();
     void removeTexture();
 
     // Scene tab helpers
     void syncSceneUI();
     void setLightColorButton(QPushButton* btn, const QColor& color);
+
+    // Mesh tab helpers
+    void updateMeshUI();
+    void updateSimplifyTarget();
+    void applySimplify();
+    void recomputeNormals();
+
+    // Returns the node to operate on: the explicitly selected node when one
+    // exists, otherwise falls back to the loaded scene root so node-level
+    // editing remains usable without an explicit selection.
+    osg::Node* effectiveNode() const;
 
     // Node operations
     // (handled in MainWindow via lambdas)
@@ -126,6 +140,9 @@ private:
     QComboBox* m_wrapSCombo;
     QComboBox* m_wrapTCombo;
     QComboBox* m_filterCombo;
+    QDoubleSpinBox* m_textureScaleU;
+    QDoubleSpinBox* m_textureScaleV;
+    QLabel* m_uvScaleHint;
     QPushButton* m_removeTextureBtn;
     bool m_updatingTexture = false;
 
@@ -140,4 +157,15 @@ private:
     QDoubleSpinBox* m_lightPosZ;
     QPushButton* m_bgColorBtn;
     bool m_updatingScene = false;
+
+    // --- Mesh Tab ---
+    QLabel* m_meshStatsLabel;
+    QLabel* m_simplifyTargetLabel;
+    QSlider* m_simplifyRatioSlider;
+    QSpinBox* m_simplifyRatioSpin;
+    QPushButton* m_simplifyApplyBtn;
+    QCheckBox* m_recomputeNormalsCheck;
+    QPushButton* m_recomputeNormalsBtn;
+    unsigned m_currentVertices = 0;
+    unsigned m_currentTriangles = 0;
 };

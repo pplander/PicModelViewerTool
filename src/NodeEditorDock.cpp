@@ -22,6 +22,9 @@
 #include <osg/Geode>
 #include <osg/Geometry>
 #include <osg/TexEnv>
+#include <osg/TexMat>
+#include <osg/BoundingBox>
+#include <functional>
 #include <osgDB/ReadFile>
 #include <osgDB/FileUtils>
 #include <osg/PolygonMode>
@@ -33,6 +36,13 @@
 #include <osg/ShadeModel>
 #include <osg/LineWidth>
 #include <osg/PolygonOffset>
+#include <osgUtil/Simplifier>
+#include <osgUtil/SmoothingVisitor>
+#include <osg/NodeVisitor>
+#include <osg/PrimitiveSet>
+#include <cmath>
+#include <map>
+#include <tuple>
 
 // ============================================================================
 // Construction
@@ -52,6 +62,7 @@ void NodeEditorDock::setupUI()
     m_tabWidget->addTab(createTransformTab(), tr("Transform"));
     m_tabWidget->addTab(createMaterialTab(), tr("Material"));
     m_tabWidget->addTab(createTextureTab(), tr("Texture"));
+    m_tabWidget->addTab(createMeshTab(), tr("Mesh"));
     m_tabWidget->addTab(createSceneTab(), tr("Scene"));
     setWidget(m_tabWidget);
 
@@ -181,7 +192,7 @@ QWidget* NodeEditorDock::createTransformTab()
 
 osg::Node* NodeEditorDock::getEffectiveTransformNode() const
 {
-    osg::Node* node = m_currentNode.get();
+    osg::Node* node = effectiveNode();
     if (!node) return nullptr;
 
     // If the node itself is a transform type, edit it directly
@@ -221,7 +232,7 @@ osg::Node* NodeEditorDock::getEffectiveTransformNode() const
 
 void NodeEditorDock::updateTransformUI()
 {
-    osg::Node* node = m_currentNode.get();
+    osg::Node* node = effectiveNode();
     if (!node)
     {
         m_transformContent->hide();
@@ -312,7 +323,7 @@ void NodeEditorDock::updateTransformUI()
 
 void NodeEditorDock::applyTransform()
 {
-    osg::Node* node = m_currentNode.get();
+    osg::Node* node = effectiveNode();
     if (!node) return;
 
     osg::Vec3 pos(m_posX->value(), m_posY->value(), m_posZ->value());
@@ -663,7 +674,7 @@ QWidget* NodeEditorDock::createMaterialTab()
 
 void NodeEditorDock::updateMaterialUI()
 {
-    osg::Node* node = m_currentNode.get();
+    osg::Node* node = effectiveNode();
     if (!node) return;
 
     m_updatingMaterial = true;
@@ -828,7 +839,7 @@ void NodeEditorDock::updateMaterialUI()
 
 void NodeEditorDock::onMaterialColorClicked(int component)
 {
-    osg::Node* node = m_currentNode.get();
+    osg::Node* node = effectiveNode();
     if (!node) return;
 
     osg::StateSet* ss = node->getOrCreateStateSet();
@@ -875,7 +886,7 @@ void NodeEditorDock::onMaterialColorClicked(int component)
 
 void NodeEditorDock::applyMaterial()
 {
-    osg::Node* node = m_currentNode.get();
+    osg::Node* node = effectiveNode();
     if (!node) return;
 
     // Save old StateSet snapshot for undo
@@ -1164,6 +1175,34 @@ QWidget* NodeEditorDock::createTextureTab()
     m_filterCombo->addItem(tr("MipMap (Trilinear)"), 2);
     form->addRow(tr("Filter"), m_filterCombo);
 
+    // UV scale (texture matrix). Values >1 tile the texture more (with REPEAT
+    // wrap), values <1 stretch it. Effectively edits a TexMat on unit 0.
+    auto* uvRow = new QHBoxLayout;
+    m_textureScaleU = new QDoubleSpinBox;
+    m_textureScaleU->setRange(0.01, 100.0);
+    m_textureScaleU->setDecimals(3);
+    m_textureScaleU->setSingleStep(0.1);
+    m_textureScaleU->setValue(1.0);
+    m_textureScaleU->setPrefix(tr("U: "));
+    m_textureScaleV = new QDoubleSpinBox;
+    m_textureScaleV->setRange(0.01, 100.0);
+    m_textureScaleV->setDecimals(3);
+    m_textureScaleV->setSingleStep(0.1);
+    m_textureScaleV->setValue(1.0);
+    m_textureScaleV->setPrefix(tr("V: "));
+    uvRow->addWidget(m_textureScaleU);
+    uvRow->addWidget(m_textureScaleV);
+    form->addRow(tr("UV Scale"), uvRow);
+
+    // Inline hint shown directly under the UV scale row, used to surface
+    // status (e.g. "model has no UV coordinates") without modal dialogs.
+    m_uvScaleHint = new QLabel;
+    m_uvScaleHint->setWordWrap(true);
+    m_uvScaleHint->setStyleSheet("color: #888; font-size: 11px;");
+    m_uvScaleHint->setText(QString());
+    m_uvScaleHint->hide();
+    form->addRow(QString(), m_uvScaleHint);
+
     m_removeTextureBtn = new QPushButton(tr("Remove Texture"));
     form->addRow(m_removeTextureBtn);
 
@@ -1193,13 +1232,19 @@ QWidget* NodeEditorDock::createTextureTab()
     connect(m_filterCombo, QOverload<int>::of(&QComboBox::activated), this, [this]() {
         if (!m_updatingTexture && m_currentNode.valid()) applyTextureWrapFilter();
     });
+    connect(m_textureScaleU, QOverload<double>::of(&QDoubleSpinBox::valueChanged), this, [this]() {
+        if (!m_updatingTexture && effectiveNode()) applyTextureScale();
+    });
+    connect(m_textureScaleV, QOverload<double>::of(&QDoubleSpinBox::valueChanged), this, [this]() {
+        if (!m_updatingTexture && effectiveNode()) applyTextureScale();
+    });
 
     return page;
 }
 
 void NodeEditorDock::applyTextureWrapFilter()
 {
-    osg::Node* node = m_currentNode.get();
+    osg::Node* node = effectiveNode();
     if (!node) return;
 
     osg::StateSet* ss = node->getOrCreateStateSet();
@@ -1227,12 +1272,225 @@ void NodeEditorDock::applyTextureWrapFilter()
         newWrapS, newWrapT, newMinF, newMagF));
 }
 
+void NodeEditorDock::applyTextureScale()
+{
+    osg::Node* node = effectiveNode();
+    if (!node) return;
+
+    const double su = m_textureScaleU->value();
+    const double sv = m_textureScaleV->value();
+    const bool isIdentity = std::abs(su - 1.0) < 1e-6 && std::abs(sv - 1.0) < 1e-6;
+
+    // Walk every Geometry under the target subtree, scaling its unit-0
+    // TexCoord array directly. A pristine copy of the original UVs is cached
+    // on the geometry's UserDataContainer (named "__OrigTexCoord0") so the
+    // user can rescale to any factor without drift, and so 1.0 perfectly
+    // restores the source UVs. Editing the array works for both the fixed-
+    // function pipeline and any shader-driven path that samples TEXCOORD0.
+    struct UVScaleVisitor : public osg::NodeVisitor
+    {
+        double su = 1.0, sv = 1.0;
+        bool identity = false;
+        int touched = 0;
+        int geomSeen = 0;
+        int withTC = 0;
+        int unsupportedTC = 0;
+        int generatedPlanar = 0;
+        UVScaleVisitor() : NodeVisitor(NodeVisitor::TRAVERSE_ALL_CHILDREN)
+        {
+            // Walk regardless of NodeMask so hidden subtrees are still edited.
+            setNodeMaskOverride(0xFFFFFFFF);
+        }
+
+        static osg::Vec2Array* findBase(osg::Geometry* geom)
+        {
+            auto* udc = geom->getUserDataContainer();
+            if (!udc) return nullptr;
+            for (unsigned j = 0; j < udc->getNumUserObjects(); ++j)
+            {
+                osg::Object* o = udc->getUserObject(j);
+                if (o && o->getName() == "__OrigTexCoord0")
+                    return dynamic_cast<osg::Vec2Array*>(o);
+            }
+            return nullptr;
+        }
+
+        // Convert any common float-based TexCoord array (Vec2/Vec3/Vec4) into
+        // a Vec2Array baseline; returns nullptr when the type is unsupported.
+        static osg::ref_ptr<osg::Vec2Array> toVec2Array(osg::Array* arr)
+        {
+            if (!arr) return {};
+            if (auto* a2 = dynamic_cast<osg::Vec2Array*>(arr))
+                return new osg::Vec2Array(*a2);
+            osg::ref_ptr<osg::Vec2Array> out = new osg::Vec2Array;
+            if (auto* a3 = dynamic_cast<osg::Vec3Array*>(arr))
+            {
+                out->reserve(a3->size());
+                for (const auto& v : *a3) out->push_back(osg::Vec2(v.x(), v.y()));
+                return out;
+            }
+            if (auto* a4 = dynamic_cast<osg::Vec4Array*>(arr))
+            {
+                out->reserve(a4->size());
+                for (const auto& v : *a4) out->push_back(osg::Vec2(v.x(), v.y()));
+                return out;
+            }
+            return {};
+        }
+
+        void processGeometry(osg::Geometry* geom)
+        {
+            if (!geom) return;
+            ++geomSeen;
+            osg::Array* tcRaw = geom->getTexCoordArray(0);
+            if (!tcRaw || tcRaw->getNumElements() == 0)
+            {
+                // No UVs at all on unit 0. Try other units first; if none of
+                // them carry UVs either, synthesize a planar UV mapping in
+                // the geometry's local X/Y bounding box so that the texture
+                // (which the user has already applied) can finally be seen
+                // and scaled. Without this step, OBJ/STL-style models that
+                // ship without UVs sample the texture's (0,0) pixel only.
+                osg::Array* alt = nullptr;
+                for (unsigned u = 1; u < 8; ++u)
+                {
+                    if (auto* a = geom->getTexCoordArray(u))
+                    {
+                        if (a->getNumElements() > 0) { alt = a; break; }
+                    }
+                }
+                if (alt)
+                {
+                    geom->setTexCoordArray(0, alt);
+                    tcRaw = alt;
+                }
+                else
+                {
+                    auto* pos = dynamic_cast<osg::Vec3Array*>(geom->getVertexArray());
+                    if (!pos || pos->empty()) return;
+                    osg::BoundingBox bb;
+                    for (const auto& p : *pos) bb.expandBy(p);
+                    const float dx = std::max(bb.xMax() - bb.xMin(), 1e-6f);
+                    const float dy = std::max(bb.yMax() - bb.yMin(), 1e-6f);
+                    osg::ref_ptr<osg::Vec2Array> gen = new osg::Vec2Array;
+                    gen->reserve(pos->size());
+                    for (const auto& p : *pos)
+                    {
+                        gen->push_back(osg::Vec2(
+                            (p.x() - bb.xMin()) / dx,
+                            (p.y() - bb.yMin()) / dy));
+                    }
+                    geom->setTexCoordArray(0, gen.get());
+                    tcRaw = gen.get();
+                    ++generatedPlanar;
+                }
+            }
+            ++withTC;
+
+            osg::ref_ptr<osg::Vec2Array> base = findBase(geom);
+            if (!base)
+            {
+                base = toVec2Array(tcRaw);
+                if (!base)
+                {
+                    ++unsupportedTC;
+                    return;
+                }
+                base->setName("__OrigTexCoord0");
+                geom->getOrCreateUserDataContainer()->addUserObject(base.get());
+            }
+
+            osg::ref_ptr<osg::Vec2Array> next = new osg::Vec2Array;
+            next->reserve(base->size());
+            for (const auto& uv : *base)
+                next->push_back(osg::Vec2(
+                    static_cast<float>(uv.x() * su),
+                    static_cast<float>(uv.y() * sv)));
+            geom->setTexCoordArray(0, next.get());
+            geom->dirtyDisplayList();
+            geom->dirtyBound();
+
+            // Clear any stale TexMat we may have written in earlier versions
+            // so it does not stack on top of the now-baked UV scaling.
+            if (auto* ss = geom->getStateSet())
+                ss->removeTextureAttribute(0, osg::StateAttribute::TEXMAT);
+
+            ++touched;
+        }
+
+        void apply(osg::Geode& g) override
+        {
+            for (unsigned i = 0; i < g.getNumDrawables(); ++i)
+                processGeometry(dynamic_cast<osg::Geometry*>(g.getDrawable(i)));
+            traverse(g);
+        }
+        void apply(osg::Node& n) override
+        {
+            if (auto* ss = n.getStateSet())
+                ss->removeTextureAttribute(0, osg::StateAttribute::TEXMAT);
+            // OSG 3.4+: osg::Drawable derives from osg::Node, so loaders may
+            // attach an osg::Geometry directly under a Group without a Geode.
+            // Handle that path here too.
+            if (auto* geom = dynamic_cast<osg::Geometry*>(&n))
+                processGeometry(geom);
+            traverse(n);
+        }
+    };
+
+    UVScaleVisitor v;
+    v.su = su;
+    v.sv = sv;
+    v.identity = isIdentity;
+    node->accept(v);
+
+    if (v.touched == 0)
+    {
+        // Update the inline hint label instead of popping a modal dialog.
+        if (m_uvScaleHint)
+        {
+            m_uvScaleHint->setText(
+                tr("No UV coordinates on the target geometry (scanned %1). "
+                   "UV scaling has no effect until the model is unwrapped.")
+                    .arg(v.geomSeen));
+            m_uvScaleHint->show();
+        }
+        return;
+    }
+
+    // Successful path: clear any previous hint.
+    if (m_uvScaleHint)
+    {
+        if (v.generatedPlanar > 0)
+        {
+            m_uvScaleHint->setText(
+                tr("Model has no native UV on %1 geometry; planar UVs were "
+                   "auto-generated. Scaling may look stretched on non-planar shapes.")
+                    .arg(v.generatedPlanar));
+            m_uvScaleHint->show();
+        }
+        else
+        {
+            m_uvScaleHint->clear();
+            m_uvScaleHint->hide();
+        }
+    }
+
+    if (m_osgWidget) m_osgWidget->update();
+    emit nodeEdited(node);
+}
+
 void NodeEditorDock::updateTextureUI()
 {
-    osg::Node* node = m_currentNode.get();
+    osg::Node* node = effectiveNode();
     if (!node) return;
 
     m_updatingTexture = true;
+
+    if (m_uvScaleHint)
+    {
+        m_uvScaleHint->clear();
+        m_uvScaleHint->hide();
+    }
 
     osg::StateSet* ss = node->getStateSet();
     osg::Texture2D* tex = nullptr;
@@ -1256,6 +1514,69 @@ void NodeEditorDock::updateTextureUI()
         // Filter mode
         osg::Texture::FilterMode minF = tex->getFilter(osg::Texture::MIN_FILTER);
         m_filterCombo->setCurrentIndex(minF == osg::Texture::NEAREST ? 0 : (minF == osg::Texture::LINEAR ? 1 : 2));
+
+        // UV scale (recover by comparing the live TexCoord0 against the
+        // baseline cached by applyTextureScale; default to 1,1 when no
+        // baseline exists yet).
+        double su = 1.0, sv = 1.0;
+        struct UVReadVisitor : public osg::NodeVisitor
+        {
+            double su = 1.0, sv = 1.0;
+            bool done = false;
+            UVReadVisitor() : NodeVisitor(NodeVisitor::TRAVERSE_ALL_CHILDREN) {}
+            void tryGeometry(osg::Geometry* geom)
+            {
+                if (done || !geom) return;
+                auto* tc = dynamic_cast<osg::Vec2Array*>(geom->getTexCoordArray(0));
+                if (!tc || tc->empty()) return;
+                auto* udc = geom->getUserDataContainer();
+                if (!udc) return;
+                osg::Vec2Array* base = nullptr;
+                for (unsigned j = 0; j < udc->getNumUserObjects(); ++j)
+                {
+                    osg::Object* o = udc->getUserObject(j);
+                    if (o && o->getName() == "__OrigTexCoord0")
+                    {
+                        base = dynamic_cast<osg::Vec2Array*>(o);
+                        break;
+                    }
+                }
+                if (!base || base->empty()) return;
+                for (size_t k = 0; k < base->size() && k < tc->size(); ++k)
+                {
+                    const float bu = (*base)[k].x();
+                    const float bv = (*base)[k].y();
+                    if (std::abs(bu) > 1e-6f) su = (*tc)[k].x() / bu;
+                    if (std::abs(bv) > 1e-6f) sv = (*tc)[k].y() / bv;
+                    if (std::abs(bu) > 1e-6f && std::abs(bv) > 1e-6f) break;
+                }
+                done = true;
+            }
+            void apply(osg::Geode& g) override
+            {
+                if (done) return;
+                for (unsigned i = 0; i < g.getNumDrawables() && !done; ++i)
+                {
+                    auto* geom = dynamic_cast<osg::Geometry*>(g.getDrawable(i));
+                    tryGeometry(geom);
+                }
+                if (!done) traverse(g);
+            }
+            void apply(osg::Node& n) override
+            {
+                if (done) return;
+                // Same as above: Geometry can be a direct child of a Group in OSG 3.4+.
+                if (auto* geom = dynamic_cast<osg::Geometry*>(&n))
+                    tryGeometry(geom);
+                if (!done) traverse(n);
+            }
+        };
+        UVReadVisitor rv;
+        node->accept(rv);
+        if (rv.su > 0.0) su = rv.su;
+        if (rv.sv > 0.0) sv = rv.sv;
+        m_textureScaleU->setValue(su);
+        m_textureScaleV->setValue(sv);
 
         // Preview
         osg::Image* img = tex->getImage();
@@ -1285,6 +1606,8 @@ void NodeEditorDock::updateTextureUI()
         m_wrapSCombo->setCurrentIndex(0);
         m_wrapTCombo->setCurrentIndex(0);
         m_filterCombo->setCurrentIndex(2);
+        m_textureScaleU->setValue(1.0);
+        m_textureScaleV->setValue(1.0);
     }
 
     m_updatingTexture = false;
@@ -1292,7 +1615,7 @@ void NodeEditorDock::updateTextureUI()
 
 void NodeEditorDock::browseTexture()
 {
-    osg::Node* node = m_currentNode.get();
+    osg::Node* node = effectiveNode();
     if (!node) return;
 
     QString filter = tr("Image Files (*.png *.jpg *.jpeg *.bmp *.tga *.tiff *.tif *.gif *.psd);;All Files (*)");
@@ -1358,7 +1681,7 @@ void NodeEditorDock::browseTexture()
 
 void NodeEditorDock::removeTexture()
 {
-    osg::Node* node = m_currentNode.get();
+    osg::Node* node = effectiveNode();
     if (!node) return;
 
     osg::StateSet* ss = node->getOrCreateStateSet();
@@ -1379,31 +1702,37 @@ void NodeEditorDock::setNode(osg::Node* node)
     syncFromNode();
 }
 
+osg::Node* NodeEditorDock::effectiveNode() const
+{
+    if (m_currentNode.valid()) return m_currentNode.get();
+    return m_osgWidget ? m_osgWidget->getSceneData() : nullptr;
+}
+
 void NodeEditorDock::syncFromNode()
 {
-    osg::Node* node = m_currentNode.get();
+    osg::Node* node = effectiveNode();
 
     // Scene tab is always active (scene-level, not node-level)
     syncSceneUI();
 
-    if (!node)
+    const bool hasTarget = (node != nullptr);
+    m_tabWidget->setTabEnabled(0, hasTarget);  // Transform
+    m_tabWidget->setTabEnabled(1, hasTarget);  // Material
+    m_tabWidget->setTabEnabled(2, hasTarget);  // Texture
+    m_tabWidget->setTabEnabled(3, hasTarget);  // Mesh
+
+    if (!hasTarget)
     {
-        // Only disable node-level tabs
-        m_tabWidget->setTabEnabled(0, false);  // Transform
-        m_tabWidget->setTabEnabled(1, false);  // Material
-        m_tabWidget->setTabEnabled(2, false);  // Texture
         // Switch to Scene tab if a node-level tab was active
-        if (m_tabWidget->currentIndex() < 3)
-            m_tabWidget->setCurrentIndex(3);
+        if (m_tabWidget->currentIndex() < 4)
+            m_tabWidget->setCurrentIndex(4);
         return;
     }
 
-    m_tabWidget->setTabEnabled(0, true);
-    m_tabWidget->setTabEnabled(1, true);
-    m_tabWidget->setTabEnabled(2, true);
     updateTransformUI();
     updateMaterialUI();
     updateTextureUI();
+    updateMeshUI();
 }
 
 // ============================================================================
@@ -1572,4 +1901,424 @@ void NodeEditorDock::setLightColorButton(QPushButton* btn, const QColor& color)
                 "QPushButton:hover { border: 2px solid #aaa; }")
             .arg(color.name(QColor::HexArgb), textColor));
     btn->setText(QString("%1, %2, %3").arg(color.red()).arg(color.green()).arg(color.blue()));
+}
+
+// ============================================================================
+// Mesh Tab - mesh simplification (decimation) for the selected subtree
+// ============================================================================
+
+namespace {
+// Collect all Geode nodes under a given root.
+class GeodeCollector : public osg::NodeVisitor
+{
+public:
+    GeodeCollector() : osg::NodeVisitor(TRAVERSE_ALL_CHILDREN) {}
+    void apply(osg::Geode& g) override { geodes.push_back(&g); traverse(g); }
+    std::vector<osg::ref_ptr<osg::Geode>> geodes;
+};
+
+// Sum vertex / triangle stats for all Geometry drawables under a node.
+struct MeshStats { unsigned vertices = 0; unsigned triangles = 0; };
+MeshStats computeStats(osg::Node* root)
+{
+    MeshStats s;
+    if (!root) return s;
+    GeodeCollector c; root->accept(c);
+    for (auto& geode : c.geodes) {
+        for (unsigned i = 0; i < geode->getNumDrawables(); ++i) {
+            auto* geom = dynamic_cast<osg::Geometry*>(geode->getDrawable(i));
+            if (!geom) continue;
+            auto* va = dynamic_cast<osg::Vec3Array*>(geom->getVertexArray());
+            if (va) s.vertices += static_cast<unsigned>(va->size());
+            for (unsigned p = 0; p < geom->getNumPrimitiveSets(); ++p) {
+                osg::PrimitiveSet* ps = geom->getPrimitiveSet(p);
+                if (!ps) continue;
+                GLenum mode = ps->getMode();
+                unsigned n = ps->getNumIndices();
+                if (mode == GL_TRIANGLES) s.triangles += n / 3;
+                else if (mode == GL_TRIANGLE_STRIP || mode == GL_TRIANGLE_FAN) s.triangles += (n >= 3 ? n - 2 : 0);
+            }
+        }
+    }
+    return s;
+}
+} // namespace
+
+namespace {
+struct WeldResult { bool welded = false; std::size_t before = 0; std::size_t after = 0; };
+// Weld coincident vertices into a shared-index mesh so that SmoothingVisitor
+// can actually average normals across faces meeting at the same position.
+// Without this step, geometry with unshared vertices (each triangle owning 3
+// independent vertices) yields face normals regardless of the crease angle.
+// Lossy across UV/Color seams: only the first occurrence's attributes are kept.
+WeldResult weldGeometryVertices(osg::Geometry& geom, double epsilon = 1e-5)
+{
+    WeldResult r;
+    auto* posArr = dynamic_cast<osg::Vec3Array*>(geom.getVertexArray());
+    if (!posArr || posArr->empty()) return r;
+    r.before = posArr->size();
+
+    auto* tcArr  = dynamic_cast<osg::Vec2Array*>(geom.getTexCoordArray(0));
+    auto* colArr = dynamic_cast<osg::Vec4Array*>(geom.getColorArray());
+    const bool keepTC  = tcArr  && tcArr->size()  == posArr->size();
+    const bool keepCol = colArr && colArr->size() == posArr->size()
+        && geom.getColorBinding() == osg::Geometry::BIND_PER_VERTEX;
+
+    const double inv = 1.0 / epsilon;
+    auto quant = [inv](float x) -> long long {
+        return static_cast<long long>(std::llround(double(x) * inv));
+    };
+
+    std::map<std::tuple<long long, long long, long long>, unsigned> indexMap;
+    osg::ref_ptr<osg::Vec3Array> newPos = new osg::Vec3Array;
+    osg::ref_ptr<osg::Vec2Array> newTC;
+    osg::ref_ptr<osg::Vec4Array> newCol;
+    if (keepTC)  newTC  = new osg::Vec2Array;
+    if (keepCol) newCol = new osg::Vec4Array;
+    std::vector<unsigned> remap(posArr->size(), 0u);
+
+    for (unsigned i = 0; i < posArr->size(); ++i) {
+        const osg::Vec3& v = (*posArr)[i];
+        auto key = std::make_tuple(quant(v.x()), quant(v.y()), quant(v.z()));
+        auto it = indexMap.find(key);
+        if (it != indexMap.end()) {
+            remap[i] = it->second;
+        } else {
+            unsigned newIdx = static_cast<unsigned>(newPos->size());
+            newPos->push_back(v);
+            if (newTC)  newTC ->push_back((*tcArr)[i]);
+            if (newCol) newCol->push_back((*colArr)[i]);
+            indexMap[key] = newIdx;
+            remap[i] = newIdx;
+        }
+    }
+
+    // No reduction -> already shared; still rebuild a unified GL_TRIANGLES
+    // index buffer so SmoothingVisitor sees a consistent indexed mesh.
+    r.after = newPos->size();
+    if (newPos->size() == posArr->size()) {
+        r.welded = false;
+    } else {
+        r.welded = true;
+    }
+
+    // Rebuild a single GL_TRIANGLES index buffer from all primitive sets.
+    osg::ref_ptr<osg::DrawElementsUInt> idx = new osg::DrawElementsUInt(GL_TRIANGLES);
+    for (unsigned p = 0; p < geom.getNumPrimitiveSets(); ++p) {
+        osg::PrimitiveSet* ps = geom.getPrimitiveSet(p);
+        if (!ps) continue;
+        const GLenum mode = ps->getMode();
+        const unsigned n  = ps->getNumIndices();
+        if (mode == GL_TRIANGLES) {
+            for (unsigned i = 0; i + 2 < n; i += 3) {
+                idx->push_back(remap[ps->index(i)]);
+                idx->push_back(remap[ps->index(i + 1)]);
+                idx->push_back(remap[ps->index(i + 2)]);
+            }
+        } else if (mode == GL_TRIANGLE_STRIP) {
+            for (unsigned i = 0; i + 2 < n; ++i) {
+                unsigned a = ps->index(i), b = ps->index(i + 1), c = ps->index(i + 2);
+                if (i & 1u) std::swap(b, c);
+                idx->push_back(remap[a]);
+                idx->push_back(remap[b]);
+                idx->push_back(remap[c]);
+            }
+        } else if (mode == GL_TRIANGLE_FAN) {
+            if (n >= 3) {
+                unsigned a = ps->index(0);
+                for (unsigned i = 1; i + 1 < n; ++i) {
+                    idx->push_back(remap[a]);
+                    idx->push_back(remap[ps->index(i)]);
+                    idx->push_back(remap[ps->index(i + 1)]);
+                }
+            }
+        }
+        // Other modes (lines/points) are dropped here.
+    }
+
+    geom.removePrimitiveSet(0, geom.getNumPrimitiveSets());
+    geom.addPrimitiveSet(idx.get());
+    geom.setVertexArray(newPos.get());
+    if (newTC)  geom.setTexCoordArray(0, newTC.get());
+    if (newCol) geom.setColorArray(newCol.get(), osg::Array::BIND_PER_VERTEX);
+    geom.setNormalArray(nullptr); // force SmoothingVisitor to rebuild
+    return r;
+}
+} // namespace
+
+QWidget* NodeEditorDock::createMeshTab()
+{
+    QWidget* page = new QWidget;
+    QVBoxLayout* layout = new QVBoxLayout(page);
+    layout->setContentsMargins(8, 8, 8, 8);
+    layout->setSpacing(8);
+
+    // Group: Statistics
+    QGroupBox* statsGroup = new QGroupBox(tr("Mesh Statistics"));
+    QVBoxLayout* statsLayout = new QVBoxLayout(statsGroup);
+    m_meshStatsLabel = new QLabel(tr("No node selected"));
+    m_meshStatsLabel->setWordWrap(true);
+    statsLayout->addWidget(m_meshStatsLabel);
+    layout->addWidget(statsGroup);
+
+    // Group: Simplify
+    QGroupBox* simpGroup = new QGroupBox(tr("Simplify"));
+    QFormLayout* simpForm = new QFormLayout(simpGroup);
+    simpForm->setContentsMargins(4, 4, 4, 4);
+
+    auto* ratioRow = new QHBoxLayout;
+    m_simplifyRatioSlider = new QSlider(Qt::Horizontal);
+    m_simplifyRatioSlider->setRange(5, 100);
+    m_simplifyRatioSlider->setValue(100);
+    m_simplifyRatioSpin = new QSpinBox;
+    m_simplifyRatioSpin->setRange(5, 100);
+    m_simplifyRatioSpin->setSingleStep(5);
+    m_simplifyRatioSpin->setSuffix(QStringLiteral("%"));
+    m_simplifyRatioSpin->setValue(100);
+    m_simplifyRatioSpin->setMinimumWidth(70);
+    ratioRow->addWidget(m_simplifyRatioSlider, 1);
+    ratioRow->addWidget(m_simplifyRatioSpin);
+    simpForm->addRow(tr("Target Ratio"), ratioRow);
+
+    // Real-time target estimate (updates as the slider moves)
+    m_simplifyTargetLabel = new QLabel(tr("Target: -"));
+    m_simplifyTargetLabel->setWordWrap(true);
+    m_simplifyTargetLabel->setStyleSheet("color: #2a8; font-weight: bold;");
+    simpForm->addRow(m_simplifyTargetLabel);
+
+    m_recomputeNormalsCheck = new QCheckBox(tr("Recompute smooth normals after simplify"));
+    m_recomputeNormalsCheck->setChecked(true);
+    simpForm->addRow(m_recomputeNormalsCheck);
+
+    m_simplifyApplyBtn = new QPushButton(tr("Apply Simplify"));
+    simpForm->addRow(m_simplifyApplyBtn);
+
+    layout->addWidget(simpGroup);
+
+    // Group: Normals
+    QGroupBox* normGroup = new QGroupBox(tr("Normals"));
+    QVBoxLayout* normLayout = new QVBoxLayout(normGroup);
+    auto* normHint = new QLabel(tr("Recompute smooth per-vertex normals to fix shading artifacts."));
+    normHint->setWordWrap(true);
+    normHint->setStyleSheet("color: #888;");
+    normLayout->addWidget(normHint);
+    m_recomputeNormalsBtn = new QPushButton(tr("Recompute Normals"));
+    normLayout->addWidget(m_recomputeNormalsBtn);
+    layout->addWidget(normGroup);
+
+    layout->addStretch();
+
+    // Connections (slider <-> spin both in integer percent)
+    connect(m_simplifyRatioSlider, &QSlider::valueChanged, this, [this](int v) {
+        if (m_simplifyRatioSpin->value() != v) {
+            m_simplifyRatioSpin->blockSignals(true);
+            m_simplifyRatioSpin->setValue(v);
+            m_simplifyRatioSpin->blockSignals(false);
+        }
+        updateSimplifyTarget();
+    });
+    connect(m_simplifyRatioSpin, QOverload<int>::of(&QSpinBox::valueChanged), this, [this](int v) {
+        if (m_simplifyRatioSlider->value() != v) {
+            m_simplifyRatioSlider->blockSignals(true);
+            m_simplifyRatioSlider->setValue(v);
+            m_simplifyRatioSlider->blockSignals(false);
+        }
+        updateSimplifyTarget();
+    });
+    connect(m_simplifyApplyBtn, &QPushButton::clicked, this, &NodeEditorDock::applySimplify);
+    connect(m_recomputeNormalsBtn, &QPushButton::clicked, this, &NodeEditorDock::recomputeNormals);
+
+    return page;
+}
+
+void NodeEditorDock::updateMeshUI()
+{
+    osg::Node* node = effectiveNode();
+    if (!node) {
+        m_meshStatsLabel->setText(tr("No node selected"));
+        m_simplifyApplyBtn->setEnabled(false);
+        m_recomputeNormalsBtn->setEnabled(false);
+        m_currentVertices = 0;
+        m_currentTriangles = 0;
+        updateSimplifyTarget();
+        return;
+    }
+    MeshStats s = computeStats(node);
+    m_currentVertices = s.vertices;
+    m_currentTriangles = s.triangles;
+    m_meshStatsLabel->setText(tr("Vertices: %1\nTriangles: %2")
+                              .arg(s.vertices).arg(s.triangles));
+    m_simplifyApplyBtn->setEnabled(s.triangles > 0);
+    m_recomputeNormalsBtn->setEnabled(s.triangles > 0);
+    updateSimplifyTarget();
+}
+
+void NodeEditorDock::updateSimplifyTarget()
+{
+    if (!m_simplifyTargetLabel) return;
+    if (m_currentTriangles == 0) {
+        m_simplifyTargetLabel->setText(tr("Target: -"));
+        return;
+    }
+    const int pct = m_simplifyRatioSpin->value();
+    const double ratio = pct / 100.0;
+    const unsigned tgtV = static_cast<unsigned>(std::llround(double(m_currentVertices)  * ratio));
+    const unsigned tgtT = static_cast<unsigned>(std::llround(double(m_currentTriangles) * ratio));
+    m_simplifyTargetLabel->setText(
+        tr("Target: ~%1 vertices, ~%2 triangles (%3%)")
+            .arg(tgtV).arg(tgtT).arg(pct));
+}
+
+void NodeEditorDock::applySimplify()
+{
+    osg::Node* node = effectiveNode();
+    if (!node) return;
+
+    const float ratio = static_cast<float>(m_simplifyRatioSpin->value()) / 100.0f;
+    if (ratio >= 0.999f) {
+        QMessageBox::information(this, tr("Simplify"), tr("Ratio is 100%, nothing to simplify."));
+        return;
+    }
+
+    // Collect Geodes under the selected subtree
+    GeodeCollector collector;
+    node->accept(collector);
+    if (collector.geodes.empty()) {
+        QMessageBox::information(this, tr("Simplify"), tr("Selected node contains no geometry."));
+        return;
+    }
+
+    // Build snapshots: per-Geode list of original drawables + simplified clones
+    std::vector<SimplifyCommand::GeodeSnapshot> snapshots;
+    snapshots.reserve(collector.geodes.size());
+
+    osgUtil::Simplifier simplifier(ratio);
+    const bool recomputeNormals = m_recomputeNormalsCheck && m_recomputeNormalsCheck->isChecked();
+    int simplifiedCount = 0;
+
+    for (auto& geode : collector.geodes) {
+        SimplifyCommand::GeodeSnapshot snap;
+        snap.geode = geode.get();
+        for (unsigned i = 0; i < geode->getNumDrawables(); ++i) {
+            osg::Drawable* d = geode->getDrawable(i);
+            snap.originals.push_back(d);
+            auto* geom = dynamic_cast<osg::Geometry*>(d);
+            if (!geom) {
+                // non-geometry drawable: keep as-is in simplified list
+                snap.simplified.push_back(d);
+                continue;
+            }
+            // Deep-copy geometry then simplify the copy in place
+            osg::ref_ptr<osg::Geometry> clone = dynamic_cast<osg::Geometry*>(
+                geom->clone(osg::CopyOp::DEEP_COPY_ARRAYS | osg::CopyOp::DEEP_COPY_PRIMITIVES));
+            if (clone.valid()) {
+                clone->accept(simplifier);
+                if (recomputeNormals) {
+                    // Weld coincident vertices first so SmoothingVisitor can
+                    // actually average normals across shared faces (otherwise
+                    // unshared vertices yield face normals regardless of
+                    // crease angle). Then rebuild per-vertex normals with the
+                    // maximum crease angle and invalidate GL caches.
+                    weldGeometryVertices(*clone);
+                    clone->setNormalArray(nullptr);
+                    osg::ref_ptr<osg::Geode> tmp = new osg::Geode;
+                    tmp->addDrawable(clone.get());
+                    osgUtil::SmoothingVisitor sv;
+                    sv.setCreaseAngle(osg::PI);
+                    tmp->accept(sv);
+                    tmp->removeDrawables(0, tmp->getNumDrawables());
+                    clone->dirtyDisplayList();
+                    clone->dirtyBound();
+                }
+                snap.simplified.push_back(clone.get());
+                ++simplifiedCount;
+            } else {
+                snap.simplified.push_back(d);
+            }
+        }
+        if (!snap.originals.empty()) snapshots.push_back(std::move(snap));
+    }
+
+    if (simplifiedCount == 0) {
+        QMessageBox::information(this, tr("Simplify"), tr("No geometry available to simplify."));
+        return;
+    }
+
+    m_undoStack->push(new SimplifyCommand(std::move(snapshots), ratio));
+    updateMeshUI();
+
+    emit nodeEdited(node);
+}
+
+void NodeEditorDock::recomputeNormals()
+{
+    osg::Node* node = effectiveNode();
+    if (!node) return;
+
+    GeodeCollector collector;
+    node->accept(collector);
+    if (collector.geodes.empty()) {
+        QMessageBox::information(this, tr("Recompute Normals"), tr("Selected node contains no geometry."));
+        return;
+    }
+
+    std::vector<SimplifyCommand::GeodeSnapshot> snapshots;
+    snapshots.reserve(collector.geodes.size());
+    int processed = 0;
+    int weldedCount = 0;
+    std::size_t totalBefore = 0;
+    std::size_t totalAfter  = 0;
+
+    for (auto& geode : collector.geodes) {
+        SimplifyCommand::GeodeSnapshot snap;
+        snap.geode = geode.get();
+        for (unsigned i = 0; i < geode->getNumDrawables(); ++i) {
+            osg::Drawable* d = geode->getDrawable(i);
+            snap.originals.push_back(d);
+            auto* geom = dynamic_cast<osg::Geometry*>(d);
+            if (!geom) {
+                snap.simplified.push_back(d);
+                continue;
+            }
+            osg::ref_ptr<osg::Geometry> clone = dynamic_cast<osg::Geometry*>(
+                geom->clone(osg::CopyOp::DEEP_COPY_ARRAYS | osg::CopyOp::DEEP_COPY_PRIMITIVES));
+            if (clone.valid()) {
+                // Weld coincident vertices first to allow real per-vertex
+                // smoothing across shared faces, then rebuild normals.
+                WeldResult wr = weldGeometryVertices(*clone);
+                if (wr.welded) ++weldedCount;
+                totalBefore += wr.before;
+                totalAfter  += (wr.welded ? wr.after : wr.before);
+                clone->setNormalArray(nullptr);
+                osg::ref_ptr<osg::Geode> tmp = new osg::Geode;
+                tmp->addDrawable(clone.get());
+                osgUtil::SmoothingVisitor sv;
+                sv.setCreaseAngle(osg::PI);
+                tmp->accept(sv);
+                tmp->removeDrawables(0, tmp->getNumDrawables());
+                clone->dirtyDisplayList();
+                clone->dirtyBound();
+                snap.simplified.push_back(clone.get());
+                ++processed;
+            } else {
+                snap.simplified.push_back(d);
+            }
+        }
+        if (!snap.originals.empty()) snapshots.push_back(std::move(snap));
+    }
+
+    if (processed == 0) {
+        QMessageBox::information(this, tr("Recompute Normals"), tr("No geometry available to process."));
+        return;
+    }
+
+    m_undoStack->push(new SimplifyCommand(std::move(snapshots), tr("Recompute Normals")));
+    updateMeshUI();
+    emit nodeEdited(node);
+
+    QMessageBox::information(this, tr("Recompute Normals"),
+        tr("Processed %1 geometry, welded %2 (vertices: %3 \u2192 %4).")
+            .arg(processed).arg(weldedCount)
+            .arg(static_cast<qulonglong>(totalBefore))
+            .arg(static_cast<qulonglong>(totalAfter)));
 }

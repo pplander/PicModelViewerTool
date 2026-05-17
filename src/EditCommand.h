@@ -9,6 +9,9 @@
 #include <osg/PositionAttitudeTransform>
 #include <osg/Material>
 #include <osg/Texture2D>
+#include <osg/Geode>
+#include <osg/Geometry>
+#include <vector>
 
 // ============================================================================
 // Transform Command - undo/redo for MatrixTransform
@@ -459,4 +462,57 @@ private:
     osg::Texture::FilterMode m_oldMinFilter, m_oldMagFilter;
     osg::Texture::WrapMode m_newWrapS, m_newWrapT;
     osg::Texture::FilterMode m_newMinFilter, m_newMagFilter;
+};
+
+// ============================================================================
+// Simplify Command - undo/redo for mesh simplification on a subtree
+// Stores per-Geode snapshots of the original drawables, then replaces them
+// with simplified copies on redo, restores originals on undo.
+// ============================================================================
+class SimplifyCommand : public QUndoCommand
+{
+public:
+    struct GeodeSnapshot {
+        osg::observer_ptr<osg::Geode> geode;
+        std::vector<osg::ref_ptr<osg::Drawable>> originals;
+        std::vector<osg::ref_ptr<osg::Drawable>> simplified;
+    };
+
+    SimplifyCommand(std::vector<GeodeSnapshot> snapshots, float ratio,
+                    QUndoCommand* parent = nullptr)
+        : QUndoCommand(parent)
+        , m_snapshots(std::move(snapshots))
+    {
+        setText(QObject::tr("Simplify Mesh (%1%)").arg(static_cast<int>(ratio * 100)));
+    }
+
+    // Generic constructor: caller provides command text (e.g. "Recompute Normals").
+    SimplifyCommand(std::vector<GeodeSnapshot> snapshots, const QString& text,
+                    QUndoCommand* parent = nullptr)
+        : QUndoCommand(parent)
+        , m_snapshots(std::move(snapshots))
+    {
+        setText(text);
+    }
+
+    void undo() override
+    {
+        for (auto& s : m_snapshots) {
+            if (!s.geode.valid()) continue;
+            s.geode->removeDrawables(0, s.geode->getNumDrawables());
+            for (auto& d : s.originals) s.geode->addDrawable(d.get());
+        }
+    }
+
+    void redo() override
+    {
+        for (auto& s : m_snapshots) {
+            if (!s.geode.valid()) continue;
+            s.geode->removeDrawables(0, s.geode->getNumDrawables());
+            for (auto& d : s.simplified) s.geode->addDrawable(d.get());
+        }
+    }
+
+private:
+    std::vector<GeodeSnapshot> m_snapshots;
 };

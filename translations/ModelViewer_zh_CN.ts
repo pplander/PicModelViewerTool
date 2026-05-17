@@ -133,215 +133,152 @@
     </message>
 </context>
 <context>
-    <name>LightControlDock</name>
-    <message>
-        <source>Light Control</source>
-        <translation type="vanished">光照控制</translation>
-    </message>
-    <message>
-        <source>Light Settings</source>
-        <translation type="vanished">光照设置</translation>
-    </message>
-    <message>
-        <source>Enable Lighting</source>
-        <translation type="vanished">启用光照</translation>
-    </message>
-    <message>
-        <source>Two-sided Lighting</source>
-        <translation type="vanished">双面光照</translation>
-    </message>
-    <message>
-        <source>Ambient:</source>
-        <translation type="vanished">环境光：</translation>
-    </message>
-    <message>
-        <source>Diffuse:</source>
-        <translation type="vanished">漫反射：</translation>
-    </message>
-    <message>
-        <source>Specular:</source>
-        <translation type="vanished">镜面反射：</translation>
-    </message>
-    <message>
-        <source>Light Position</source>
-        <translation type="vanished">光源位置</translation>
-    </message>
-    <message>
-        <source>Background</source>
-        <translation type="vanished">背景</translation>
-    </message>
-    <message>
-        <source>Color:</source>
-        <translation type="vanished">颜色：</translation>
-    </message>
-    <message>
-        <source>Select Ambient Color</source>
-        <translation type="vanished">选择环境光颜色</translation>
-    </message>
-    <message>
-        <source>Select Diffuse Color</source>
-        <translation type="vanished">选择漫反射颜色</translation>
-    </message>
-    <message>
-        <source>Select Specular Color</source>
-        <translation type="vanished">选择镜面反射颜色</translation>
-    </message>
-    <message>
-        <source>Select Background Color</source>
-        <translation type="vanished">选择背景颜色</translation>
-    </message>
-</context>
-<context>
     <name>MainWindow</name>
     <message>
         <location filename="../src/MainWindow.cpp" line="120"/>
-        <location filename="../src/MainWindow.cpp" line="944"/>
+        <location filename="../src/MainWindow.cpp" line="953"/>
         <source>&amp;File</source>
         <translation>文件(&amp;F)</translation>
     </message>
     <message>
-        <location filename="../src/MainWindow.cpp" line="197"/>
-        <location filename="../src/MainWindow.cpp" line="945"/>
+        <location filename="../src/MainWindow.cpp" line="199"/>
+        <location filename="../src/MainWindow.cpp" line="954"/>
         <source>&amp;View</source>
         <translation>视图(&amp;V)</translation>
     </message>
     <message>
-        <location filename="../src/MainWindow.cpp" line="247"/>
-        <location filename="../src/MainWindow.cpp" line="946"/>
+        <location filename="../src/MainWindow.cpp" line="249"/>
+        <location filename="../src/MainWindow.cpp" line="955"/>
         <source>&amp;Tools</source>
         <translation>工具(&amp;T)</translation>
     </message>
     <message>
-        <location filename="../src/MainWindow.cpp" line="319"/>
-        <location filename="../src/MainWindow.cpp" line="947"/>
+        <location filename="../src/MainWindow.cpp" line="321"/>
+        <location filename="../src/MainWindow.cpp" line="956"/>
         <source>&amp;Language</source>
         <translation>语言(&amp;L)</translation>
     </message>
     <message>
-        <location filename="../src/MainWindow.cpp" line="361"/>
-        <location filename="../src/MainWindow.cpp" line="948"/>
+        <location filename="../src/MainWindow.cpp" line="363"/>
+        <location filename="../src/MainWindow.cpp" line="957"/>
         <source>&amp;Help</source>
         <translation>帮助(&amp;H)</translation>
     </message>
     <message>
         <location filename="../src/MainWindow.cpp" line="122"/>
-        <location filename="../src/MainWindow.cpp" line="951"/>
+        <location filename="../src/MainWindow.cpp" line="960"/>
         <source>&amp;Open...</source>
         <translation>打开(&amp;O)...</translation>
     </message>
     <message>
         <location filename="../src/MainWindow.cpp" line="125"/>
-        <location filename="../src/MainWindow.cpp" line="952"/>
+        <location filename="../src/MainWindow.cpp" line="961"/>
         <source>Open a model file</source>
         <translation>打开模型文件</translation>
     </message>
     <message>
         <location filename="../src/MainWindow.cpp" line="151"/>
-        <location filename="../src/MainWindow.cpp" line="957"/>
+        <location filename="../src/MainWindow.cpp" line="966"/>
         <source>&amp;Close</source>
         <translation>关闭(&amp;C)</translation>
     </message>
     <message>
         <location filename="../src/MainWindow.cpp" line="154"/>
-        <location filename="../src/MainWindow.cpp" line="958"/>
+        <location filename="../src/MainWindow.cpp" line="967"/>
         <source>Close current model</source>
         <translation>关闭当前模型</translation>
     </message>
     <message>
         <location filename="../src/MainWindow.cpp" line="159"/>
-        <location filename="../src/MainWindow.cpp" line="959"/>
+        <location filename="../src/MainWindow.cpp" line="968"/>
         <source>E&amp;xit</source>
         <translation>退出(&amp;X)</translation>
     </message>
     <message>
         <location filename="../src/MainWindow.cpp" line="162"/>
-        <location filename="../src/MainWindow.cpp" line="960"/>
+        <location filename="../src/MainWindow.cpp" line="969"/>
         <source>Exit application</source>
         <translation>退出应用程序</translation>
     </message>
     <message>
-        <location filename="../src/MainWindow.cpp" line="199"/>
-        <location filename="../src/MainWindow.cpp" line="961"/>
+        <location filename="../src/MainWindow.cpp" line="201"/>
+        <location filename="../src/MainWindow.cpp" line="970"/>
         <source>Reset View</source>
         <translation>重置视图</translation>
     </message>
     <message>
-        <location filename="../src/MainWindow.cpp" line="202"/>
-        <location filename="../src/MainWindow.cpp" line="962"/>
+        <location filename="../src/MainWindow.cpp" line="204"/>
+        <location filename="../src/MainWindow.cpp" line="971"/>
         <source>Reset camera to default position</source>
         <translation>重置相机到默认位置</translation>
     </message>
     <message>
-        <location filename="../src/MainWindow.cpp" line="209"/>
-        <location filename="../src/MainWindow.cpp" line="973"/>
+        <location filename="../src/MainWindow.cpp" line="211"/>
+        <location filename="../src/MainWindow.cpp" line="982"/>
         <source>Solid</source>
         <translation>实体</translation>
     </message>
     <message>
-        <location filename="../src/MainWindow.cpp" line="216"/>
-        <location filename="../src/MainWindow.cpp" line="974"/>
+        <location filename="../src/MainWindow.cpp" line="218"/>
+        <location filename="../src/MainWindow.cpp" line="983"/>
         <source>Wireframe</source>
         <translation>线框</translation>
     </message>
     <message>
-        <location filename="../src/MainWindow.cpp" line="222"/>
-        <location filename="../src/MainWindow.cpp" line="975"/>
+        <location filename="../src/MainWindow.cpp" line="224"/>
+        <location filename="../src/MainWindow.cpp" line="984"/>
         <source>Points</source>
         <translation>点云</translation>
     </message>
     <message>
-        <location filename="../src/MainWindow.cpp" line="228"/>
-        <location filename="../src/MainWindow.cpp" line="976"/>
+        <location filename="../src/MainWindow.cpp" line="230"/>
+        <location filename="../src/MainWindow.cpp" line="985"/>
         <source>Solid + Wireframe</source>
         <translation>实体+线框</translation>
     </message>
     <message>
-        <location filename="../src/MainWindow.cpp" line="205"/>
-        <location filename="../src/MainWindow.cpp" line="971"/>
+        <location filename="../src/MainWindow.cpp" line="207"/>
+        <location filename="../src/MainWindow.cpp" line="980"/>
         <source>Display Mode</source>
         <translation>显示模式</translation>
     </message>
     <message>
-        <location filename="../src/MainWindow.cpp" line="989"/>
+        <location filename="../src/MainWindow.cpp" line="998"/>
         <source>Model Info</source>
         <translation>模型信息</translation>
     </message>
     <message>
-        <location filename="../src/MainWindow.cpp" line="990"/>
+        <location filename="../src/MainWindow.cpp" line="999"/>
         <source>Scene Tree</source>
         <translation>场景树</translation>
     </message>
     <message>
-        <source>Light Control</source>
-        <translation type="vanished">光照控制</translation>
-    </message>
-    <message>
-        <location filename="../src/MainWindow.cpp" line="236"/>
-        <location filename="../src/MainWindow.cpp" line="963"/>
+        <location filename="../src/MainWindow.cpp" line="238"/>
+        <location filename="../src/MainWindow.cpp" line="972"/>
         <source>Full Screen</source>
         <translation>全屏</translation>
     </message>
     <message>
         <location filename="../src/MainWindow.cpp" line="135"/>
-        <location filename="../src/MainWindow.cpp" line="953"/>
+        <location filename="../src/MainWindow.cpp" line="962"/>
         <source>Previous File</source>
         <translation>上一个文件</translation>
     </message>
     <message>
         <location filename="../src/MainWindow.cpp" line="138"/>
-        <location filename="../src/MainWindow.cpp" line="954"/>
+        <location filename="../src/MainWindow.cpp" line="963"/>
         <source>Open previous model file in directory</source>
         <translation>打开目录中上一个模型文件</translation>
     </message>
     <message>
         <location filename="../src/MainWindow.cpp" line="142"/>
-        <location filename="../src/MainWindow.cpp" line="955"/>
+        <location filename="../src/MainWindow.cpp" line="964"/>
         <source>Next File</source>
         <translation>下一个文件</translation>
     </message>
     <message>
         <location filename="../src/MainWindow.cpp" line="145"/>
-        <location filename="../src/MainWindow.cpp" line="956"/>
+        <location filename="../src/MainWindow.cpp" line="965"/>
         <source>Open next model file in directory</source>
         <translation>打开目录中下一个模型文件</translation>
     </message>
@@ -361,336 +298,336 @@
         <translation>撤销上次编辑</translation>
     </message>
     <message>
-        <location filename="../src/MainWindow.cpp" line="174"/>
+        <location filename="../src/MainWindow.cpp" line="175"/>
         <source>&amp;Redo</source>
         <translation>重做(&amp;R)</translation>
     </message>
     <message>
-        <location filename="../src/MainWindow.cpp" line="176"/>
+        <location filename="../src/MainWindow.cpp" line="177"/>
         <source>Redo last undone edit</source>
         <translation>重做上次撤销的编辑</translation>
     </message>
     <message>
-        <location filename="../src/MainWindow.cpp" line="181"/>
+        <location filename="../src/MainWindow.cpp" line="183"/>
         <source>Delete Node</source>
         <translation>删除节点</translation>
     </message>
     <message>
-        <location filename="../src/MainWindow.cpp" line="183"/>
+        <location filename="../src/MainWindow.cpp" line="185"/>
         <source>Delete selected node from scene</source>
         <translation>从场景中删除选中节点</translation>
     </message>
     <message>
-        <location filename="../src/MainWindow.cpp" line="186"/>
+        <location filename="../src/MainWindow.cpp" line="188"/>
         <source>Hide/Show Node</source>
         <translation>隐藏/显示节点</translation>
     </message>
     <message>
-        <location filename="../src/MainWindow.cpp" line="188"/>
+        <location filename="../src/MainWindow.cpp" line="190"/>
         <source>Toggle visibility of selected node</source>
         <translation>切换选中节点的可见性</translation>
     </message>
     <message>
-        <location filename="../src/MainWindow.cpp" line="191"/>
+        <location filename="../src/MainWindow.cpp" line="193"/>
         <source>Duplicate Node</source>
         <translation>复制节点</translation>
     </message>
     <message>
-        <location filename="../src/MainWindow.cpp" line="193"/>
+        <location filename="../src/MainWindow.cpp" line="195"/>
         <source>Duplicate selected node</source>
         <translation>复制选中节点</translation>
     </message>
     <message>
-        <location filename="../src/MainWindow.cpp" line="240"/>
-        <location filename="../src/MainWindow.cpp" line="964"/>
+        <location filename="../src/MainWindow.cpp" line="242"/>
+        <location filename="../src/MainWindow.cpp" line="973"/>
         <source>Toggle full screen mode</source>
         <translation>切换全屏模式</translation>
     </message>
     <message>
-        <location filename="../src/MainWindow.cpp" line="249"/>
-        <location filename="../src/MainWindow.cpp" line="965"/>
+        <location filename="../src/MainWindow.cpp" line="251"/>
+        <location filename="../src/MainWindow.cpp" line="974"/>
         <source>Take Screenshot</source>
         <translation>截图</translation>
     </message>
     <message>
-        <location filename="../src/MainWindow.cpp" line="252"/>
-        <location filename="../src/MainWindow.cpp" line="966"/>
+        <location filename="../src/MainWindow.cpp" line="254"/>
+        <location filename="../src/MainWindow.cpp" line="975"/>
         <source>Save screenshot to file</source>
         <translation>保存截图到文件</translation>
     </message>
     <message>
-        <location filename="../src/MainWindow.cpp" line="255"/>
+        <location filename="../src/MainWindow.cpp" line="257"/>
         <source>Batch Convert...</source>
         <translation>批量转换...</translation>
     </message>
     <message>
-        <location filename="../src/MainWindow.cpp" line="257"/>
+        <location filename="../src/MainWindow.cpp" line="259"/>
         <source>Convert models between different formats</source>
         <translation>在不同格式之间转换模型</translation>
     </message>
     <message>
-        <location filename="../src/MainWindow.cpp" line="261"/>
+        <location filename="../src/MainWindow.cpp" line="263"/>
         <source>OSG &amp;Handlers</source>
         <translation>OSG处理器(&amp;H)</translation>
     </message>
     <message>
-        <location filename="../src/MainWindow.cpp" line="263"/>
+        <location filename="../src/MainWindow.cpp" line="265"/>
         <source>Toggle Stats (S)</source>
         <translation>切换统计信息 (S)</translation>
     </message>
     <message>
-        <location filename="../src/MainWindow.cpp" line="266"/>
+        <location filename="../src/MainWindow.cpp" line="268"/>
         <source>Toggle on-screen statistics display</source>
         <translation>切换屏幕统计信息显示</translation>
     </message>
     <message>
-        <location filename="../src/MainWindow.cpp" line="270"/>
+        <location filename="../src/MainWindow.cpp" line="272"/>
         <source>Toggle Help (H)</source>
         <translation>切换帮助 (H)</translation>
     </message>
     <message>
-        <location filename="../src/MainWindow.cpp" line="273"/>
+        <location filename="../src/MainWindow.cpp" line="275"/>
         <source>Toggle on-screen help display</source>
         <translation>切换屏幕帮助显示</translation>
     </message>
     <message>
-        <location filename="../src/MainWindow.cpp" line="277"/>
+        <location filename="../src/MainWindow.cpp" line="279"/>
         <source>Screen Capture (C)</source>
         <translation>屏幕截图 (C)</translation>
     </message>
     <message>
-        <location filename="../src/MainWindow.cpp" line="280"/>
+        <location filename="../src/MainWindow.cpp" line="282"/>
         <source>Capture screenshot via OSG handler</source>
         <translation>通过OSG处理器截图</translation>
     </message>
     <message>
-        <location filename="../src/MainWindow.cpp" line="286"/>
+        <location filename="../src/MainWindow.cpp" line="288"/>
         <source>Cycle Threading Model (M)</source>
         <translation>切换线程模型 (M)</translation>
     </message>
     <message>
-        <location filename="../src/MainWindow.cpp" line="289"/>
+        <location filename="../src/MainWindow.cpp" line="291"/>
         <source>Change OSG threading model</source>
         <translation>更改OSG线程模型</translation>
     </message>
     <message>
-        <location filename="../src/MainWindow.cpp" line="295"/>
+        <location filename="../src/MainWindow.cpp" line="297"/>
         <source>Increase LOD Scale (+)</source>
         <translation>增加LOD比例 (+)</translation>
     </message>
     <message>
-        <location filename="../src/MainWindow.cpp" line="298"/>
+        <location filename="../src/MainWindow.cpp" line="300"/>
         <source>Increase level-of-detail scale</source>
         <translation>增加细节层次比例</translation>
     </message>
     <message>
-        <location filename="../src/MainWindow.cpp" line="302"/>
+        <location filename="../src/MainWindow.cpp" line="304"/>
         <source>Decrease LOD Scale (-)</source>
         <translation>减少LOD比例 (-)</translation>
     </message>
     <message>
-        <location filename="../src/MainWindow.cpp" line="305"/>
+        <location filename="../src/MainWindow.cpp" line="307"/>
         <source>Decrease level-of-detail scale</source>
         <translation>减少细节层次比例</translation>
     </message>
     <message>
-        <location filename="../src/MainWindow.cpp" line="311"/>
+        <location filename="../src/MainWindow.cpp" line="313"/>
         <source>Toggle Fullscreen (F)</source>
         <translation>切换全屏 (F)</translation>
     </message>
     <message>
-        <location filename="../src/MainWindow.cpp" line="314"/>
+        <location filename="../src/MainWindow.cpp" line="316"/>
         <source>Toggle fullscreen via OSG handler</source>
         <translation>通过OSG处理器切换全屏</translation>
     </message>
     <message>
-        <location filename="../src/MainWindow.cpp" line="324"/>
-        <location filename="../src/MainWindow.cpp" line="978"/>
+        <location filename="../src/MainWindow.cpp" line="326"/>
+        <location filename="../src/MainWindow.cpp" line="987"/>
         <source>中文</source>
         <translation>中文</translation>
     </message>
     <message>
-        <location filename="../src/MainWindow.cpp" line="329"/>
-        <location filename="../src/MainWindow.cpp" line="979"/>
+        <location filename="../src/MainWindow.cpp" line="331"/>
+        <location filename="../src/MainWindow.cpp" line="988"/>
         <source>English</source>
         <translation>English</translation>
     </message>
     <message>
-        <location filename="../src/MainWindow.cpp" line="334"/>
-        <location filename="../src/MainWindow.cpp" line="949"/>
+        <location filename="../src/MainWindow.cpp" line="336"/>
+        <location filename="../src/MainWindow.cpp" line="958"/>
         <source>&amp;Theme</source>
         <translation>主题(&amp;T)</translation>
     </message>
     <message>
-        <location filename="../src/MainWindow.cpp" line="339"/>
-        <location filename="../src/MainWindow.cpp" line="981"/>
-        <location filename="../src/MainWindow.cpp" line="1041"/>
-        <location filename="../src/MainWindow.cpp" line="1045"/>
+        <location filename="../src/MainWindow.cpp" line="341"/>
+        <location filename="../src/MainWindow.cpp" line="990"/>
+        <location filename="../src/MainWindow.cpp" line="1050"/>
+        <location filename="../src/MainWindow.cpp" line="1054"/>
         <source>Dark</source>
         <translation>暗色</translation>
     </message>
     <message>
-        <location filename="../src/MainWindow.cpp" line="345"/>
-        <location filename="../src/MainWindow.cpp" line="982"/>
-        <location filename="../src/MainWindow.cpp" line="1042"/>
+        <location filename="../src/MainWindow.cpp" line="347"/>
+        <location filename="../src/MainWindow.cpp" line="991"/>
+        <location filename="../src/MainWindow.cpp" line="1051"/>
         <source>Light</source>
         <translation>亮色</translation>
     </message>
     <message>
-        <location filename="../src/MainWindow.cpp" line="350"/>
-        <location filename="../src/MainWindow.cpp" line="983"/>
-        <location filename="../src/MainWindow.cpp" line="1043"/>
+        <location filename="../src/MainWindow.cpp" line="352"/>
+        <location filename="../src/MainWindow.cpp" line="992"/>
+        <location filename="../src/MainWindow.cpp" line="1052"/>
         <source>Nord</source>
         <translation>北欧</translation>
     </message>
     <message>
-        <location filename="../src/MainWindow.cpp" line="355"/>
-        <location filename="../src/MainWindow.cpp" line="984"/>
-        <location filename="../src/MainWindow.cpp" line="1044"/>
+        <location filename="../src/MainWindow.cpp" line="357"/>
+        <location filename="../src/MainWindow.cpp" line="993"/>
+        <location filename="../src/MainWindow.cpp" line="1053"/>
         <source>Solarized</source>
         <translation>日晒</translation>
     </message>
     <message>
-        <location filename="../src/MainWindow.cpp" line="366"/>
-        <location filename="../src/MainWindow.cpp" line="967"/>
+        <location filename="../src/MainWindow.cpp" line="368"/>
+        <location filename="../src/MainWindow.cpp" line="976"/>
         <source>About</source>
         <translation>关于</translation>
     </message>
     <message>
-        <location filename="../src/MainWindow.cpp" line="368"/>
-        <location filename="../src/MainWindow.cpp" line="850"/>
+        <location filename="../src/MainWindow.cpp" line="370"/>
+        <location filename="../src/MainWindow.cpp" line="859"/>
         <source>About PicModelViewer</source>
         <translation>关于 PicModelViewer</translation>
     </message>
     <message>
-        <location filename="../src/MainWindow.cpp" line="374"/>
+        <location filename="../src/MainWindow.cpp" line="376"/>
         <source>Main Toolbar</source>
         <translation>主工具栏</translation>
     </message>
     <message>
-        <location filename="../src/MainWindow.cpp" line="399"/>
-        <location filename="../src/MainWindow.cpp" line="752"/>
-        <location filename="../src/MainWindow.cpp" line="986"/>
+        <location filename="../src/MainWindow.cpp" line="404"/>
+        <location filename="../src/MainWindow.cpp" line="757"/>
+        <location filename="../src/MainWindow.cpp" line="995"/>
         <source>Ready</source>
         <translation>就绪</translation>
     </message>
     <message>
-        <location filename="../src/MainWindow.cpp" line="401"/>
-        <location filename="../src/MainWindow.cpp" line="753"/>
+        <location filename="../src/MainWindow.cpp" line="406"/>
+        <location filename="../src/MainWindow.cpp" line="758"/>
         <source>Vertices: 0</source>
         <translation>顶点数: 0</translation>
     </message>
     <message>
-        <location filename="../src/MainWindow.cpp" line="402"/>
-        <location filename="../src/MainWindow.cpp" line="754"/>
+        <location filename="../src/MainWindow.cpp" line="407"/>
+        <location filename="../src/MainWindow.cpp" line="759"/>
         <source>Faces: 0</source>
         <translation>面数: 0</translation>
     </message>
     <message>
-        <location filename="../src/MainWindow.cpp" line="561"/>
-        <location filename="../src/MainWindow.cpp" line="818"/>
+        <location filename="../src/MainWindow.cpp" line="566"/>
+        <location filename="../src/MainWindow.cpp" line="827"/>
         <source>Error</source>
         <translation>错误</translation>
     </message>
     <message>
-        <location filename="../src/MainWindow.cpp" line="653"/>
+        <location filename="../src/MainWindow.cpp" line="658"/>
         <source>Info</source>
         <translation>信息</translation>
     </message>
     <message>
-        <location filename="../src/MainWindow.cpp" line="653"/>
+        <location filename="../src/MainWindow.cpp" line="658"/>
         <source>Cannot delete the root node.</source>
         <translation>无法删除根节点。</translation>
     </message>
     <message>
-        <location filename="../src/MainWindow.cpp" line="731"/>
+        <location filename="../src/MainWindow.cpp" line="736"/>
         <source>Open Model File</source>
         <translation>打开模型文件</translation>
     </message>
     <message>
-        <location filename="../src/MainWindow.cpp" line="770"/>
+        <location filename="../src/MainWindow.cpp" line="775"/>
         <source>Loading...</source>
         <translation>加载中...</translation>
     </message>
     <message>
-        <location filename="../src/MainWindow.cpp" line="784"/>
+        <location filename="../src/MainWindow.cpp" line="793"/>
         <source>Vertices: %1</source>
         <translation>顶点数: %1</translation>
     </message>
     <message>
-        <location filename="../src/MainWindow.cpp" line="785"/>
+        <location filename="../src/MainWindow.cpp" line="794"/>
         <source>Faces: %1</source>
         <translation>面数: %1</translation>
     </message>
     <message>
-        <location filename="../src/MainWindow.cpp" line="806"/>
+        <location filename="../src/MainWindow.cpp" line="815"/>
         <source>Save Screenshot</source>
         <translation>保存截图</translation>
     </message>
     <message>
-        <location filename="../src/MainWindow.cpp" line="807"/>
+        <location filename="../src/MainWindow.cpp" line="816"/>
         <source>PNG Image (*.png);;JPEG Image (*.jpg);;BMP Image (*.bmp)</source>
         <translation>PNG图片 (*.png);;JPEG图片 (*.jpg);;BMP图片 (*.bmp)</translation>
     </message>
     <message>
-        <location filename="../src/MainWindow.cpp" line="814"/>
+        <location filename="../src/MainWindow.cpp" line="823"/>
         <source>Screenshot saved: %1</source>
         <translation>截图已保存: %1</translation>
     </message>
     <message>
-        <location filename="../src/MainWindow.cpp" line="818"/>
+        <location filename="../src/MainWindow.cpp" line="827"/>
         <source>Failed to save screenshot</source>
         <translation>截图保存失败</translation>
     </message>
     <message>
-        <location filename="../src/MainWindow.cpp" line="851"/>
+        <location filename="../src/MainWindow.cpp" line="860"/>
         <source>Universal 3D Model Viewer</source>
         <translation>万能3D模型浏览器</translation>
     </message>
     <message>
-        <location filename="../src/MainWindow.cpp" line="852"/>
+        <location filename="../src/MainWindow.cpp" line="861"/>
         <source>Version</source>
         <translation>版本</translation>
     </message>
     <message>
-        <location filename="../src/MainWindow.cpp" line="853"/>
+        <location filename="../src/MainWindow.cpp" line="862"/>
         <source>A universal 3D model viewer based on Qt, OSG and Assimp.</source>
         <translation>基于Qt、OSG和Assimp的万能3D模型浏览器。</translation>
     </message>
     <message>
-        <location filename="../src/MainWindow.cpp" line="991"/>
+        <location filename="../src/MainWindow.cpp" line="1000"/>
         <source>Node Editor</source>
         <translation>节点编辑器</translation>
     </message>
     <message>
-        <location filename="../src/MainWindow.cpp" line="992"/>
+        <location filename="../src/MainWindow.cpp" line="1001"/>
         <source>Pre-Process Effects</source>
         <translation>前处理特效</translation>
     </message>
     <message>
-        <location filename="../src/MainWindow.cpp" line="1066"/>
+        <location filename="../src/MainWindow.cpp" line="1075"/>
         <source>Theme: %1</source>
         <translation>主题: %1</translation>
     </message>
     <message>
-        <location filename="../src/MainWindow.cpp" line="1125"/>
+        <location filename="../src/MainWindow.cpp" line="1134"/>
         <source>%1 / %2</source>
         <translation>%1 / %2</translation>
     </message>
     <message>
         <location filename="../src/MainWindow.cpp" line="128"/>
-        <location filename="../src/MainWindow.cpp" line="969"/>
+        <location filename="../src/MainWindow.cpp" line="978"/>
         <source>&amp;Recent Files</source>
         <translation>最近文件(&amp;R)</translation>
     </message>
     <message>
         <location filename="../src/MainWindow.cpp" line="130"/>
-        <location filename="../src/MainWindow.cpp" line="970"/>
+        <location filename="../src/MainWindow.cpp" line="979"/>
         <source>Clear Recent</source>
         <translation>清除最近记录</translation>
     </message>
     <message>
-        <location filename="../src/MainWindow.cpp" line="862"/>
+        <location filename="../src/MainWindow.cpp" line="871"/>
         <source>No recent files</source>
         <translation>无最近文件</translation>
     </message>
@@ -913,26 +850,6 @@
         <translation>文件不存在：%1</translation>
     </message>
     <message>
-        <source>Loading model: %1</source>
-        <translation type="vanished">正在加载模型：%1</translation>
-    </message>
-    <message>
-        <source>Trying OSG loader...</source>
-        <translation type="vanished">尝试OSG加载器...</translation>
-    </message>
-    <message>
-        <source>Trying Assimp loader...</source>
-        <translation type="vanished">尝试Assimp加载器...</translation>
-    </message>
-    <message>
-        <source>Trying OSG as fallback...</source>
-        <translation type="vanished">尝试OSG作为后备...</translation>
-    </message>
-    <message>
-        <source>Calculating model info...</source>
-        <translation type="vanished">计算模型信息...</translation>
-    </message>
-    <message>
         <location filename="../src/ModelLoader.cpp" line="97"/>
         <source>Model loaded successfully: %1</source>
         <translation>模型加载成功：%1</translation>
@@ -942,581 +859,652 @@
         <source>Failed to load model: %1</source>
         <translation>模型加载失败：%1</translation>
     </message>
-    <message>
-        <source>All Supported Formats (%1)</source>
-        <translation type="vanished">所有支持的格式 (%1)</translation>
-    </message>
-    <message>
-        <source>OSG Native (*.osg *.osgb *.osgt *.osgx *.ive)</source>
-        <translation type="vanished">OSG原生格式 (*.osg *.osgb *.osgt *.osgx *.ive)</translation>
-    </message>
-    <message>
-        <source>Wavefront OBJ (*.obj)</source>
-        <translation type="vanished">Wavefront OBJ (*.obj)</translation>
-    </message>
-    <message>
-        <source>3D Studio (*.3ds)</source>
-        <translation type="vanished">3D Studio (*.3ds)</translation>
-    </message>
-    <message>
-        <source>COLLADA (*.dae)</source>
-        <translation type="vanished">COLLADA (*.dae)</translation>
-    </message>
-    <message>
-        <source>Autodesk FBX (*.fbx)</source>
-        <translation type="vanished">Autodesk FBX (*.fbx)</translation>
-    </message>
-    <message>
-        <source>glTF (*.gltf *.glb)</source>
-        <translation type="vanished">glTF (*.gltf *.glb)</translation>
-    </message>
-    <message>
-        <source>STL (*.stl)</source>
-        <translation type="vanished">STL (*.stl)</translation>
-    </message>
-    <message>
-        <source>Stanford PLY (*.ply)</source>
-        <translation type="vanished">Stanford PLY (*.ply)</translation>
-    </message>
-    <message>
-        <source>All Files (*)</source>
-        <translation type="vanished">所有文件 (*)</translation>
-    </message>
 </context>
 <context>
     <name>NodeEditorDock</name>
     <message>
-        <location filename="../src/NodeEditorDock.cpp" line="42"/>
+        <location filename="../src/NodeEditorDock.cpp" line="52"/>
         <source>Node Editor</source>
         <translation>节点编辑器</translation>
     </message>
     <message>
-        <location filename="../src/NodeEditorDock.cpp" line="52"/>
+        <location filename="../src/NodeEditorDock.cpp" line="62"/>
         <source>Transform</source>
         <translation>变换</translation>
     </message>
     <message>
-        <location filename="../src/NodeEditorDock.cpp" line="53"/>
+        <location filename="../src/NodeEditorDock.cpp" line="63"/>
         <source>Material</source>
         <translation>材质</translation>
     </message>
     <message>
-        <location filename="../src/NodeEditorDock.cpp" line="54"/>
+        <location filename="../src/NodeEditorDock.cpp" line="64"/>
         <source>Texture</source>
         <translation>纹理</translation>
     </message>
     <message>
-        <location filename="../src/NodeEditorDock.cpp" line="55"/>
+        <location filename="../src/NodeEditorDock.cpp" line="66"/>
         <source>Scene</source>
         <translation>场景</translation>
     </message>
     <message>
-        <source>This node does not support transform editing.
-
-Select a MatrixTransform or PositionAttitudeTransform node.</source>
-        <translation type="vanished">此节点不支持变换编辑。
-
-请选择 MatrixTransform 或 PositionAttitudeTransform 节点。</translation>
-    </message>
-    <message>
-        <location filename="../src/NodeEditorDock.cpp" line="72"/>
+        <location filename="../src/NodeEditorDock.cpp" line="83"/>
         <source>Cannot edit transform of the scene root node.</source>
         <translation>无法编辑场景根节点的变换。</translation>
     </message>
     <message>
-        <location filename="../src/NodeEditorDock.cpp" line="93"/>
+        <location filename="../src/NodeEditorDock.cpp" line="104"/>
         <source>Position</source>
         <translation>位置</translation>
     </message>
     <message>
-        <location filename="../src/NodeEditorDock.cpp" line="102"/>
+        <location filename="../src/NodeEditorDock.cpp" line="113"/>
         <source>Rotation (H/P/R)</source>
         <translation>旋转 (H/P/R)</translation>
     </message>
     <message>
-        <location filename="../src/NodeEditorDock.cpp" line="111"/>
+        <location filename="../src/NodeEditorDock.cpp" line="122"/>
         <source>Scale</source>
         <translation>缩放</translation>
     </message>
     <message>
-        <location filename="../src/NodeEditorDock.cpp" line="113"/>
+        <location filename="../src/NodeEditorDock.cpp" line="124"/>
         <source>Uniform Scale</source>
         <translation>等比缩放</translation>
     </message>
     <message>
-        <location filename="../src/NodeEditorDock.cpp" line="116"/>
+        <location filename="../src/NodeEditorDock.cpp" line="127"/>
         <source>Reset Transform</source>
         <translation>重置变换</translation>
     </message>
     <message>
-        <source>Change Transform</source>
-        <translation type="obsolete">修改变换</translation>
-    </message>
-    <message>
-        <location filename="../src/NodeEditorDock.cpp" line="424"/>
+        <location filename="../src/NodeEditorDock.cpp" line="435"/>
         <source>Enable Material</source>
         <translation>启用材质</translation>
     </message>
     <message>
-        <location filename="../src/NodeEditorDock.cpp" line="436"/>
-        <location filename="../src/NodeEditorDock.cpp" line="440"/>
-        <location filename="../src/NodeEditorDock.cpp" line="444"/>
-        <location filename="../src/NodeEditorDock.cpp" line="448"/>
+        <location filename="../src/NodeEditorDock.cpp" line="447"/>
+        <location filename="../src/NodeEditorDock.cpp" line="451"/>
+        <location filename="../src/NodeEditorDock.cpp" line="455"/>
+        <location filename="../src/NodeEditorDock.cpp" line="459"/>
         <source>Click to Pick</source>
         <translation>点击选择</translation>
     </message>
     <message>
-        <location filename="../src/NodeEditorDock.cpp" line="431"/>
-        <location filename="../src/NodeEditorDock.cpp" line="438"/>
+        <location filename="../src/NodeEditorDock.cpp" line="442"/>
+        <location filename="../src/NodeEditorDock.cpp" line="449"/>
         <source>Ambient</source>
         <translation>环境光</translation>
     </message>
     <message>
-        <location filename="../src/NodeEditorDock.cpp" line="432"/>
-        <location filename="../src/NodeEditorDock.cpp" line="442"/>
+        <location filename="../src/NodeEditorDock.cpp" line="443"/>
+        <location filename="../src/NodeEditorDock.cpp" line="453"/>
         <source>Diffuse</source>
         <translation>漫反射</translation>
     </message>
     <message>
-        <location filename="../src/NodeEditorDock.cpp" line="433"/>
-        <location filename="../src/NodeEditorDock.cpp" line="446"/>
+        <location filename="../src/NodeEditorDock.cpp" line="444"/>
+        <location filename="../src/NodeEditorDock.cpp" line="457"/>
         <source>Specular</source>
         <translation>镜面反射</translation>
     </message>
     <message>
-        <location filename="../src/NodeEditorDock.cpp" line="430"/>
-        <location filename="../src/NodeEditorDock.cpp" line="450"/>
+        <location filename="../src/NodeEditorDock.cpp" line="441"/>
+        <location filename="../src/NodeEditorDock.cpp" line="461"/>
         <source>Emission</source>
         <translation>自发光</translation>
     </message>
     <message>
-        <location filename="../src/NodeEditorDock.cpp" line="456"/>
+        <location filename="../src/NodeEditorDock.cpp" line="467"/>
         <source>Shininess</source>
         <translation>光泽度</translation>
     </message>
     <message>
-        <location filename="../src/NodeEditorDock.cpp" line="468"/>
+        <location filename="../src/NodeEditorDock.cpp" line="479"/>
         <source>Alpha</source>
         <translation>透明度</translation>
     </message>
     <message>
-        <location filename="../src/NodeEditorDock.cpp" line="429"/>
-        <location filename="../src/NodeEditorDock.cpp" line="480"/>
+        <location filename="../src/NodeEditorDock.cpp" line="440"/>
+        <location filename="../src/NodeEditorDock.cpp" line="491"/>
         <source>Off</source>
         <translation>关</translation>
     </message>
     <message>
-        <location filename="../src/NodeEditorDock.cpp" line="392"/>
+        <location filename="../src/NodeEditorDock.cpp" line="65"/>
+        <source>Mesh</source>
+        <translation>网格</translation>
+    </message>
+    <message>
+        <location filename="../src/NodeEditorDock.cpp" line="403"/>
         <source>Material Presets</source>
         <translation>材质预设</translation>
     </message>
     <message>
-        <location filename="../src/NodeEditorDock.cpp" line="397"/>
+        <location filename="../src/NodeEditorDock.cpp" line="408"/>
         <source>None</source>
         <translation>无</translation>
     </message>
     <message>
-        <location filename="../src/NodeEditorDock.cpp" line="398"/>
+        <location filename="../src/NodeEditorDock.cpp" line="409"/>
         <source>Gold</source>
         <translation>金色</translation>
     </message>
     <message>
-        <location filename="../src/NodeEditorDock.cpp" line="399"/>
+        <location filename="../src/NodeEditorDock.cpp" line="410"/>
         <source>Silver</source>
         <translation>银色</translation>
     </message>
     <message>
-        <location filename="../src/NodeEditorDock.cpp" line="400"/>
+        <location filename="../src/NodeEditorDock.cpp" line="411"/>
         <source>Copper</source>
         <translation>铜色</translation>
     </message>
     <message>
-        <location filename="../src/NodeEditorDock.cpp" line="401"/>
+        <location filename="../src/NodeEditorDock.cpp" line="412"/>
         <source>Bronze</source>
         <translation>青铜</translation>
     </message>
     <message>
-        <location filename="../src/NodeEditorDock.cpp" line="402"/>
+        <location filename="../src/NodeEditorDock.cpp" line="413"/>
         <source>Chrome</source>
         <translation>铬色</translation>
     </message>
     <message>
-        <location filename="../src/NodeEditorDock.cpp" line="403"/>
+        <location filename="../src/NodeEditorDock.cpp" line="414"/>
         <source>Ruby</source>
         <translation>红宝石</translation>
     </message>
     <message>
-        <location filename="../src/NodeEditorDock.cpp" line="404"/>
+        <location filename="../src/NodeEditorDock.cpp" line="415"/>
         <source>Emerald</source>
         <translation>祖母绿</translation>
     </message>
     <message>
-        <location filename="../src/NodeEditorDock.cpp" line="405"/>
+        <location filename="../src/NodeEditorDock.cpp" line="416"/>
         <source>Jade</source>
         <translation>翡翠</translation>
     </message>
     <message>
-        <location filename="../src/NodeEditorDock.cpp" line="406"/>
+        <location filename="../src/NodeEditorDock.cpp" line="417"/>
         <source>Glass</source>
         <translation>玻璃</translation>
     </message>
     <message>
-        <location filename="../src/NodeEditorDock.cpp" line="407"/>
+        <location filename="../src/NodeEditorDock.cpp" line="418"/>
         <source>Plastic Red</source>
         <translation>塑料红</translation>
     </message>
     <message>
-        <location filename="../src/NodeEditorDock.cpp" line="408"/>
+        <location filename="../src/NodeEditorDock.cpp" line="419"/>
         <source>Plastic Green</source>
         <translation>塑料绿</translation>
     </message>
     <message>
-        <location filename="../src/NodeEditorDock.cpp" line="409"/>
+        <location filename="../src/NodeEditorDock.cpp" line="420"/>
         <source>Plastic Blue</source>
         <translation>塑料蓝</translation>
     </message>
     <message>
-        <location filename="../src/NodeEditorDock.cpp" line="410"/>
+        <location filename="../src/NodeEditorDock.cpp" line="421"/>
         <source>Plastic White</source>
         <translation>塑料白</translation>
     </message>
     <message>
-        <location filename="../src/NodeEditorDock.cpp" line="411"/>
+        <location filename="../src/NodeEditorDock.cpp" line="422"/>
         <source>Rubber Black</source>
         <translation>橡胶黑</translation>
     </message>
     <message>
-        <location filename="../src/NodeEditorDock.cpp" line="412"/>
+        <location filename="../src/NodeEditorDock.cpp" line="423"/>
         <source>Rubber Red</source>
         <translation>橡胶红</translation>
     </message>
     <message>
-        <location filename="../src/NodeEditorDock.cpp" line="413"/>
+        <location filename="../src/NodeEditorDock.cpp" line="424"/>
         <source>Ceramic</source>
         <translation>陶瓷</translation>
     </message>
     <message>
-        <location filename="../src/NodeEditorDock.cpp" line="414"/>
+        <location filename="../src/NodeEditorDock.cpp" line="425"/>
         <source>Preset</source>
         <translation>预设</translation>
     </message>
     <message>
-        <location filename="../src/NodeEditorDock.cpp" line="420"/>
+        <location filename="../src/NodeEditorDock.cpp" line="431"/>
         <source>Material Properties</source>
         <translation>材质属性</translation>
     </message>
     <message>
-        <location filename="../src/NodeEditorDock.cpp" line="428"/>
+        <location filename="../src/NodeEditorDock.cpp" line="439"/>
         <source>Ambient and Diffuse</source>
         <translation>环境光与漫反射</translation>
     </message>
     <message>
-        <location filename="../src/NodeEditorDock.cpp" line="434"/>
+        <location filename="../src/NodeEditorDock.cpp" line="445"/>
         <source>Color Mode</source>
         <translation>颜色模式</translation>
     </message>
     <message>
-        <location filename="../src/NodeEditorDock.cpp" line="475"/>
+        <location filename="../src/NodeEditorDock.cpp" line="486"/>
         <source>Transparency</source>
         <translation>透明</translation>
     </message>
     <message>
-        <location filename="../src/NodeEditorDock.cpp" line="481"/>
+        <location filename="../src/NodeEditorDock.cpp" line="492"/>
         <source>Standard Alpha</source>
         <translation>标准透明</translation>
     </message>
     <message>
-        <location filename="../src/NodeEditorDock.cpp" line="482"/>
+        <location filename="../src/NodeEditorDock.cpp" line="493"/>
         <source>Additive</source>
         <translation>叠加</translation>
     </message>
     <message>
-        <location filename="../src/NodeEditorDock.cpp" line="483"/>
+        <location filename="../src/NodeEditorDock.cpp" line="494"/>
         <source>Blend Mode</source>
         <translation>混合模式</translation>
     </message>
     <message>
-        <source>Two-Sided Lighting</source>
-        <translation type="vanished">双面光照</translation>
-    </message>
-    <message>
-        <location filename="../src/NodeEditorDock.cpp" line="485"/>
+        <location filename="../src/NodeEditorDock.cpp" line="496"/>
         <source>Depth Write</source>
         <translation>深度写入</translation>
     </message>
     <message>
-        <location filename="../src/NodeEditorDock.cpp" line="494"/>
+        <location filename="../src/NodeEditorDock.cpp" line="505"/>
         <source>Rendering Options</source>
         <translation>渲染选项</translation>
     </message>
     <message>
-        <location filename="../src/NodeEditorDock.cpp" line="499"/>
+        <location filename="../src/NodeEditorDock.cpp" line="510"/>
         <source>Back</source>
         <translation>背面</translation>
     </message>
     <message>
-        <location filename="../src/NodeEditorDock.cpp" line="500"/>
+        <location filename="../src/NodeEditorDock.cpp" line="511"/>
         <source>Off (Two-Sided)</source>
         <translation>关闭（双面）</translation>
     </message>
     <message>
-        <location filename="../src/NodeEditorDock.cpp" line="501"/>
+        <location filename="../src/NodeEditorDock.cpp" line="512"/>
         <source>Front</source>
         <translation>正面</translation>
     </message>
     <message>
-        <location filename="../src/NodeEditorDock.cpp" line="502"/>
+        <location filename="../src/NodeEditorDock.cpp" line="513"/>
         <source>Front and Back</source>
         <translation>正面和背面</translation>
     </message>
     <message>
-        <location filename="../src/NodeEditorDock.cpp" line="503"/>
+        <location filename="../src/NodeEditorDock.cpp" line="514"/>
         <source>Cull Face</source>
         <translation>裁剪面</translation>
     </message>
     <message>
-        <location filename="../src/NodeEditorDock.cpp" line="506"/>
+        <location filename="../src/NodeEditorDock.cpp" line="517"/>
         <source>Smooth</source>
         <translation>平滑</translation>
     </message>
     <message>
-        <location filename="../src/NodeEditorDock.cpp" line="507"/>
+        <location filename="../src/NodeEditorDock.cpp" line="518"/>
         <source>Flat</source>
         <translation>平面</translation>
     </message>
     <message>
-        <location filename="../src/NodeEditorDock.cpp" line="508"/>
+        <location filename="../src/NodeEditorDock.cpp" line="519"/>
         <source>Shade Model</source>
         <translation>着色模型</translation>
     </message>
     <message>
-        <location filename="../src/NodeEditorDock.cpp" line="511"/>
+        <location filename="../src/NodeEditorDock.cpp" line="522"/>
         <source>Fill</source>
         <translation>填充</translation>
     </message>
     <message>
-        <location filename="../src/NodeEditorDock.cpp" line="512"/>
+        <location filename="../src/NodeEditorDock.cpp" line="523"/>
         <source>Wireframe</source>
         <translation>线框</translation>
     </message>
     <message>
-        <location filename="../src/NodeEditorDock.cpp" line="513"/>
+        <location filename="../src/NodeEditorDock.cpp" line="524"/>
         <source>Point</source>
         <translation>点</translation>
     </message>
     <message>
-        <location filename="../src/NodeEditorDock.cpp" line="514"/>
+        <location filename="../src/NodeEditorDock.cpp" line="525"/>
         <source>Polygon Mode</source>
         <translation>多边形模式</translation>
     </message>
     <message>
-        <location filename="../src/NodeEditorDock.cpp" line="521"/>
+        <location filename="../src/NodeEditorDock.cpp" line="532"/>
         <source>Line Width</source>
         <translation>线宽</translation>
     </message>
     <message>
-        <location filename="../src/NodeEditorDock.cpp" line="528"/>
+        <location filename="../src/NodeEditorDock.cpp" line="539"/>
         <source>Point Size</source>
         <translation>点大小</translation>
     </message>
     <message>
-        <location filename="../src/NodeEditorDock.cpp" line="541"/>
+        <location filename="../src/NodeEditorDock.cpp" line="552"/>
         <source>F:</source>
         <translation>F:</translation>
     </message>
     <message>
-        <location filename="../src/NodeEditorDock.cpp" line="543"/>
+        <location filename="../src/NodeEditorDock.cpp" line="554"/>
         <source>U:</source>
         <translation>U:</translation>
     </message>
     <message>
-        <location filename="../src/NodeEditorDock.cpp" line="545"/>
+        <location filename="../src/NodeEditorDock.cpp" line="556"/>
         <source>Polygon Offset</source>
         <translation>多边形偏移</translation>
     </message>
     <message>
-        <location filename="../src/NodeEditorDock.cpp" line="866"/>
+        <location filename="../src/NodeEditorDock.cpp" line="877"/>
         <source>Select Color</source>
         <translation>选择颜色</translation>
     </message>
     <message>
-        <location filename="../src/NodeEditorDock.cpp" line="883"/>
+        <location filename="../src/NodeEditorDock.cpp" line="894"/>
         <source>Change Material</source>
         <translation>修改材质</translation>
     </message>
     <message>
-        <location filename="../src/NodeEditorDock.cpp" line="1127"/>
+        <location filename="../src/NodeEditorDock.cpp" line="1138"/>
         <source>Enable Texture</source>
         <translation>启用纹理</translation>
     </message>
     <message>
-        <location filename="../src/NodeEditorDock.cpp" line="1134"/>
+        <location filename="../src/NodeEditorDock.cpp" line="1145"/>
         <source>Browse...</source>
         <translation>浏览...</translation>
     </message>
     <message>
-        <location filename="../src/NodeEditorDock.cpp" line="1137"/>
+        <location filename="../src/NodeEditorDock.cpp" line="1148"/>
         <source>Texture File</source>
         <translation>纹理文件</translation>
     </message>
     <message>
-        <location filename="../src/NodeEditorDock.cpp" line="1144"/>
-        <location filename="../src/NodeEditorDock.cpp" line="1283"/>
+        <location filename="../src/NodeEditorDock.cpp" line="1155"/>
+        <location filename="../src/NodeEditorDock.cpp" line="1604"/>
         <source>No Texture</source>
         <translation>无纹理</translation>
     </message>
     <message>
-        <location filename="../src/NodeEditorDock.cpp" line="1145"/>
+        <location filename="../src/NodeEditorDock.cpp" line="1156"/>
         <source>Preview</source>
         <translation>预览</translation>
     </message>
     <message>
-        <location filename="../src/NodeEditorDock.cpp" line="1149"/>
-        <location filename="../src/NodeEditorDock.cpp" line="1155"/>
+        <location filename="../src/NodeEditorDock.cpp" line="1160"/>
+        <location filename="../src/NodeEditorDock.cpp" line="1166"/>
         <source>Repeat</source>
         <translation>重复</translation>
     </message>
     <message>
-        <location filename="../src/NodeEditorDock.cpp" line="1150"/>
-        <location filename="../src/NodeEditorDock.cpp" line="1156"/>
+        <location filename="../src/NodeEditorDock.cpp" line="1161"/>
+        <location filename="../src/NodeEditorDock.cpp" line="1167"/>
         <source>Clamp to Edge</source>
         <translation>边缘夹紧</translation>
     </message>
     <message>
-        <location filename="../src/NodeEditorDock.cpp" line="1151"/>
-        <location filename="../src/NodeEditorDock.cpp" line="1157"/>
+        <location filename="../src/NodeEditorDock.cpp" line="1162"/>
+        <location filename="../src/NodeEditorDock.cpp" line="1168"/>
         <source>Mirror Repeat</source>
         <translation>镜像重复</translation>
     </message>
     <message>
-        <location filename="../src/NodeEditorDock.cpp" line="1152"/>
+        <location filename="../src/NodeEditorDock.cpp" line="1163"/>
         <source>Wrap S</source>
         <translation>S方向包裹</translation>
     </message>
     <message>
-        <location filename="../src/NodeEditorDock.cpp" line="1158"/>
+        <location filename="../src/NodeEditorDock.cpp" line="1169"/>
         <source>Wrap T</source>
         <translation>T方向包裹</translation>
     </message>
     <message>
-        <location filename="../src/NodeEditorDock.cpp" line="1162"/>
+        <location filename="../src/NodeEditorDock.cpp" line="1173"/>
         <source>Nearest</source>
         <translation>最近</translation>
     </message>
     <message>
-        <location filename="../src/NodeEditorDock.cpp" line="1163"/>
+        <location filename="../src/NodeEditorDock.cpp" line="1174"/>
         <source>Linear</source>
         <translation>线性</translation>
     </message>
     <message>
-        <location filename="../src/NodeEditorDock.cpp" line="1164"/>
+        <location filename="../src/NodeEditorDock.cpp" line="1175"/>
         <source>MipMap (Trilinear)</source>
         <translation>MipMap（三线性）</translation>
     </message>
     <message>
-        <location filename="../src/NodeEditorDock.cpp" line="1165"/>
+        <location filename="../src/NodeEditorDock.cpp" line="1176"/>
         <source>Filter</source>
         <translation>过滤</translation>
     </message>
     <message>
-        <location filename="../src/NodeEditorDock.cpp" line="1167"/>
+        <location filename="../src/NodeEditorDock.cpp" line="1186"/>
+        <source>U: </source>
+        <translation>U：</translation>
+    </message>
+    <message>
+        <location filename="../src/NodeEditorDock.cpp" line="1192"/>
+        <source>V: </source>
+        <translation>V：</translation>
+    </message>
+    <message>
+        <location filename="../src/NodeEditorDock.cpp" line="1195"/>
+        <source>UV Scale</source>
+        <translation>UV 缩放</translation>
+    </message>
+    <message>
+        <location filename="../src/NodeEditorDock.cpp" line="1206"/>
         <source>Remove Texture</source>
         <translation>移除纹理</translation>
     </message>
     <message>
-        <location filename="../src/NodeEditorDock.cpp" line="1272"/>
+        <location filename="../src/NodeEditorDock.cpp" line="1452"/>
+        <source>No UV coordinates on the target geometry (scanned %1). UV scaling has no effect until the model is unwrapped.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/NodeEditorDock.cpp" line="1466"/>
+        <source>Model has no native UV on %1 geometry; planar UVs were auto-generated. Scaling may look stretched on non-planar shapes.</source>
+        <translation>模型在 %1 个几何体上没有原生 UV，已自动生成平面 UV。非平面形状上可能出现拉伸。</translation>
+    </message>
+    <message>
+        <location filename="../src/NodeEditorDock.cpp" line="1593"/>
         <source>Preview N/A</source>
         <translation>预览不可用</translation>
     </message>
     <message>
-        <location filename="../src/NodeEditorDock.cpp" line="1276"/>
+        <location filename="../src/NodeEditorDock.cpp" line="1597"/>
         <source>No Preview</source>
         <translation>无预览</translation>
     </message>
     <message>
-        <location filename="../src/NodeEditorDock.cpp" line="1298"/>
+        <location filename="../src/NodeEditorDock.cpp" line="1621"/>
         <source>Image Files (*.png *.jpg *.jpeg *.bmp *.tga *.tiff *.tif *.gif *.psd);;All Files (*)</source>
         <translation>图片文件 (*.png *.jpg *.jpeg *.bmp *.tga *.tiff *.tif *.gif *.psd);;所有文件 (*)</translation>
     </message>
     <message>
-        <location filename="../src/NodeEditorDock.cpp" line="1299"/>
+        <location filename="../src/NodeEditorDock.cpp" line="1622"/>
         <source>Select Texture</source>
         <translation>选择纹理</translation>
     </message>
     <message>
-        <location filename="../src/NodeEditorDock.cpp" line="1324"/>
+        <location filename="../src/NodeEditorDock.cpp" line="1647"/>
         <source>Error</source>
         <translation>错误</translation>
     </message>
     <message>
-        <location filename="../src/NodeEditorDock.cpp" line="1324"/>
+        <location filename="../src/NodeEditorDock.cpp" line="1647"/>
         <source>Failed to load texture: %1</source>
         <translation>纹理加载失败：%1</translation>
     </message>
     <message>
-        <location filename="../src/NodeEditorDock.cpp" line="1420"/>
+        <location filename="../src/NodeEditorDock.cpp" line="1749"/>
         <source>Light Settings</source>
         <translation>光照设置</translation>
     </message>
     <message>
-        <location filename="../src/NodeEditorDock.cpp" line="1423"/>
+        <location filename="../src/NodeEditorDock.cpp" line="1752"/>
         <source>Enable Lighting</source>
         <translation>启用光照</translation>
     </message>
     <message>
-        <location filename="../src/NodeEditorDock.cpp" line="1431"/>
+        <location filename="../src/NodeEditorDock.cpp" line="1760"/>
         <source>Two-sided Lighting</source>
         <translation>双面光照</translation>
     </message>
     <message>
-        <location filename="../src/NodeEditorDock.cpp" line="1447"/>
+        <location filename="../src/NodeEditorDock.cpp" line="1776"/>
         <source>Select Ambient Color</source>
         <translation>选择环境光颜色</translation>
     </message>
     <message>
-        <location filename="../src/NodeEditorDock.cpp" line="1454"/>
+        <location filename="../src/NodeEditorDock.cpp" line="1783"/>
         <source>Ambient:</source>
         <translation>环境光：</translation>
     </message>
     <message>
-        <location filename="../src/NodeEditorDock.cpp" line="1461"/>
+        <location filename="../src/NodeEditorDock.cpp" line="1790"/>
         <source>Select Diffuse Color</source>
         <translation>选择漫反射颜色</translation>
     </message>
     <message>
-        <location filename="../src/NodeEditorDock.cpp" line="1468"/>
+        <location filename="../src/NodeEditorDock.cpp" line="1797"/>
         <source>Diffuse:</source>
         <translation>漫反射：</translation>
     </message>
     <message>
-        <location filename="../src/NodeEditorDock.cpp" line="1475"/>
+        <location filename="../src/NodeEditorDock.cpp" line="1804"/>
         <source>Select Specular Color</source>
         <translation>选择镜面反射颜色</translation>
     </message>
     <message>
-        <location filename="../src/NodeEditorDock.cpp" line="1482"/>
+        <location filename="../src/NodeEditorDock.cpp" line="1811"/>
         <source>Specular:</source>
         <translation>镜面反射：</translation>
     </message>
     <message>
-        <location filename="../src/NodeEditorDock.cpp" line="1487"/>
+        <location filename="../src/NodeEditorDock.cpp" line="1816"/>
         <source>Light Position</source>
         <translation>光源位置</translation>
     </message>
     <message>
-        <location filename="../src/NodeEditorDock.cpp" line="1514"/>
+        <location filename="../src/NodeEditorDock.cpp" line="1843"/>
         <source>Background</source>
         <translation>背景</translation>
     </message>
     <message>
-        <location filename="../src/NodeEditorDock.cpp" line="1521"/>
+        <location filename="../src/NodeEditorDock.cpp" line="1850"/>
         <source>Select Background Color</source>
         <translation>选择背景颜色</translation>
     </message>
     <message>
-        <location filename="../src/NodeEditorDock.cpp" line="1528"/>
+        <location filename="../src/NodeEditorDock.cpp" line="1857"/>
         <source>Color:</source>
         <translation>颜色：</translation>
+    </message>
+    <message>
+        <location filename="../src/NodeEditorDock.cpp" line="2057"/>
+        <source>Mesh Statistics</source>
+        <translation>网格统计</translation>
+    </message>
+    <message>
+        <location filename="../src/NodeEditorDock.cpp" line="2059"/>
+        <location filename="../src/NodeEditorDock.cpp" line="2138"/>
+        <source>No node selected</source>
+        <translation>未选中节点</translation>
+    </message>
+    <message>
+        <location filename="../src/NodeEditorDock.cpp" line="2065"/>
+        <location filename="../src/NodeEditorDock.cpp" line="2179"/>
+        <location filename="../src/NodeEditorDock.cpp" line="2187"/>
+        <location filename="../src/NodeEditorDock.cpp" line="2243"/>
+        <source>Simplify</source>
+        <translation>简化</translation>
+    </message>
+    <message>
+        <location filename="../src/NodeEditorDock.cpp" line="2081"/>
+        <source>Target Ratio</source>
+        <translation>目标比例</translation>
+    </message>
+    <message>
+        <location filename="../src/NodeEditorDock.cpp" line="2084"/>
+        <location filename="../src/NodeEditorDock.cpp" line="2160"/>
+        <source>Target: -</source>
+        <translation>目标：-</translation>
+    </message>
+    <message>
+        <location filename="../src/NodeEditorDock.cpp" line="2168"/>
+        <source>Target: ~%1 vertices, ~%2 triangles (%3%)</source>
+        <translation>目标：约 %1 顶点，约 %2 三角面（%3%）</translation>
+    </message>
+    <message>
+        <location filename="../src/NodeEditorDock.cpp" line="2179"/>
+        <source>Ratio is 100%, nothing to simplify.</source>
+        <translation>比例为 100%，无需简化。</translation>
+    </message>
+    <message>
+        <location filename="../src/NodeEditorDock.cpp" line="2320"/>
+        <source>Processed %1 geometry, welded %2 (vertices: %3 → %4).</source>
+        <translation>已处理 %1 个几何体，焊接顶点 %2 个（顶点数：%3 → %4）。</translation>
+    </message>
+    <message>
+        <location filename="../src/NodeEditorDock.cpp" line="2089"/>
+        <source>Recompute smooth normals after simplify</source>
+        <translation>简化后重新计算平滑法线</translation>
+    </message>
+    <message>
+        <location filename="../src/NodeEditorDock.cpp" line="2093"/>
+        <source>Apply Simplify</source>
+        <translation>应用简化</translation>
+    </message>
+    <message>
+        <location filename="../src/NodeEditorDock.cpp" line="2099"/>
+        <source>Normals</source>
+        <translation>法线</translation>
+    </message>
+    <message>
+        <location filename="../src/NodeEditorDock.cpp" line="2101"/>
+        <source>Recompute smooth per-vertex normals to fix shading artifacts.</source>
+        <translation>重新计算逐顶点的平滑法线，用于修复渲染异常。</translation>
+    </message>
+    <message>
+        <location filename="../src/NodeEditorDock.cpp" line="2105"/>
+        <location filename="../src/NodeEditorDock.cpp" line="2261"/>
+        <location filename="../src/NodeEditorDock.cpp" line="2311"/>
+        <location filename="../src/NodeEditorDock.cpp" line="2315"/>
+        <location filename="../src/NodeEditorDock.cpp" line="2319"/>
+        <source>Recompute Normals</source>
+        <translation>重算法线</translation>
+    </message>
+    <message>
+        <location filename="../src/NodeEditorDock.cpp" line="2149"/>
+        <source>Vertices: %1
+Triangles: %2</source>
+        <translation>顶点数：%1
+三角面数：%2</translation>
+    </message>
+    <message>
+        <location filename="../src/NodeEditorDock.cpp" line="2187"/>
+        <location filename="../src/NodeEditorDock.cpp" line="2261"/>
+        <source>Selected node contains no geometry.</source>
+        <translation>所选节点不包含几何体。</translation>
+    </message>
+    <message>
+        <location filename="../src/NodeEditorDock.cpp" line="2243"/>
+        <source>No geometry available to simplify.</source>
+        <translation>没有可简化的几何体。</translation>
+    </message>
+    <message>
+        <location filename="../src/NodeEditorDock.cpp" line="2311"/>
+        <source>No geometry available to process.</source>
+        <translation>没有可处理的几何体。</translation>
     </message>
 </context>
 <context>
@@ -1889,10 +1877,6 @@ Select a MatrixTransform or PositionAttitudeTransform node.</source>
         <translation>炸开</translation>
     </message>
     <message>
-        <source>Randomness</source>
-        <translation type="vanished">随机度</translation>
-    </message>
-    <message>
         <location filename="../src/PreProcessDock.cpp" line="220"/>
         <source>Visualization</source>
         <translation>可视化诊断</translation>
@@ -2051,55 +2035,60 @@ Select a MatrixTransform or PositionAttitudeTransform node.</source>
         <translation>所有文件 (*)</translation>
     </message>
     <message>
-        <location filename="../src/EditCommand.h" line="26"/>
-        <location filename="../src/EditCommand.h" line="63"/>
+        <location filename="../src/EditCommand.h" line="29"/>
+        <location filename="../src/EditCommand.h" line="66"/>
         <source>Change Transform</source>
         <translation>修改变换</translation>
     </message>
     <message>
-        <location filename="../src/EditCommand.h" line="110"/>
+        <location filename="../src/EditCommand.h" line="113"/>
         <source>Change %1 Color</source>
         <translation>修改%1颜色</translation>
     </message>
     <message>
-        <location filename="../src/EditCommand.h" line="162"/>
+        <location filename="../src/EditCommand.h" line="165"/>
         <source>Change Texture</source>
         <translation>修改纹理</translation>
     </message>
     <message>
-        <location filename="../src/EditCommand.h" line="162"/>
+        <location filename="../src/EditCommand.h" line="165"/>
         <source>Remove Texture</source>
         <translation>移除纹理</translation>
     </message>
     <message>
-        <location filename="../src/EditCommand.h" line="207"/>
+        <location filename="../src/EditCommand.h" line="210"/>
         <source>Show Node</source>
         <translation>显示节点</translation>
     </message>
     <message>
-        <location filename="../src/EditCommand.h" line="207"/>
+        <location filename="../src/EditCommand.h" line="210"/>
         <source>Hide Node</source>
         <translation>隐藏节点</translation>
     </message>
     <message>
-        <location filename="../src/EditCommand.h" line="253"/>
+        <location filename="../src/EditCommand.h" line="256"/>
         <source>Wrap with Transform</source>
         <translation>包装为变换节点</translation>
     </message>
     <message>
-        <location filename="../src/EditCommand.h" line="310"/>
+        <location filename="../src/EditCommand.h" line="313"/>
         <source>Delete Node</source>
         <translation>删除节点</translation>
     </message>
     <message>
-        <location filename="../src/EditCommand.h" line="346"/>
+        <location filename="../src/EditCommand.h" line="349"/>
         <source>Duplicate Node</source>
         <translation>复制节点</translation>
     </message>
     <message>
-        <location filename="../src/EditCommand.h" line="435"/>
+        <location filename="../src/EditCommand.h" line="438"/>
         <source>Change Texture Wrap/Filter</source>
         <translation>修改纹理包裹/过滤</translation>
+    </message>
+    <message>
+        <location filename="../src/EditCommand.h" line="486"/>
+        <source>Simplify Mesh (%1%)</source>
+        <translation>简化网格 (%1%)</translation>
     </message>
 </context>
 <context>

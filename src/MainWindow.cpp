@@ -169,11 +169,13 @@ void MainWindow::setupMenuBar()
     m_undoAction = m_undoStack->createUndoAction(this, tr("&Undo"));
     m_undoAction->setShortcut(QKeySequence::Undo);
     m_undoAction->setStatusTip(tr("Undo last edit"));
+    m_undoAction->setIcon(QIcon(":/icons/undo.svg"));
     m_editMenu->addAction(m_undoAction);
 
     m_redoAction = m_undoStack->createRedoAction(this, tr("&Redo"));
     m_redoAction->setShortcut(QKeySequence::Redo);
     m_redoAction->setStatusTip(tr("Redo last undone edit"));
+    m_redoAction->setIcon(QIcon(":/icons/redo.svg"));
     m_editMenu->addAction(m_redoAction);
 
     m_editMenu->addSeparator();
@@ -381,6 +383,9 @@ void MainWindow::setupToolBar()
     toolBar->addAction(m_nextFileAction);
     toolBar->addSeparator();
     toolBar->addAction(m_resetViewAction);
+    toolBar->addSeparator();
+    toolBar->addAction(m_undoAction);
+    toolBar->addAction(m_redoAction);
     toolBar->addSeparator();
     toolBar->addAction(m_solidAction);
     toolBar->addAction(m_wireframeAction);
@@ -777,6 +782,10 @@ void MainWindow::loadModel(const QString& filePath)
     if (node)
     {
         m_osgWidget->setSceneData(node);
+
+        // Refresh node editor so node-level tabs become available, falling back
+        // to the scene root when no explicit selection is made.
+        m_nodeEditorDock->setNode(nullptr);
 
         // Update info
         ModelInfo info = m_modelLoader->getModelInfo();
