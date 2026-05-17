@@ -4,6 +4,7 @@
 #include "ModelInfoDock.h"
 #include "SceneTreeDock.h"
 #include "NodeEditorDock.h"
+#include "PreProcessDock.h"
 #include "EditCommand.h"
 #include "I18nManager.h"
 #include "WelcomeWidget.h"
@@ -107,9 +108,9 @@ void MainWindow::setupUI()
     m_modelConverter = new ModelConverter(this);
 
     setupMenuBar();
-    setupToolBar();
     setupStatusBar();
     setupDockWidgets();
+    setupToolBar();
     setupConnections();
 }
 
@@ -252,6 +253,7 @@ void MainWindow::setupMenuBar()
     m_toolsMenu->addAction(m_screenshotAction);
 
     m_batchConvertAction = new QAction(tr("Batch Convert..."), this);
+    m_batchConvertAction->setIcon(QIcon(":/icons/batch-convert.svg"));
     m_batchConvertAction->setStatusTip(tr("Convert models between different formats"));
     m_toolsMenu->addAction(m_batchConvertAction);
 
@@ -387,6 +389,9 @@ void MainWindow::setupToolBar()
     toolBar->addSeparator();
     toolBar->addAction(m_screenshotAction);
     toolBar->addAction(m_fullScreenAction);
+    toolBar->addSeparator();
+    toolBar->addAction(m_batchConvertAction);
+    toolBar->addAction(m_preProcessDock->toggleViewAction());
 }
 
 void MainWindow::setupStatusBar()
@@ -445,6 +450,17 @@ void MainWindow::setupDockWidgets()
     m_nodeEditorDock->setAllowedAreas(Qt::LeftDockWidgetArea | Qt::RightDockWidgetArea);
     tabifyDockWidget(m_modelInfoDock, m_nodeEditorDock);
     m_viewMenu->addAction(m_nodeEditorDock->toggleViewAction());
+
+    // Pre-Process Effects dock - tabify with Node Editor
+    m_preProcessDock = new PreProcessDock(m_osgWidget->preProcessManager(), m_osgWidget, this);
+    m_preProcessDock->setAllowedAreas(Qt::LeftDockWidgetArea | Qt::RightDockWidgetArea);
+    m_preProcessDock->setWindowIcon(QIcon(":/icons/pre-process.svg"));
+    tabifyDockWidget(m_nodeEditorDock, m_preProcessDock);
+    {
+        QAction* act = m_preProcessDock->toggleViewAction();
+        act->setIcon(QIcon(":/icons/pre-process.svg"));
+        m_viewMenu->addAction(act);
+    }
 
     m_modelInfoDock->raise();
 }
@@ -972,6 +988,8 @@ void MainWindow::changeEvent(QEvent* event)
         // Retranslate dock widgets
         m_modelInfoDock->setWindowTitle(tr("Model Info"));
         m_sceneTreeDock->setWindowTitle(tr("Scene Tree"));
+        if (m_nodeEditorDock) m_nodeEditorDock->setWindowTitle(tr("Node Editor"));
+        if (m_preProcessDock) m_preProcessDock->setWindowTitle(tr("Pre-Process Effects"));
 
         // Update recent files menu
         updateRecentFiles();

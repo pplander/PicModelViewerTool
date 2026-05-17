@@ -194,120 +194,120 @@
 <context>
     <name>MainWindow</name>
     <message>
-        <location filename="../src/MainWindow.cpp" line="119"/>
-        <location filename="../src/MainWindow.cpp" line="928"/>
+        <location filename="../src/MainWindow.cpp" line="120"/>
+        <location filename="../src/MainWindow.cpp" line="944"/>
         <source>&amp;File</source>
         <translation>&amp;File</translation>
     </message>
     <message>
-        <location filename="../src/MainWindow.cpp" line="196"/>
-        <location filename="../src/MainWindow.cpp" line="929"/>
+        <location filename="../src/MainWindow.cpp" line="197"/>
+        <location filename="../src/MainWindow.cpp" line="945"/>
         <source>&amp;View</source>
         <translation>&amp;View</translation>
     </message>
     <message>
-        <location filename="../src/MainWindow.cpp" line="246"/>
-        <location filename="../src/MainWindow.cpp" line="930"/>
+        <location filename="../src/MainWindow.cpp" line="247"/>
+        <location filename="../src/MainWindow.cpp" line="946"/>
         <source>&amp;Tools</source>
         <translation>&amp;Tools</translation>
     </message>
     <message>
-        <location filename="../src/MainWindow.cpp" line="317"/>
-        <location filename="../src/MainWindow.cpp" line="931"/>
+        <location filename="../src/MainWindow.cpp" line="319"/>
+        <location filename="../src/MainWindow.cpp" line="947"/>
         <source>&amp;Language</source>
         <translation>&amp;Language</translation>
     </message>
     <message>
-        <location filename="../src/MainWindow.cpp" line="359"/>
-        <location filename="../src/MainWindow.cpp" line="932"/>
+        <location filename="../src/MainWindow.cpp" line="361"/>
+        <location filename="../src/MainWindow.cpp" line="948"/>
         <source>&amp;Help</source>
         <translation>&amp;Help</translation>
     </message>
     <message>
-        <location filename="../src/MainWindow.cpp" line="121"/>
-        <location filename="../src/MainWindow.cpp" line="935"/>
+        <location filename="../src/MainWindow.cpp" line="122"/>
+        <location filename="../src/MainWindow.cpp" line="951"/>
         <source>&amp;Open...</source>
         <translation>&amp;Open...</translation>
     </message>
     <message>
-        <location filename="../src/MainWindow.cpp" line="124"/>
-        <location filename="../src/MainWindow.cpp" line="936"/>
+        <location filename="../src/MainWindow.cpp" line="125"/>
+        <location filename="../src/MainWindow.cpp" line="952"/>
         <source>Open a model file</source>
         <translation>Open a model file</translation>
     </message>
     <message>
-        <location filename="../src/MainWindow.cpp" line="150"/>
-        <location filename="../src/MainWindow.cpp" line="941"/>
+        <location filename="../src/MainWindow.cpp" line="151"/>
+        <location filename="../src/MainWindow.cpp" line="957"/>
         <source>&amp;Close</source>
         <translation>&amp;Close</translation>
     </message>
     <message>
-        <location filename="../src/MainWindow.cpp" line="153"/>
-        <location filename="../src/MainWindow.cpp" line="942"/>
+        <location filename="../src/MainWindow.cpp" line="154"/>
+        <location filename="../src/MainWindow.cpp" line="958"/>
         <source>Close current model</source>
         <translation>Close current model</translation>
     </message>
     <message>
-        <location filename="../src/MainWindow.cpp" line="158"/>
-        <location filename="../src/MainWindow.cpp" line="943"/>
+        <location filename="../src/MainWindow.cpp" line="159"/>
+        <location filename="../src/MainWindow.cpp" line="959"/>
         <source>E&amp;xit</source>
         <translation>E&amp;xit</translation>
     </message>
     <message>
-        <location filename="../src/MainWindow.cpp" line="161"/>
-        <location filename="../src/MainWindow.cpp" line="944"/>
+        <location filename="../src/MainWindow.cpp" line="162"/>
+        <location filename="../src/MainWindow.cpp" line="960"/>
         <source>Exit application</source>
         <translation>Exit application</translation>
     </message>
     <message>
-        <location filename="../src/MainWindow.cpp" line="198"/>
-        <location filename="../src/MainWindow.cpp" line="945"/>
+        <location filename="../src/MainWindow.cpp" line="199"/>
+        <location filename="../src/MainWindow.cpp" line="961"/>
         <source>Reset View</source>
         <translation>Reset View</translation>
     </message>
     <message>
-        <location filename="../src/MainWindow.cpp" line="201"/>
-        <location filename="../src/MainWindow.cpp" line="946"/>
+        <location filename="../src/MainWindow.cpp" line="202"/>
+        <location filename="../src/MainWindow.cpp" line="962"/>
         <source>Reset camera to default position</source>
         <translation>Reset camera to default position</translation>
     </message>
     <message>
-        <location filename="../src/MainWindow.cpp" line="208"/>
-        <location filename="../src/MainWindow.cpp" line="957"/>
+        <location filename="../src/MainWindow.cpp" line="209"/>
+        <location filename="../src/MainWindow.cpp" line="973"/>
         <source>Solid</source>
         <translation>Solid</translation>
     </message>
     <message>
-        <location filename="../src/MainWindow.cpp" line="215"/>
-        <location filename="../src/MainWindow.cpp" line="958"/>
+        <location filename="../src/MainWindow.cpp" line="216"/>
+        <location filename="../src/MainWindow.cpp" line="974"/>
         <source>Wireframe</source>
         <translation>Wireframe</translation>
     </message>
     <message>
-        <location filename="../src/MainWindow.cpp" line="221"/>
-        <location filename="../src/MainWindow.cpp" line="959"/>
+        <location filename="../src/MainWindow.cpp" line="222"/>
+        <location filename="../src/MainWindow.cpp" line="975"/>
         <source>Points</source>
         <translation>Points</translation>
     </message>
     <message>
-        <location filename="../src/MainWindow.cpp" line="227"/>
-        <location filename="../src/MainWindow.cpp" line="960"/>
+        <location filename="../src/MainWindow.cpp" line="228"/>
+        <location filename="../src/MainWindow.cpp" line="976"/>
         <source>Solid + Wireframe</source>
         <translation>Solid + Wireframe</translation>
     </message>
     <message>
-        <location filename="../src/MainWindow.cpp" line="204"/>
-        <location filename="../src/MainWindow.cpp" line="955"/>
+        <location filename="../src/MainWindow.cpp" line="205"/>
+        <location filename="../src/MainWindow.cpp" line="971"/>
         <source>Display Mode</source>
         <translation>Display Mode</translation>
     </message>
     <message>
-        <location filename="../src/MainWindow.cpp" line="973"/>
+        <location filename="../src/MainWindow.cpp" line="989"/>
         <source>Model Info</source>
         <translation>Model Info</translation>
     </message>
     <message>
-        <location filename="../src/MainWindow.cpp" line="974"/>
+        <location filename="../src/MainWindow.cpp" line="990"/>
         <source>Scene Tree</source>
         <translation>Scene Tree</translation>
     </message>
@@ -316,371 +316,381 @@
         <translation type="vanished">Light Control</translation>
     </message>
     <message>
-        <location filename="../src/MainWindow.cpp" line="235"/>
-        <location filename="../src/MainWindow.cpp" line="947"/>
+        <location filename="../src/MainWindow.cpp" line="236"/>
+        <location filename="../src/MainWindow.cpp" line="963"/>
         <source>Full Screen</source>
         <translation>Full Screen</translation>
     </message>
     <message>
-        <location filename="../src/MainWindow.cpp" line="134"/>
-        <location filename="../src/MainWindow.cpp" line="937"/>
+        <location filename="../src/MainWindow.cpp" line="135"/>
+        <location filename="../src/MainWindow.cpp" line="953"/>
         <source>Previous File</source>
         <translation>Previous File</translation>
     </message>
     <message>
-        <location filename="../src/MainWindow.cpp" line="137"/>
-        <location filename="../src/MainWindow.cpp" line="938"/>
+        <location filename="../src/MainWindow.cpp" line="138"/>
+        <location filename="../src/MainWindow.cpp" line="954"/>
         <source>Open previous model file in directory</source>
         <translation>Open previous model file in directory</translation>
     </message>
     <message>
-        <location filename="../src/MainWindow.cpp" line="141"/>
-        <location filename="../src/MainWindow.cpp" line="939"/>
+        <location filename="../src/MainWindow.cpp" line="142"/>
+        <location filename="../src/MainWindow.cpp" line="955"/>
         <source>Next File</source>
         <translation>Next File</translation>
     </message>
     <message>
-        <location filename="../src/MainWindow.cpp" line="144"/>
-        <location filename="../src/MainWindow.cpp" line="940"/>
+        <location filename="../src/MainWindow.cpp" line="145"/>
+        <location filename="../src/MainWindow.cpp" line="956"/>
         <source>Open next model file in directory</source>
         <translation>Open next model file in directory</translation>
     </message>
     <message>
-        <location filename="../src/MainWindow.cpp" line="165"/>
+        <location filename="../src/MainWindow.cpp" line="166"/>
         <source>&amp;Edit</source>
         <translation>&amp;Edit</translation>
     </message>
     <message>
-        <location filename="../src/MainWindow.cpp" line="168"/>
+        <location filename="../src/MainWindow.cpp" line="169"/>
         <source>&amp;Undo</source>
         <translation>&amp;Undo</translation>
     </message>
     <message>
-        <location filename="../src/MainWindow.cpp" line="170"/>
+        <location filename="../src/MainWindow.cpp" line="171"/>
         <source>Undo last edit</source>
         <translation>Undo last edit</translation>
     </message>
     <message>
-        <location filename="../src/MainWindow.cpp" line="173"/>
+        <location filename="../src/MainWindow.cpp" line="174"/>
         <source>&amp;Redo</source>
         <translation>&amp;Redo</translation>
     </message>
     <message>
-        <location filename="../src/MainWindow.cpp" line="175"/>
+        <location filename="../src/MainWindow.cpp" line="176"/>
         <source>Redo last undone edit</source>
         <translation>Redo last undone edit</translation>
     </message>
     <message>
-        <location filename="../src/MainWindow.cpp" line="180"/>
+        <location filename="../src/MainWindow.cpp" line="181"/>
         <source>Delete Node</source>
         <translation>Delete Node</translation>
     </message>
     <message>
-        <location filename="../src/MainWindow.cpp" line="182"/>
+        <location filename="../src/MainWindow.cpp" line="183"/>
         <source>Delete selected node from scene</source>
         <translation>Delete selected node from scene</translation>
     </message>
     <message>
-        <location filename="../src/MainWindow.cpp" line="185"/>
+        <location filename="../src/MainWindow.cpp" line="186"/>
         <source>Hide/Show Node</source>
         <translation>Hide/Show Node</translation>
     </message>
     <message>
-        <location filename="../src/MainWindow.cpp" line="187"/>
+        <location filename="../src/MainWindow.cpp" line="188"/>
         <source>Toggle visibility of selected node</source>
         <translation>Toggle visibility of selected node</translation>
     </message>
     <message>
-        <location filename="../src/MainWindow.cpp" line="190"/>
+        <location filename="../src/MainWindow.cpp" line="191"/>
         <source>Duplicate Node</source>
         <translation>Duplicate Node</translation>
     </message>
     <message>
-        <location filename="../src/MainWindow.cpp" line="192"/>
+        <location filename="../src/MainWindow.cpp" line="193"/>
         <source>Duplicate selected node</source>
         <translation>Duplicate selected node</translation>
     </message>
     <message>
-        <location filename="../src/MainWindow.cpp" line="239"/>
-        <location filename="../src/MainWindow.cpp" line="948"/>
+        <location filename="../src/MainWindow.cpp" line="240"/>
+        <location filename="../src/MainWindow.cpp" line="964"/>
         <source>Toggle full screen mode</source>
         <translation>Toggle full screen mode</translation>
     </message>
     <message>
-        <location filename="../src/MainWindow.cpp" line="248"/>
-        <location filename="../src/MainWindow.cpp" line="949"/>
+        <location filename="../src/MainWindow.cpp" line="249"/>
+        <location filename="../src/MainWindow.cpp" line="965"/>
         <source>Take Screenshot</source>
         <translation>Take Screenshot</translation>
     </message>
     <message>
-        <location filename="../src/MainWindow.cpp" line="251"/>
-        <location filename="../src/MainWindow.cpp" line="950"/>
+        <location filename="../src/MainWindow.cpp" line="252"/>
+        <location filename="../src/MainWindow.cpp" line="966"/>
         <source>Save screenshot to file</source>
         <translation>Save screenshot to file</translation>
     </message>
     <message>
-        <location filename="../src/MainWindow.cpp" line="254"/>
+        <location filename="../src/MainWindow.cpp" line="255"/>
         <source>Batch Convert...</source>
         <translation>Batch Convert...</translation>
     </message>
     <message>
-        <location filename="../src/MainWindow.cpp" line="255"/>
+        <location filename="../src/MainWindow.cpp" line="257"/>
         <source>Convert models between different formats</source>
         <translation>Convert models between different formats</translation>
     </message>
     <message>
-        <location filename="../src/MainWindow.cpp" line="259"/>
+        <location filename="../src/MainWindow.cpp" line="261"/>
         <source>OSG &amp;Handlers</source>
         <translation>OSG &amp;Handlers</translation>
     </message>
     <message>
-        <location filename="../src/MainWindow.cpp" line="261"/>
+        <location filename="../src/MainWindow.cpp" line="263"/>
         <source>Toggle Stats (S)</source>
         <translation>Toggle Stats (S)</translation>
     </message>
     <message>
-        <location filename="../src/MainWindow.cpp" line="264"/>
+        <location filename="../src/MainWindow.cpp" line="266"/>
         <source>Toggle on-screen statistics display</source>
         <translation>Toggle on-screen statistics display</translation>
     </message>
     <message>
-        <location filename="../src/MainWindow.cpp" line="268"/>
+        <location filename="../src/MainWindow.cpp" line="270"/>
         <source>Toggle Help (H)</source>
         <translation>Toggle Help (H)</translation>
     </message>
     <message>
-        <location filename="../src/MainWindow.cpp" line="271"/>
+        <location filename="../src/MainWindow.cpp" line="273"/>
         <source>Toggle on-screen help display</source>
         <translation>Toggle on-screen help display</translation>
     </message>
     <message>
-        <location filename="../src/MainWindow.cpp" line="275"/>
+        <location filename="../src/MainWindow.cpp" line="277"/>
         <source>Screen Capture (C)</source>
         <translation>Screen Capture (C)</translation>
     </message>
     <message>
-        <location filename="../src/MainWindow.cpp" line="278"/>
+        <location filename="../src/MainWindow.cpp" line="280"/>
         <source>Capture screenshot via OSG handler</source>
         <translation>Capture screenshot via OSG handler</translation>
     </message>
     <message>
-        <location filename="../src/MainWindow.cpp" line="284"/>
+        <location filename="../src/MainWindow.cpp" line="286"/>
         <source>Cycle Threading Model (M)</source>
         <translation>Cycle Threading Model (M)</translation>
     </message>
     <message>
-        <location filename="../src/MainWindow.cpp" line="287"/>
+        <location filename="../src/MainWindow.cpp" line="289"/>
         <source>Change OSG threading model</source>
         <translation>Change OSG threading model</translation>
     </message>
     <message>
-        <location filename="../src/MainWindow.cpp" line="293"/>
+        <location filename="../src/MainWindow.cpp" line="295"/>
         <source>Increase LOD Scale (+)</source>
         <translation>Increase LOD Scale (+)</translation>
     </message>
     <message>
-        <location filename="../src/MainWindow.cpp" line="296"/>
+        <location filename="../src/MainWindow.cpp" line="298"/>
         <source>Increase level-of-detail scale</source>
         <translation>Increase level-of-detail scale</translation>
     </message>
     <message>
-        <location filename="../src/MainWindow.cpp" line="300"/>
+        <location filename="../src/MainWindow.cpp" line="302"/>
         <source>Decrease LOD Scale (-)</source>
         <translation>Decrease LOD Scale (-)</translation>
     </message>
     <message>
-        <location filename="../src/MainWindow.cpp" line="303"/>
+        <location filename="../src/MainWindow.cpp" line="305"/>
         <source>Decrease level-of-detail scale</source>
         <translation>Decrease level-of-detail scale</translation>
     </message>
     <message>
-        <location filename="../src/MainWindow.cpp" line="309"/>
+        <location filename="../src/MainWindow.cpp" line="311"/>
         <source>Toggle Fullscreen (F)</source>
         <translation>Toggle Fullscreen (F)</translation>
     </message>
     <message>
-        <location filename="../src/MainWindow.cpp" line="312"/>
+        <location filename="../src/MainWindow.cpp" line="314"/>
         <source>Toggle fullscreen via OSG handler</source>
         <translation>Toggle fullscreen via OSG handler</translation>
     </message>
     <message>
-        <location filename="../src/MainWindow.cpp" line="322"/>
-        <location filename="../src/MainWindow.cpp" line="962"/>
+        <location filename="../src/MainWindow.cpp" line="324"/>
+        <location filename="../src/MainWindow.cpp" line="978"/>
         <source>中文</source>
         <translation>Chinese</translation>
     </message>
     <message>
-        <location filename="../src/MainWindow.cpp" line="327"/>
-        <location filename="../src/MainWindow.cpp" line="963"/>
+        <location filename="../src/MainWindow.cpp" line="329"/>
+        <location filename="../src/MainWindow.cpp" line="979"/>
         <source>English</source>
         <translation>English</translation>
     </message>
     <message>
-        <location filename="../src/MainWindow.cpp" line="332"/>
-        <location filename="../src/MainWindow.cpp" line="933"/>
+        <location filename="../src/MainWindow.cpp" line="334"/>
+        <location filename="../src/MainWindow.cpp" line="949"/>
         <source>&amp;Theme</source>
         <translation>&amp;Theme</translation>
     </message>
     <message>
-        <location filename="../src/MainWindow.cpp" line="337"/>
-        <location filename="../src/MainWindow.cpp" line="965"/>
-        <location filename="../src/MainWindow.cpp" line="1023"/>
-        <location filename="../src/MainWindow.cpp" line="1027"/>
+        <location filename="../src/MainWindow.cpp" line="339"/>
+        <location filename="../src/MainWindow.cpp" line="981"/>
+        <location filename="../src/MainWindow.cpp" line="1041"/>
+        <location filename="../src/MainWindow.cpp" line="1045"/>
         <source>Dark</source>
         <translation>Dark</translation>
     </message>
     <message>
-        <location filename="../src/MainWindow.cpp" line="343"/>
-        <location filename="../src/MainWindow.cpp" line="966"/>
-        <location filename="../src/MainWindow.cpp" line="1024"/>
+        <location filename="../src/MainWindow.cpp" line="345"/>
+        <location filename="../src/MainWindow.cpp" line="982"/>
+        <location filename="../src/MainWindow.cpp" line="1042"/>
         <source>Light</source>
         <translation>Light</translation>
     </message>
     <message>
-        <location filename="../src/MainWindow.cpp" line="348"/>
-        <location filename="../src/MainWindow.cpp" line="967"/>
-        <location filename="../src/MainWindow.cpp" line="1025"/>
+        <location filename="../src/MainWindow.cpp" line="350"/>
+        <location filename="../src/MainWindow.cpp" line="983"/>
+        <location filename="../src/MainWindow.cpp" line="1043"/>
         <source>Nord</source>
         <translation>Nord</translation>
     </message>
     <message>
-        <location filename="../src/MainWindow.cpp" line="353"/>
-        <location filename="../src/MainWindow.cpp" line="968"/>
-        <location filename="../src/MainWindow.cpp" line="1026"/>
+        <location filename="../src/MainWindow.cpp" line="355"/>
+        <location filename="../src/MainWindow.cpp" line="984"/>
+        <location filename="../src/MainWindow.cpp" line="1044"/>
         <source>Solarized</source>
         <translation>Solarized</translation>
     </message>
     <message>
-        <location filename="../src/MainWindow.cpp" line="364"/>
-        <location filename="../src/MainWindow.cpp" line="951"/>
+        <location filename="../src/MainWindow.cpp" line="366"/>
+        <location filename="../src/MainWindow.cpp" line="967"/>
         <source>About</source>
         <translation>About</translation>
     </message>
     <message>
-        <location filename="../src/MainWindow.cpp" line="366"/>
-        <location filename="../src/MainWindow.cpp" line="834"/>
+        <location filename="../src/MainWindow.cpp" line="368"/>
+        <location filename="../src/MainWindow.cpp" line="850"/>
         <source>About PicModelViewer</source>
         <translation>About PicModelViewer</translation>
     </message>
     <message>
-        <location filename="../src/MainWindow.cpp" line="372"/>
+        <location filename="../src/MainWindow.cpp" line="374"/>
         <source>Main Toolbar</source>
         <translation>Main Toolbar</translation>
     </message>
     <message>
-        <location filename="../src/MainWindow.cpp" line="394"/>
-        <location filename="../src/MainWindow.cpp" line="736"/>
-        <location filename="../src/MainWindow.cpp" line="970"/>
+        <location filename="../src/MainWindow.cpp" line="399"/>
+        <location filename="../src/MainWindow.cpp" line="752"/>
+        <location filename="../src/MainWindow.cpp" line="986"/>
         <source>Ready</source>
         <translation>Ready</translation>
     </message>
     <message>
-        <location filename="../src/MainWindow.cpp" line="396"/>
-        <location filename="../src/MainWindow.cpp" line="737"/>
+        <location filename="../src/MainWindow.cpp" line="401"/>
+        <location filename="../src/MainWindow.cpp" line="753"/>
         <source>Vertices: 0</source>
         <translation>Vertices: 0</translation>
     </message>
     <message>
-        <location filename="../src/MainWindow.cpp" line="397"/>
-        <location filename="../src/MainWindow.cpp" line="738"/>
+        <location filename="../src/MainWindow.cpp" line="402"/>
+        <location filename="../src/MainWindow.cpp" line="754"/>
         <source>Faces: 0</source>
         <translation>Faces: 0</translation>
     </message>
     <message>
-        <location filename="../src/MainWindow.cpp" line="545"/>
-        <location filename="../src/MainWindow.cpp" line="802"/>
+        <location filename="../src/MainWindow.cpp" line="561"/>
+        <location filename="../src/MainWindow.cpp" line="818"/>
         <source>Error</source>
         <translation>Error</translation>
     </message>
     <message>
-        <location filename="../src/MainWindow.cpp" line="637"/>
+        <location filename="../src/MainWindow.cpp" line="653"/>
         <source>Info</source>
         <translation>Info</translation>
     </message>
     <message>
-        <location filename="../src/MainWindow.cpp" line="637"/>
+        <location filename="../src/MainWindow.cpp" line="653"/>
         <source>Cannot delete the root node.</source>
         <translation>Cannot delete the root node.</translation>
     </message>
     <message>
-        <location filename="../src/MainWindow.cpp" line="715"/>
+        <location filename="../src/MainWindow.cpp" line="731"/>
         <source>Open Model File</source>
         <translation>Open Model File</translation>
     </message>
     <message>
-        <location filename="../src/MainWindow.cpp" line="754"/>
+        <location filename="../src/MainWindow.cpp" line="770"/>
         <source>Loading...</source>
         <translation>Loading...</translation>
     </message>
     <message>
-        <location filename="../src/MainWindow.cpp" line="768"/>
+        <location filename="../src/MainWindow.cpp" line="784"/>
         <source>Vertices: %1</source>
         <translation>Vertices: %1</translation>
     </message>
     <message>
-        <location filename="../src/MainWindow.cpp" line="769"/>
+        <location filename="../src/MainWindow.cpp" line="785"/>
         <source>Faces: %1</source>
         <translation>Faces: %1</translation>
     </message>
     <message>
-        <location filename="../src/MainWindow.cpp" line="790"/>
+        <location filename="../src/MainWindow.cpp" line="806"/>
         <source>Save Screenshot</source>
         <translation>Save Screenshot</translation>
     </message>
     <message>
-        <location filename="../src/MainWindow.cpp" line="791"/>
+        <location filename="../src/MainWindow.cpp" line="807"/>
         <source>PNG Image (*.png);;JPEG Image (*.jpg);;BMP Image (*.bmp)</source>
         <translation>PNG Image (*.png);;JPEG Image (*.jpg);;BMP Image (*.bmp)</translation>
     </message>
     <message>
-        <location filename="../src/MainWindow.cpp" line="798"/>
+        <location filename="../src/MainWindow.cpp" line="814"/>
         <source>Screenshot saved: %1</source>
         <translation>Screenshot saved: %1</translation>
     </message>
     <message>
-        <location filename="../src/MainWindow.cpp" line="802"/>
+        <location filename="../src/MainWindow.cpp" line="818"/>
         <source>Failed to save screenshot</source>
         <translation>Failed to save screenshot</translation>
     </message>
     <message>
-        <location filename="../src/MainWindow.cpp" line="835"/>
+        <location filename="../src/MainWindow.cpp" line="851"/>
         <source>Universal 3D Model Viewer</source>
         <translation>Universal 3D Model Viewer</translation>
     </message>
     <message>
-        <location filename="../src/MainWindow.cpp" line="836"/>
+        <location filename="../src/MainWindow.cpp" line="852"/>
         <source>Version</source>
         <translation>Version</translation>
     </message>
     <message>
-        <location filename="../src/MainWindow.cpp" line="837"/>
+        <location filename="../src/MainWindow.cpp" line="853"/>
         <source>A universal 3D model viewer based on Qt, OSG and Assimp.</source>
         <translation>A universal 3D model viewer based on Qt, OSG and Assimp.</translation>
     </message>
     <message>
-        <location filename="../src/MainWindow.cpp" line="1048"/>
+        <location filename="../src/MainWindow.cpp" line="991"/>
+        <source>Node Editor</source>
+        <translation>Node Editor</translation>
+    </message>
+    <message>
+        <location filename="../src/MainWindow.cpp" line="992"/>
+        <source>Pre-Process Effects</source>
+        <translation>Pre-Process Effects</translation>
+    </message>
+    <message>
+        <location filename="../src/MainWindow.cpp" line="1066"/>
         <source>Theme: %1</source>
         <translation>Theme: %1</translation>
     </message>
     <message>
-        <location filename="../src/MainWindow.cpp" line="1107"/>
+        <location filename="../src/MainWindow.cpp" line="1125"/>
         <source>%1 / %2</source>
         <translation>%1 / %2</translation>
     </message>
     <message>
-        <location filename="../src/MainWindow.cpp" line="127"/>
-        <location filename="../src/MainWindow.cpp" line="953"/>
+        <location filename="../src/MainWindow.cpp" line="128"/>
+        <location filename="../src/MainWindow.cpp" line="969"/>
         <source>&amp;Recent Files</source>
         <translation>&amp;Recent Files</translation>
     </message>
     <message>
-        <location filename="../src/MainWindow.cpp" line="129"/>
-        <location filename="../src/MainWindow.cpp" line="954"/>
+        <location filename="../src/MainWindow.cpp" line="130"/>
+        <location filename="../src/MainWindow.cpp" line="970"/>
         <source>Clear Recent</source>
         <translation>Clear Recent</translation>
     </message>
     <message>
-        <location filename="../src/MainWindow.cpp" line="846"/>
+        <location filename="../src/MainWindow.cpp" line="862"/>
         <source>No recent files</source>
         <translation>No recent files</translation>
     </message>
@@ -1507,6 +1517,461 @@ Select a MatrixTransform or PositionAttitudeTransform node.</translation>
         <location filename="../src/NodeEditorDock.cpp" line="1528"/>
         <source>Color:</source>
         <translation>Color:</translation>
+    </message>
+</context>
+<context>
+    <name>PreProcessDock</name>
+    <message>
+        <location filename="../src/PreProcessDock.cpp" line="19"/>
+        <location filename="../src/PreProcessDock.cpp" line="61"/>
+        <source>Pre-Process Effects</source>
+        <translation>Pre-Process Effects</translation>
+    </message>
+    <message>
+        <location filename="../src/PreProcessDock.cpp" line="81"/>
+        <source>Rendering Style</source>
+        <translation>Rendering Style</translation>
+    </message>
+    <message>
+        <location filename="../src/PreProcessDock.cpp" line="84"/>
+        <source>Enhanced Phong</source>
+        <translation>Enhanced Phong</translation>
+    </message>
+    <message>
+        <location filename="../src/PreProcessDock.cpp" line="84"/>
+        <source>Specular</source>
+        <translation>Specular</translation>
+    </message>
+    <message>
+        <location filename="../src/PreProcessDock.cpp" line="84"/>
+        <location filename="../src/PreProcessDock.cpp" line="91"/>
+        <source>Roughness</source>
+        <translation>Roughness</translation>
+    </message>
+    <message>
+        <location filename="../src/PreProcessDock.cpp" line="85"/>
+        <source>Cel Shading</source>
+        <translation>Cel Shading</translation>
+    </message>
+    <message>
+        <location filename="../src/PreProcessDock.cpp" line="85"/>
+        <source>Steps</source>
+        <translation>Steps</translation>
+    </message>
+    <message>
+        <location filename="../src/PreProcessDock.cpp" line="85"/>
+        <source>Outline</source>
+        <translation>Outline</translation>
+    </message>
+    <message>
+        <location filename="../src/PreProcessDock.cpp" line="86"/>
+        <source>Half Lambert</source>
+        <translation>Half Lambert</translation>
+    </message>
+    <message>
+        <location filename="../src/PreProcessDock.cpp" line="86"/>
+        <location filename="../src/PreProcessDock.cpp" line="89"/>
+        <location filename="../src/PreProcessDock.cpp" line="100"/>
+        <location filename="../src/PreProcessDock.cpp" line="116"/>
+        <location filename="../src/PreProcessDock.cpp" line="131"/>
+        <source>Intensity</source>
+        <translation>Intensity</translation>
+    </message>
+    <message>
+        <location filename="../src/PreProcessDock.cpp" line="87"/>
+        <source>Anisotropic</source>
+        <translation>Anisotropic</translation>
+    </message>
+    <message>
+        <location filename="../src/PreProcessDock.cpp" line="87"/>
+        <location filename="../src/PreProcessDock.cpp" line="125"/>
+        <source>Direction</source>
+        <translation>Direction</translation>
+    </message>
+    <message>
+        <location filename="../src/PreProcessDock.cpp" line="87"/>
+        <location filename="../src/PreProcessDock.cpp" line="102"/>
+        <location filename="../src/PreProcessDock.cpp" line="104"/>
+        <location filename="../src/PreProcessDock.cpp" line="129"/>
+        <source>Strength</source>
+        <translation>Strength</translation>
+    </message>
+    <message>
+        <location filename="../src/PreProcessDock.cpp" line="88"/>
+        <source>Subsurface Scatter</source>
+        <translation>Subsurface Scatter</translation>
+    </message>
+    <message>
+        <location filename="../src/PreProcessDock.cpp" line="88"/>
+        <source>Thickness</source>
+        <translation>Thickness</translation>
+    </message>
+    <message>
+        <location filename="../src/PreProcessDock.cpp" line="88"/>
+        <source>Color Int.</source>
+        <translation>Color Int.</translation>
+    </message>
+    <message>
+        <location filename="../src/PreProcessDock.cpp" line="89"/>
+        <source>Rim Light</source>
+        <translation>Rim Light</translation>
+    </message>
+    <message>
+        <location filename="../src/PreProcessDock.cpp" line="89"/>
+        <source>Power</source>
+        <translation>Power</translation>
+    </message>
+    <message>
+        <location filename="../src/PreProcessDock.cpp" line="90"/>
+        <source>MatCap</source>
+        <translation>MatCap</translation>
+    </message>
+    <message>
+        <location filename="../src/PreProcessDock.cpp" line="90"/>
+        <location filename="../src/PreProcessDock.cpp" line="106"/>
+        <source>Blend</source>
+        <translation>Blend</translation>
+    </message>
+    <message>
+        <location filename="../src/PreProcessDock.cpp" line="91"/>
+        <source>Metalness PBR</source>
+        <translation>Metalness PBR</translation>
+    </message>
+    <message>
+        <location filename="../src/PreProcessDock.cpp" line="91"/>
+        <source>Metallic</source>
+        <translation>Metallic</translation>
+    </message>
+    <message>
+        <location filename="../src/PreProcessDock.cpp" line="92"/>
+        <source>Outline Stroke</source>
+        <translation>Outline Stroke</translation>
+    </message>
+    <message>
+        <location filename="../src/PreProcessDock.cpp" line="92"/>
+        <source>Width</source>
+        <translation>Width</translation>
+    </message>
+    <message>
+        <location filename="../src/PreProcessDock.cpp" line="93"/>
+        <source>Wireframe Overlay</source>
+        <translation>Wireframe Overlay</translation>
+    </message>
+    <message>
+        <location filename="../src/PreProcessDock.cpp" line="93"/>
+        <source>Line Width</source>
+        <translation>Line Width</translation>
+    </message>
+    <message>
+        <location filename="../src/PreProcessDock.cpp" line="93"/>
+        <source>Fill Alpha</source>
+        <translation>Fill Alpha</translation>
+    </message>
+    <message>
+        <location filename="../src/PreProcessDock.cpp" line="97"/>
+        <source>Material Effects</source>
+        <translation>Material Effects</translation>
+    </message>
+    <message>
+        <location filename="../src/PreProcessDock.cpp" line="100"/>
+        <source>X-Ray</source>
+        <translation>X-Ray</translation>
+    </message>
+    <message>
+        <location filename="../src/PreProcessDock.cpp" line="101"/>
+        <source>Hologram</source>
+        <translation>Hologram</translation>
+    </message>
+    <message>
+        <location filename="../src/PreProcessDock.cpp" line="101"/>
+        <source>Scan Speed</source>
+        <translation>Scan Speed</translation>
+    </message>
+    <message>
+        <location filename="../src/PreProcessDock.cpp" line="101"/>
+        <location filename="../src/PreProcessDock.cpp" line="115"/>
+        <location filename="../src/PreProcessDock.cpp" line="117"/>
+        <location filename="../src/PreProcessDock.cpp" line="128"/>
+        <source>Density</source>
+        <translation>Density</translation>
+    </message>
+    <message>
+        <location filename="../src/PreProcessDock.cpp" line="102"/>
+        <source>Energy Shield</source>
+        <translation>Energy Shield</translation>
+    </message>
+    <message>
+        <location filename="../src/PreProcessDock.cpp" line="102"/>
+        <source>Wave Speed</source>
+        <translation>Wave Speed</translation>
+    </message>
+    <message>
+        <location filename="../src/PreProcessDock.cpp" line="103"/>
+        <source>Dissolve</source>
+        <translation>Dissolve</translation>
+    </message>
+    <message>
+        <location filename="../src/PreProcessDock.cpp" line="103"/>
+        <location filename="../src/PreProcessDock.cpp" line="130"/>
+        <location filename="../src/PreProcessDock.cpp" line="168"/>
+        <source>Progress</source>
+        <translation>Progress</translation>
+    </message>
+    <message>
+        <location filename="../src/PreProcessDock.cpp" line="103"/>
+        <source>Edge Width</source>
+        <translation>Edge Width</translation>
+    </message>
+    <message>
+        <location filename="../src/PreProcessDock.cpp" line="104"/>
+        <source>Frozen</source>
+        <translation>Frozen</translation>
+    </message>
+    <message>
+        <location filename="../src/PreProcessDock.cpp" line="105"/>
+        <source>Lava</source>
+        <translation>Lava</translation>
+    </message>
+    <message>
+        <location filename="../src/PreProcessDock.cpp" line="105"/>
+        <source>Flow Speed</source>
+        <translation>Flow Speed</translation>
+    </message>
+    <message>
+        <location filename="../src/PreProcessDock.cpp" line="105"/>
+        <source>Brightness</source>
+        <translation>Brightness</translation>
+    </message>
+    <message>
+        <location filename="../src/PreProcessDock.cpp" line="106"/>
+        <source>Camouflage</source>
+        <translation>Camouflage</translation>
+    </message>
+    <message>
+        <location filename="../src/PreProcessDock.cpp" line="106"/>
+        <source>Scale</source>
+        <translation>Scale</translation>
+    </message>
+    <message>
+        <location filename="../src/PreProcessDock.cpp" line="107"/>
+        <source>Crystal Glass</source>
+        <translation>Crystal Glass</translation>
+    </message>
+    <message>
+        <location filename="../src/PreProcessDock.cpp" line="107"/>
+        <source>Transparency</source>
+        <translation>Transparency</translation>
+    </message>
+    <message>
+        <location filename="../src/PreProcessDock.cpp" line="107"/>
+        <source>Refraction</source>
+        <translation>Refraction</translation>
+    </message>
+    <message>
+        <location filename="../src/PreProcessDock.cpp" line="111"/>
+        <source>Environment</source>
+        <translation>Environment</translation>
+    </message>
+    <message>
+        <location filename="../src/PreProcessDock.cpp" line="114"/>
+        <source>Distance Fog</source>
+        <translation>Distance Fog</translation>
+    </message>
+    <message>
+        <location filename="../src/PreProcessDock.cpp" line="114"/>
+        <source>Start</source>
+        <translation>Start</translation>
+    </message>
+    <message>
+        <location filename="../src/PreProcessDock.cpp" line="114"/>
+        <source>End</source>
+        <translation>End</translation>
+    </message>
+    <message>
+        <location filename="../src/PreProcessDock.cpp" line="115"/>
+        <source>Height Fog</source>
+        <translation>Height Fog</translation>
+    </message>
+    <message>
+        <location filename="../src/PreProcessDock.cpp" line="115"/>
+        <location filename="../src/PreProcessDock.cpp" line="117"/>
+        <location filename="../src/PreProcessDock.cpp" line="126"/>
+        <source>Height</source>
+        <translation>Height</translation>
+    </message>
+    <message>
+        <location filename="../src/PreProcessDock.cpp" line="116"/>
+        <source>Atmospheric Scatter</source>
+        <translation>Atmospheric Scatter</translation>
+    </message>
+    <message>
+        <location filename="../src/PreProcessDock.cpp" line="117"/>
+        <source>Ground Fog</source>
+        <translation>Ground Fog</translation>
+    </message>
+    <message>
+        <location filename="../src/PreProcessDock.cpp" line="121"/>
+        <source>Animation</source>
+        <translation>Animation</translation>
+    </message>
+    <message>
+        <location filename="../src/PreProcessDock.cpp" line="124"/>
+        <source>Vertex Wave</source>
+        <translation>Vertex Wave</translation>
+    </message>
+    <message>
+        <location filename="../src/PreProcessDock.cpp" line="124"/>
+        <location filename="../src/PreProcessDock.cpp" line="127"/>
+        <location filename="../src/PreProcessDock.cpp" line="131"/>
+        <source>Frequency</source>
+        <translation>Frequency</translation>
+    </message>
+    <message>
+        <location filename="../src/PreProcessDock.cpp" line="124"/>
+        <source>Amplitude</source>
+        <translation>Amplitude</translation>
+    </message>
+    <message>
+        <location filename="../src/PreProcessDock.cpp" line="125"/>
+        <source>Flag Wave</source>
+        <translation>Flag Wave</translation>
+    </message>
+    <message>
+        <location filename="../src/PreProcessDock.cpp" line="125"/>
+        <source>Wind Speed</source>
+        <translation>Wind Speed</translation>
+    </message>
+    <message>
+        <location filename="../src/PreProcessDock.cpp" line="126"/>
+        <source>Water Ripple</source>
+        <translation>Water Ripple</translation>
+    </message>
+    <message>
+        <location filename="../src/PreProcessDock.cpp" line="126"/>
+        <location filename="../src/PreProcessDock.cpp" line="128"/>
+        <location filename="../src/PreProcessDock.cpp" line="129"/>
+        <source>Speed</source>
+        <translation>Speed</translation>
+    </message>
+    <message>
+        <location filename="../src/PreProcessDock.cpp" line="127"/>
+        <source>Pulse Breathe</source>
+        <translation>Pulse Breathe</translation>
+    </message>
+    <message>
+        <location filename="../src/PreProcessDock.cpp" line="128"/>
+        <source>Scan Line</source>
+        <translation>Scan Line</translation>
+    </message>
+    <message>
+        <location filename="../src/PreProcessDock.cpp" line="129"/>
+        <source>Electric Arc</source>
+        <translation>Electric Arc</translation>
+    </message>
+    <message>
+        <location filename="../src/PreProcessDock.cpp" line="130"/>
+        <source>Burn Effect</source>
+        <translation>Burn Effect</translation>
+    </message>
+    <message>
+        <location filename="../src/PreProcessDock.cpp" line="130"/>
+        <source>Flame Height</source>
+        <translation>Flame Height</translation>
+    </message>
+    <message>
+        <location filename="../src/PreProcessDock.cpp" line="131"/>
+        <source>Glitch</source>
+        <translation>Glitch</translation>
+    </message>
+    <message>
+        <location filename="../src/PreProcessDock.cpp" line="135"/>
+        <source>Explode</source>
+        <translation>Explode</translation>
+    </message>
+    <message>
+        <source>Randomness</source>
+        <translation type="vanished">Randomness</translation>
+    </message>
+    <message>
+        <location filename="../src/PreProcessDock.cpp" line="220"/>
+        <source>Visualization</source>
+        <translation>Visualization</translation>
+    </message>
+    <message>
+        <location filename="../src/PreProcessDock.cpp" line="223"/>
+        <source>Normal Vis</source>
+        <translation>Normal Vis</translation>
+    </message>
+    <message>
+        <location filename="../src/PreProcessDock.cpp" line="224"/>
+        <source>Depth Vis</source>
+        <translation>Depth Vis</translation>
+    </message>
+    <message>
+        <location filename="../src/PreProcessDock.cpp" line="224"/>
+        <source>Near</source>
+        <translation>Near</translation>
+    </message>
+    <message>
+        <location filename="../src/PreProcessDock.cpp" line="224"/>
+        <source>Far</source>
+        <translation>Far</translation>
+    </message>
+    <message>
+        <location filename="../src/PreProcessDock.cpp" line="225"/>
+        <source>Vertex Color</source>
+        <translation>Vertex Color</translation>
+    </message>
+    <message>
+        <location filename="../src/PreProcessDock.cpp" line="226"/>
+        <source>UV Vis</source>
+        <translation>UV Vis</translation>
+    </message>
+    <message>
+        <location filename="../src/PreProcessDock.cpp" line="227"/>
+        <source>Face Orientation</source>
+        <translation>Face Orientation</translation>
+    </message>
+    <message>
+        <location filename="../src/PreProcessDock.cpp" line="228"/>
+        <source>Height Color</source>
+        <translation>Height Color</translation>
+    </message>
+    <message>
+        <location filename="../src/PreProcessDock.cpp" line="228"/>
+        <source>Low</source>
+        <translation>Low</translation>
+    </message>
+    <message>
+        <location filename="../src/PreProcessDock.cpp" line="228"/>
+        <source>High</source>
+        <translation>High</translation>
+    </message>
+    <message>
+        <location filename="../src/PreProcessDock.cpp" line="151"/>
+        <location filename="../src/PreProcessDock.cpp" line="264"/>
+        <source>Enable</source>
+        <translation>Enable</translation>
+    </message>
+    <message>
+        <location filename="../src/PreProcessDock.cpp" line="155"/>
+        <source>Mode</source>
+        <translation>Mode</translation>
+    </message>
+    <message>
+        <location filename="../src/PreProcessDock.cpp" line="157"/>
+        <source>From Center</source>
+        <translation>From Center</translation>
+    </message>
+    <message>
+        <location filename="../src/PreProcessDock.cpp" line="158"/>
+        <source>Random</source>
+        <translation>Random</translation>
+    </message>
+    <message>
+        <location filename="../src/PreProcessDock.cpp" line="370"/>
+        <source>Select Color</source>
+        <translation>Select Color</translation>
     </message>
 </context>
 <context>

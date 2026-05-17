@@ -20,6 +20,7 @@ class SceneTreeDock;
 class NodeEditorDock;
 class WelcomeWidget;
 class ModelConverter;
+class PreProcessDock;
 
 class MainWindow : public QMainWindow
 {
@@ -91,6 +92,7 @@ private:
     ModelInfoDock* m_modelInfoDock = nullptr;
     SceneTreeDock* m_sceneTreeDock = nullptr;
     NodeEditorDock* m_nodeEditorDock = nullptr;
+    PreProcessDock* m_preProcessDock = nullptr;
 
     // Undo system
     QUndoStack* m_undoStack = nullptr;

@@ -34,5 +34,7 @@
         <file alias="icons/handler-threading.svg">icons/handler-threading.svg</file>
         <file alias="icons/handler-screencapture.svg">icons/handler-screencapture.svg</file>
         <file alias="icons/app-icon.svg">icons/app-icon.svg</file>
+        <file alias="icons/batch-convert.svg">icons/batch-convert.svg</file>
+        <file alias="icons/pre-process.svg">icons/pre-process.svg</file>
     </qresource>
 </RCC>

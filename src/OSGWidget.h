@@ -17,6 +17,8 @@
 #include <osg/LineWidth>
 #include <osgUtil/LineSegmentIntersector>
 
+class PreProcessManager;
+
 class OSGWidget : public QOpenGLWidget
 {
     Q_OBJECT
@@ -72,6 +74,10 @@ public:
 
     // Node mask for highlight overlay geodes (excluded from picking and scene tree)
     static const unsigned int HIGHLIGHT_NODE_MASK = 0x80000000u;
+
+    // Pre-process effects
+    PreProcessManager* preProcessManager() const { return m_preProcessManager; }
+    void ensurePreProcessInitialized();
 
     // Send a key event to OSG event handlers (ASCII key code)
     void sendOSGKeyEvent(int key);
@@ -138,6 +144,10 @@ private:
     bool m_textureEnabled = true;
     osg::ref_ptr<osg::Group> m_axesGroup;
     osg::ref_ptr<osg::StateSet> m_savedRootStateSet;
+
+    // Pre-process effects
+    PreProcessManager* m_preProcessManager = nullptr;
+    float m_preProcessTime = 0.0f;
 
     int m_lastFrameCount = 0;
     double m_lastFPSTime = 0.0;
