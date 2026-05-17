@@ -1,4 +1,5 @@
 #include "OSGWidget.h"
+#include "PreProcessManager.h"
 
 #include <QMouseEvent>
 #include <QWheelEvent>
@@ -14,6 +15,42 @@
 #include <osgUtil/Optimizer>
 #include <osgUtil/IntersectionVisitor>
 #include <osg/ComputeBoundsVisitor>
+#include <osg/CullSettings>
+
+namespace {
+// Custom clamp callback: forces a very small minimum zNear independent of
+// nearFarRatio, so models close to the camera (or camera inside the model)
+// are never clipped by the near plane.
+struct TightNearClamp : public osg::CullSettings::ClampProjectionMatrixCallback
+{
+    static constexpr double kMinNear = 1e-3;
+
+    template<typename M>
+    static void adjust(M& projection, double& znear, double& zfar)
+    {
+        if (zfar < znear) std::swap(znear, zfar);
+        if (znear < kMinNear) znear = kMinNear;
+        if (zfar  < znear * 2.0) zfar = znear * 2.0;
+        // rebuild perspective projection (or shifted frustum) preserving x/y planes
+        double l, r, b, t, n, f;
+        if (projection.getFrustum(l, r, b, t, n, f)) {
+            double sx = znear / n;
+            projection.makeFrustum(l * sx, r * sx, b * sx, t * sx, znear, zfar);
+        } else {
+            // ortho: keep as-is, only update near/far
+            double oL, oR, oB, oT, oN, oF;
+            if (projection.getOrtho(oL, oR, oB, oT, oN, oF)) {
+                projection.makeOrtho(oL, oR, oB, oT, znear, zfar);
+            }
+        }
+    }
+
+    bool clampProjectionMatrixImplementation(osg::Matrixf& projection, double& znear, double& zfar) const override
+    { adjust(projection, znear, zfar); return true; }
+    bool clampProjectionMatrixImplementation(osg::Matrixd& projection, double& znear, double& zfar) const override
+    { adjust(projection, znear, zfar); return true; }
+};
+} // namespace
 
 #include <OpenThreads/Thread>
 #include <vector>
@@ -28,6 +65,8 @@ OSGWidget::OSGWidget(QWidget* parent)
     // Ensure widget expands to fill available space
     setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Expanding);
 
+    m_preProcessManager = new PreProcessManager();
+
     initViewer();
 
     // Render timer ~60 FPS
@@ -38,6 +77,7 @@ OSGWidget::OSGWidget(QWidget* parent)
 OSGWidget::~OSGWidget()
 {
     m_timer.stop();
+    delete m_preProcessManager;
 }
 
 void OSGWidget::initViewer()
@@ -62,6 +102,13 @@ void OSGWidget::initViewer()
 
     // Default background color
     m_viewer->getCamera()->setClearColor(osg::Vec4(0.2f, 0.2f, 0.25f, 1.0f));
+
+    // Auto near/far: use primitives for tighter bounds, smaller ratio so near plane
+    // is closer to camera (avoid clipping when zooming in). Custom clamp callback
+    // additionally forces a sub-millimeter minimum zNear regardless of zFar/ratio.
+    m_viewer->getCamera()->setComputeNearFarMode(osg::CullSettings::COMPUTE_NEAR_FAR_USING_PRIMITIVES);
+    m_viewer->getCamera()->setNearFarRatio(0.00001);
+    m_viewer->getCamera()->setClampProjectionMatrixCallback(new TightNearClamp);
 
     // Set up camera manipulator
     m_viewer->setCameraManipulator(new osgGA::TrackballManipulator);
@@ -151,6 +198,13 @@ void OSGWidget::setSceneData(osg::Node* node)
 
     // Restart rendering
     m_timer.start(16);
+
+    // Re-attach pre-process if any effect is enabled
+    if (m_preProcessManager && m_preProcessManager->hasEnabledEffects()) {
+        if (auto* root = dynamic_cast<osg::Group*>(m_viewer->getSceneData())) {
+            m_preProcessManager->attach(root);
+        }
+    }
 
     emit sceneChanged();
 }
@@ -342,6 +396,12 @@ void OSGWidget::paintGL()
 
         m_viewer->frame();
         updateFPS();
+
+        // Update pre-process time for animated effects
+        if (m_preProcessManager && m_preProcessManager->hasEnabledEffects()) {
+            m_preProcessTime += 0.016f;
+            m_preProcessManager->updateTime(m_preProcessTime);
+        }
     }
 }
 
@@ -489,6 +549,25 @@ void OSGWidget::keyReleaseEvent(QKeyEvent* event)
         m_graphicsWindow->getEventQueue()->keyRelease(
             static_cast<osgGA::GUIEventAdapter::KeySymbol>(key));
     }
+}
+
+void OSGWidget::ensurePreProcessInitialized()
+{
+    if (!m_preProcessManager || !m_viewer) return;
+    if (m_preProcessManager->isAttached()) return;
+
+    auto* sceneData = m_viewer->getSceneData();
+    if (!sceneData) return;
+
+    auto* root = sceneData->asGroup();
+    if (!root) {
+        // Scene might be a leaf node; wrap check
+        osg::Group* parent = new osg::Group;
+        parent->addChild(sceneData);
+        m_viewer->setSceneData(parent);
+        root = parent;
+    }
+    m_preProcessManager->attach(root);
 }
 
 void OSGWidget::sendOSGKeyEvent(int key)

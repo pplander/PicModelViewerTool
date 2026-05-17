@@ -71,6 +71,8 @@ set(SOURCES
     src/ModelConverter.cpp
     src/BatchConvertDialog.cpp
     src/NodeEditorDock.cpp
+    src/PreProcessManager.cpp
+    src/PreProcessDock.cpp
 )
 
 set(HEADERS
@@ -86,6 +88,8 @@ set(HEADERS
     src/BatchConvertDialog.h
     src/NodeEditorDock.h
     src/EditCommand.h
+    src/PreProcessManager.h
+    src/PreProcessDock.h
 )
 
 # ===================== Translations =====================
