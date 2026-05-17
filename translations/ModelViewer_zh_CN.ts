@@ -4,132 +4,179 @@
 <context>
     <name>BatchConvertDialog</name>
     <message>
-        <location filename="../src/BatchConvertDialog.cpp" line="29"/>
-        <location filename="../src/BatchConvertDialog.cpp" line="295"/>
-        <source>Batch Model Conversion</source>
-        <translation>批量模型转换</translation>
+        <location filename="../src/BatchConvertDialog.cpp" line="266"/>
+        <location filename="../src/BatchConvertDialog.cpp" line="427"/>
+        <source>Format Conversion</source>
+        <translation>格式转换</translation>
     </message>
     <message>
-        <location filename="../src/BatchConvertDialog.cpp" line="35"/>
-        <source>Source Files</source>
-        <translation>源文件</translation>
+        <location filename="../src/BatchConvertDialog.cpp" line="280"/>
+        <location filename="../src/BatchConvertDialog.cpp" line="430"/>
+        <source>Model</source>
+        <translation>模型</translation>
     </message>
     <message>
-        <location filename="../src/BatchConvertDialog.cpp" line="44"/>
-        <source>Add Files...</source>
-        <translation>添加文件...</translation>
+        <location filename="../src/BatchConvertDialog.cpp" line="288"/>
+        <location filename="../src/BatchConvertDialog.cpp" line="431"/>
+        <source>Image</source>
+        <translation>图片</translation>
     </message>
     <message>
-        <location filename="../src/BatchConvertDialog.cpp" line="45"/>
-        <source>Add Directory...</source>
-        <translation>添加目录...</translation>
+        <location filename="../src/BatchConvertDialog.cpp" line="297"/>
+        <location filename="../src/BatchConvertDialog.cpp" line="432"/>
+        <source>Vector</source>
+        <translation>矢量</translation>
     </message>
     <message>
-        <location filename="../src/BatchConvertDialog.cpp" line="46"/>
-        <source>Remove</source>
-        <translation>移除</translation>
+        <location filename="../src/BatchConvertDialog.cpp" line="306"/>
+        <location filename="../src/BatchConvertDialog.cpp" line="433"/>
+        <source>Raster</source>
+        <translation>栅格</translation>
     </message>
     <message>
-        <location filename="../src/BatchConvertDialog.cpp" line="47"/>
-        <source>Clear</source>
-        <translation>清空</translation>
-    </message>
-    <message>
-        <location filename="../src/BatchConvertDialog.cpp" line="58"/>
-        <source>Output Settings</source>
-        <translation>输出设置</translation>
-    </message>
-    <message>
-        <location filename="../src/BatchConvertDialog.cpp" line="63"/>
-        <source>Output Format:</source>
-        <translation>输出格式：</translation>
-    </message>
-    <message>
-        <location filename="../src/BatchConvertDialog.cpp" line="71"/>
-        <source>Output Directory:</source>
-        <translation>输出目录：</translation>
-    </message>
-    <message>
-        <location filename="../src/BatchConvertDialog.cpp" line="73"/>
-        <source>Browse...</source>
-        <translation>浏览...</translation>
-    </message>
-    <message>
-        <location filename="../src/BatchConvertDialog.cpp" line="84"/>
+        <location filename="../src/BatchConvertDialog.cpp" line="314"/>
         <source>Ready</source>
         <translation>就绪</translation>
     </message>
     <message>
-        <location filename="../src/BatchConvertDialog.cpp" line="92"/>
+        <location filename="../src/BatchConvertDialog.cpp" line="321"/>
+        <location filename="../src/BatchConvertDialog.cpp" line="435"/>
         <source>Start Conversion</source>
         <translation>开始转换</translation>
     </message>
     <message>
-        <location filename="../src/BatchConvertDialog.cpp" line="94"/>
+        <location filename="../src/BatchConvertDialog.cpp" line="323"/>
+        <location filename="../src/BatchConvertDialog.cpp" line="436"/>
         <source>Close</source>
         <translation>关闭</translation>
     </message>
     <message>
-        <location filename="../src/BatchConvertDialog.cpp" line="115"/>
-        <source>-- OSG Formats --</source>
-        <translation>-- OSG 格式 --</translation>
+        <location filename="../src/BatchConvertDialog.cpp" line="381"/>
+        <source>Model converter unavailable</source>
+        <translation>模型转换器不可用</translation>
     </message>
     <message>
-        <location filename="../src/BatchConvertDialog.cpp" line="123"/>
-        <source>-- Assimp Formats --</source>
-        <translation>-- Assimp 格式 --</translation>
-    </message>
-    <message>
-        <location filename="../src/BatchConvertDialog.cpp" line="156"/>
-        <source>Select Model Files</source>
-        <translation>选择模型文件</translation>
-    </message>
-    <message>
-        <location filename="../src/BatchConvertDialog.cpp" line="171"/>
-        <source>Select Directory Containing Models</source>
-        <translation>选择包含模型的目录</translation>
-    </message>
-    <message>
-        <location filename="../src/BatchConvertDialog.cpp" line="210"/>
-        <source>Select Output Directory</source>
-        <translation>选择输出目录</translation>
-    </message>
-    <message>
-        <location filename="../src/BatchConvertDialog.cpp" line="225"/>
-        <location filename="../src/BatchConvertDialog.cpp" line="232"/>
-        <location filename="../src/BatchConvertDialog.cpp" line="244"/>
-        <source>Error</source>
-        <translation>错误</translation>
-    </message>
-    <message>
-        <location filename="../src/BatchConvertDialog.cpp" line="225"/>
-        <source>Please select an output format</source>
-        <translation>请选择输出格式</translation>
-    </message>
-    <message>
-        <location filename="../src/BatchConvertDialog.cpp" line="232"/>
-        <source>Please specify an output directory</source>
-        <translation>请指定输出目录</translation>
-    </message>
-    <message>
-        <location filename="../src/BatchConvertDialog.cpp" line="244"/>
-        <source>No files to convert</source>
-        <translation>没有文件需要转换</translation>
-    </message>
-    <message>
-        <location filename="../src/BatchConvertDialog.cpp" line="252"/>
-        <source>Converting...</source>
-        <translation>转换中...</translation>
-    </message>
-    <message>
-        <location filename="../src/BatchConvertDialog.cpp" line="276"/>
+        <location filename="../src/BatchConvertDialog.cpp" line="413"/>
         <source>Conversion Complete</source>
         <translation>转换完成</translation>
     </message>
     <message>
-        <location filename="../src/BatchConvertDialog.cpp" line="280"/>
+        <location filename="../src/BatchConvertDialog.cpp" line="415"/>
         <source>Conversion Finished</source>
         <translation>转换已结束</translation>
+    </message>
+</context>
+<context>
+    <name>ConvertPanel</name>
+    <message>
+        <location filename="../src/BatchConvertDialog.cpp" line="33"/>
+        <source>Source Files</source>
+        <translation type="unfinished">源文件</translation>
+    </message>
+    <message>
+        <location filename="../src/BatchConvertDialog.cpp" line="41"/>
+        <location filename="../src/BatchConvertDialog.cpp" line="143"/>
+        <source>Add Files...</source>
+        <translation type="unfinished">添加文件...</translation>
+    </message>
+    <message>
+        <location filename="../src/BatchConvertDialog.cpp" line="42"/>
+        <location filename="../src/BatchConvertDialog.cpp" line="144"/>
+        <source>Add Directory...</source>
+        <translation type="unfinished">添加目录...</translation>
+    </message>
+    <message>
+        <location filename="../src/BatchConvertDialog.cpp" line="43"/>
+        <location filename="../src/BatchConvertDialog.cpp" line="145"/>
+        <source>Remove</source>
+        <translation type="unfinished">移除</translation>
+    </message>
+    <message>
+        <location filename="../src/BatchConvertDialog.cpp" line="44"/>
+        <location filename="../src/BatchConvertDialog.cpp" line="146"/>
+        <source>Clear</source>
+        <translation type="unfinished">清空</translation>
+    </message>
+    <message>
+        <location filename="../src/BatchConvertDialog.cpp" line="54"/>
+        <source>Output Settings</source>
+        <translation type="unfinished">输出设置</translation>
+    </message>
+    <message>
+        <location filename="../src/BatchConvertDialog.cpp" line="58"/>
+        <location filename="../src/BatchConvertDialog.cpp" line="148"/>
+        <source>Output Format:</source>
+        <translation type="unfinished">输出格式：</translation>
+    </message>
+    <message>
+        <location filename="../src/BatchConvertDialog.cpp" line="66"/>
+        <location filename="../src/BatchConvertDialog.cpp" line="149"/>
+        <source>Output Directory:</source>
+        <translation type="unfinished">输出目录：</translation>
+    </message>
+    <message>
+        <location filename="../src/BatchConvertDialog.cpp" line="69"/>
+        <location filename="../src/BatchConvertDialog.cpp" line="147"/>
+        <source>Browse...</source>
+        <translation type="unfinished">浏览...</translation>
+    </message>
+    <message>
+        <location filename="../src/BatchConvertDialog.cpp" line="155"/>
+        <source>Select Files</source>
+        <translation>选择文件</translation>
+    </message>
+    <message>
+        <location filename="../src/BatchConvertDialog.cpp" line="166"/>
+        <source>Select Directory</source>
+        <translation>选择目录</translation>
+    </message>
+    <message>
+        <location filename="../src/BatchConvertDialog.cpp" line="192"/>
+        <source>Select Output Directory</source>
+        <translation type="unfinished">选择输出目录</translation>
+    </message>
+</context>
+<context>
+    <name>ImageConverter</name>
+    <message>
+        <location filename="../src/ImageConverter.cpp" line="79"/>
+        <source>Failed to read image: %1 (%2)</source>
+        <translation>读取图片失败：%1 (%2)</translation>
+    </message>
+    <message>
+        <location filename="../src/ImageConverter.cpp" line="96"/>
+        <source>Failed to write image: %1 (%2)</source>
+        <translation>写入图片失败：%1 (%2)</translation>
+    </message>
+    <message>
+        <location filename="../src/ImageConverter.cpp" line="100"/>
+        <source>Converted: %1</source>
+        <translation type="unfinished">已转换：%1</translation>
+    </message>
+    <message>
+        <location filename="../src/ImageConverter.cpp" line="110"/>
+        <source>No input files specified</source>
+        <translation type="unfinished">未指定输入文件</translation>
+    </message>
+    <message>
+        <location filename="../src/ImageConverter.cpp" line="117"/>
+        <source>Cannot create output directory: %1</source>
+        <translation type="unfinished">无法创建输出目录：%1</translation>
+    </message>
+    <message>
+        <location filename="../src/ImageConverter.cpp" line="132"/>
+        <source>Converting %1/%2: %3</source>
+        <translation type="unfinished">正在转换 %1/%2：%3</translation>
+    </message>
+    <message>
+        <location filename="../src/ImageConverter.cpp" line="157"/>
+        <source>Batch conversion complete: %1 succeeded, %2 failed out of %3 files</source>
+        <translation type="unfinished">批量转换完成：%1 成功，%2 失败，共 %3 个文件</translation>
+    </message>
+    <message>
+        <location filename="../src/ImageConverter.cpp" line="160"/>
+        <source>Failed files:</source>
+        <translation type="unfinished">失败的文件：</translation>
     </message>
 </context>
 <context>
@@ -151,6 +198,18 @@
         <location filename="../src/MainWindow.cpp" line="1224"/>
         <source>&amp;Tools</source>
         <translation>工具(&amp;T)</translation>
+    </message>
+    <message>
+        <location filename="../src/MainWindow.cpp" line="277"/>
+        <location filename="../src/MainWindow.cpp" line="1246"/>
+        <source>Format Conversion...</source>
+        <translation>格式转换...</translation>
+    </message>
+    <message>
+        <location filename="../src/MainWindow.cpp" line="279"/>
+        <location filename="../src/MainWindow.cpp" line="1247"/>
+        <source>Convert models, images, vectors and rasters between different formats</source>
+        <translation>在不同格式之间转换模型、图片、矢量和栅格数据</translation>
     </message>
     <message>
         <location filename="../src/MainWindow.cpp" line="341"/>
@@ -214,31 +273,31 @@
     </message>
     <message>
         <location filename="../src/MainWindow.cpp" line="231"/>
-        <location filename="../src/MainWindow.cpp" line="1251"/>
+        <location filename="../src/MainWindow.cpp" line="1255"/>
         <source>Solid</source>
         <translation>实体</translation>
     </message>
     <message>
         <location filename="../src/MainWindow.cpp" line="238"/>
-        <location filename="../src/MainWindow.cpp" line="1252"/>
+        <location filename="../src/MainWindow.cpp" line="1256"/>
         <source>Wireframe</source>
         <translation>线框</translation>
     </message>
     <message>
         <location filename="../src/MainWindow.cpp" line="244"/>
-        <location filename="../src/MainWindow.cpp" line="1253"/>
+        <location filename="../src/MainWindow.cpp" line="1257"/>
         <source>Points</source>
         <translation>点云</translation>
     </message>
     <message>
         <location filename="../src/MainWindow.cpp" line="250"/>
-        <location filename="../src/MainWindow.cpp" line="1254"/>
+        <location filename="../src/MainWindow.cpp" line="1258"/>
         <source>Solid + Wireframe</source>
         <translation>实体+线框</translation>
     </message>
     <message>
         <location filename="../src/MainWindow.cpp" line="227"/>
-        <location filename="../src/MainWindow.cpp" line="1249"/>
+        <location filename="../src/MainWindow.cpp" line="1253"/>
         <source>Display Mode</source>
         <translation>显示模式</translation>
     </message>
@@ -248,11 +307,7 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Model Info</source>
-        <translation type="vanished">模型信息</translation>
-    </message>
-    <message>
-        <location filename="../src/MainWindow.cpp" line="1268"/>
+        <location filename="../src/MainWindow.cpp" line="1272"/>
         <source>Scene Tree</source>
         <translation>场景树</translation>
     </message>
@@ -360,16 +415,6 @@
         <translation>保存截图到文件</translation>
     </message>
     <message>
-        <location filename="../src/MainWindow.cpp" line="277"/>
-        <source>Batch Convert...</source>
-        <translation>批量转换...</translation>
-    </message>
-    <message>
-        <location filename="../src/MainWindow.cpp" line="279"/>
-        <source>Convert models between different formats</source>
-        <translation>在不同格式之间转换模型</translation>
-    </message>
-    <message>
         <location filename="../src/MainWindow.cpp" line="283"/>
         <source>OSG &amp;Handlers</source>
         <translation>OSG处理器(&amp;H)</translation>
@@ -446,13 +491,13 @@
     </message>
     <message>
         <location filename="../src/MainWindow.cpp" line="346"/>
-        <location filename="../src/MainWindow.cpp" line="1256"/>
+        <location filename="../src/MainWindow.cpp" line="1260"/>
         <source>中文</source>
         <translation>中文</translation>
     </message>
     <message>
         <location filename="../src/MainWindow.cpp" line="351"/>
-        <location filename="../src/MainWindow.cpp" line="1257"/>
+        <location filename="../src/MainWindow.cpp" line="1261"/>
         <source>English</source>
         <translation>English</translation>
     </message>
@@ -464,36 +509,36 @@
     </message>
     <message>
         <location filename="../src/MainWindow.cpp" line="361"/>
-        <location filename="../src/MainWindow.cpp" line="1259"/>
-        <location filename="../src/MainWindow.cpp" line="1319"/>
+        <location filename="../src/MainWindow.cpp" line="1263"/>
         <location filename="../src/MainWindow.cpp" line="1323"/>
+        <location filename="../src/MainWindow.cpp" line="1327"/>
         <source>Dark</source>
         <translation>暗色</translation>
     </message>
     <message>
         <location filename="../src/MainWindow.cpp" line="367"/>
-        <location filename="../src/MainWindow.cpp" line="1260"/>
-        <location filename="../src/MainWindow.cpp" line="1320"/>
+        <location filename="../src/MainWindow.cpp" line="1264"/>
+        <location filename="../src/MainWindow.cpp" line="1324"/>
         <source>Light</source>
         <translation>亮色</translation>
     </message>
     <message>
         <location filename="../src/MainWindow.cpp" line="372"/>
-        <location filename="../src/MainWindow.cpp" line="1261"/>
-        <location filename="../src/MainWindow.cpp" line="1321"/>
+        <location filename="../src/MainWindow.cpp" line="1265"/>
+        <location filename="../src/MainWindow.cpp" line="1325"/>
         <source>Nord</source>
         <translation>北欧</translation>
     </message>
     <message>
         <location filename="../src/MainWindow.cpp" line="377"/>
-        <location filename="../src/MainWindow.cpp" line="1262"/>
-        <location filename="../src/MainWindow.cpp" line="1322"/>
+        <location filename="../src/MainWindow.cpp" line="1266"/>
+        <location filename="../src/MainWindow.cpp" line="1326"/>
         <source>Solarized</source>
         <translation>日晒</translation>
     </message>
     <message>
         <location filename="../src/MainWindow.cpp" line="388"/>
-        <location filename="../src/MainWindow.cpp" line="1245"/>
+        <location filename="../src/MainWindow.cpp" line="1249"/>
         <source>About</source>
         <translation>关于</translation>
     </message>
@@ -511,7 +556,7 @@
     <message>
         <location filename="../src/MainWindow.cpp" line="424"/>
         <location filename="../src/MainWindow.cpp" line="795"/>
-        <location filename="../src/MainWindow.cpp" line="1264"/>
+        <location filename="../src/MainWindow.cpp" line="1268"/>
         <source>Ready</source>
         <translation>就绪</translation>
     </message>
@@ -542,10 +587,6 @@
         <location filename="../src/MainWindow.cpp" line="690"/>
         <source>Cannot delete the root node.</source>
         <translation>无法删除根节点。</translation>
-    </message>
-    <message>
-        <source>Open Model File</source>
-        <translation type="vanished">打开模型文件</translation>
     </message>
     <message>
         <location filename="../src/MainWindow.cpp" line="815"/>
@@ -669,34 +710,34 @@
         <translation>基于Qt、OSG和Assimp的万能3D模型浏览器。</translation>
     </message>
     <message>
-        <location filename="../src/MainWindow.cpp" line="1269"/>
+        <location filename="../src/MainWindow.cpp" line="1273"/>
         <source>Node Editor</source>
         <translation>节点编辑器</translation>
     </message>
     <message>
-        <location filename="../src/MainWindow.cpp" line="1270"/>
+        <location filename="../src/MainWindow.cpp" line="1274"/>
         <source>Pre-Process Effects</source>
         <translation>前处理特效</translation>
     </message>
     <message>
-        <location filename="../src/MainWindow.cpp" line="1344"/>
+        <location filename="../src/MainWindow.cpp" line="1348"/>
         <source>Theme: %1</source>
         <translation>主题: %1</translation>
     </message>
     <message>
-        <location filename="../src/MainWindow.cpp" line="1405"/>
+        <location filename="../src/MainWindow.cpp" line="1409"/>
         <source>%1 / %2</source>
         <translation>%1 / %2</translation>
     </message>
     <message>
         <location filename="../src/MainWindow.cpp" line="146"/>
-        <location filename="../src/MainWindow.cpp" line="1247"/>
+        <location filename="../src/MainWindow.cpp" line="1251"/>
         <source>&amp;Recent Files</source>
         <translation>最近文件(&amp;R)</translation>
     </message>
     <message>
         <location filename="../src/MainWindow.cpp" line="148"/>
-        <location filename="../src/MainWindow.cpp" line="1248"/>
+        <location filename="../src/MainWindow.cpp" line="1252"/>
         <source>Clear Recent</source>
         <translation>清除最近记录</translation>
     </message>
@@ -764,11 +805,7 @@
 <context>
     <name>ModelInfoDock</name>
     <message>
-        <source>Model Info</source>
-        <translation type="vanished">模型信息</translation>
-    </message>
-    <message>
-        <location filename="../src/MainWindow.cpp" line="1267"/>
+        <location filename="../src/MainWindow.cpp" line="1271"/>
         <location filename="../src/ModelInfoDock.cpp" line="13"/>
         <source>Info</source>
         <translation>属性信息</translation>
@@ -926,7 +963,7 @@
     <message>
         <location filename="../src/ModelInfoDock.cpp" line="186"/>
         <source>Image</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">图片</translation>
     </message>
     <message>
         <location filename="../src/ModelInfoDock.cpp" line="189"/>
@@ -974,7 +1011,7 @@
     <message>
         <location filename="../src/ModelInfoDock.cpp" line="213"/>
         <source>Raster</source>
-        <translation type="unfinished"></translation>
+        <translation>栅格</translation>
     </message>
     <message>
         <location filename="../src/ModelInfoDock.cpp" line="216"/>
@@ -1016,7 +1053,7 @@
     <message>
         <location filename="../src/ModelInfoDock.cpp" line="246"/>
         <source>Vector</source>
-        <translation type="unfinished"></translation>
+        <translation>矢量</translation>
     </message>
     <message>
         <location filename="../src/ModelInfoDock.cpp" line="247"/>
@@ -1109,26 +1146,14 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Node Geometry</source>
-        <translation type="vanished">节点几何</translation>
-    </message>
-    <message>
         <location filename="../src/ModelInfoDock.cpp" line="154"/>
         <source>Drawables</source>
         <translation>绘制体</translation>
     </message>
     <message>
-        <source>Node Bounding Box</source>
-        <translation type="vanished">节点包围盒</translation>
-    </message>
-    <message>
         <location filename="../src/ModelInfoDock.cpp" line="141"/>
         <source>(unnamed)</source>
         <translation>(未命名)</translation>
-    </message>
-    <message>
-        <source>N/A</source>
-        <translation type="vanished">不适用</translation>
     </message>
 </context>
 <context>
@@ -2318,8 +2343,43 @@ Triangles: %2</source>
         <translation>STEP (*.stp)</translation>
     </message>
     <message>
+        <location filename="../src/ImageConverter.cpp" line="51"/>
+        <source>All Supported Images (%1)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/ImageConverter.cpp" line="52"/>
+        <location filename="../src/RasterConverter.cpp" line="51"/>
+        <source>PNG (*.png)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/ImageConverter.cpp" line="53"/>
+        <location filename="../src/RasterConverter.cpp" line="52"/>
+        <source>JPEG (*.jpg *.jpeg)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/ImageConverter.cpp" line="54"/>
+        <source>BMP (*.bmp)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/ImageConverter.cpp" line="55"/>
+        <source>TIFF (*.tif *.tiff)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/ImageConverter.cpp" line="56"/>
+        <source>WebP (*.webp)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/ImageConverter.cpp" line="57"/>
         <location filename="../src/ModelConverter.cpp" line="91"/>
         <location filename="../src/ModelLoader.cpp" line="339"/>
+        <location filename="../src/RasterConverter.cpp" line="55"/>
+        <location filename="../src/VectorConverter.cpp" line="55"/>
         <source>All Files (*)</source>
         <translation>所有文件 (*)</translation>
     </message>
@@ -2379,6 +2439,156 @@ Triangles: %2</source>
         <source>Simplify Mesh (%1%)</source>
         <translation>简化网格 (%1%)</translation>
     </message>
+    <message>
+        <location filename="../src/RasterConverter.cpp" line="49"/>
+        <source>All Supported Rasters (%1)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/RasterConverter.cpp" line="50"/>
+        <source>GeoTIFF (*.tif *.tiff)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/RasterConverter.cpp" line="53"/>
+        <source>JPEG 2000 (*.jp2)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/RasterConverter.cpp" line="54"/>
+        <source>Erdas IMG (*.img)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/VectorConverter.cpp" line="48"/>
+        <source>All Supported Vectors (%1)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/VectorConverter.cpp" line="49"/>
+        <source>ESRI Shapefile (*.shp)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/VectorConverter.cpp" line="50"/>
+        <source>GeoJSON (*.geojson *.json)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/VectorConverter.cpp" line="51"/>
+        <source>KML (*.kml *.kmz)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/VectorConverter.cpp" line="52"/>
+        <source>GeoPackage (*.gpkg)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/VectorConverter.cpp" line="53"/>
+        <source>GML (*.gml)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/VectorConverter.cpp" line="54"/>
+        <source>CSV (*.csv)</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>RasterConverter</name>
+    <message>
+        <location filename="../src/RasterConverter.cpp" line="21"/>
+        <source>GeoTIFF</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/RasterConverter.cpp" line="22"/>
+        <source>PNG</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/RasterConverter.cpp" line="23"/>
+        <source>JPEG</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/RasterConverter.cpp" line="24"/>
+        <source>JPEG 2000</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/RasterConverter.cpp" line="25"/>
+        <source>Erdas IMG</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/RasterConverter.cpp" line="26"/>
+        <source>BMP</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/RasterConverter.cpp" line="27"/>
+        <source>GIF</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/RasterConverter.cpp" line="28"/>
+        <source>ENVI</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/RasterConverter.cpp" line="74"/>
+        <location filename="../src/RasterConverter.cpp" line="128"/>
+        <source>Unsupported raster output format: %1</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/RasterConverter.cpp" line="81"/>
+        <location filename="../src/RasterConverter.cpp" line="134"/>
+        <source>GDAL driver not available: %1</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/RasterConverter.cpp" line="91"/>
+        <source>Failed to open raster: %1</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/RasterConverter.cpp" line="109"/>
+        <source>Converted: %1</source>
+        <translation type="unfinished">已转换：%1</translation>
+    </message>
+    <message>
+        <location filename="../src/RasterConverter.cpp" line="111"/>
+        <source>Failed to write raster: %1</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/RasterConverter.cpp" line="121"/>
+        <source>No input files specified</source>
+        <translation type="unfinished">未指定输入文件</translation>
+    </message>
+    <message>
+        <location filename="../src/RasterConverter.cpp" line="141"/>
+        <source>Cannot create output directory: %1</source>
+        <translation type="unfinished">无法创建输出目录：%1</translation>
+    </message>
+    <message>
+        <location filename="../src/RasterConverter.cpp" line="154"/>
+        <source>Converting %1/%2: %3</source>
+        <translation type="unfinished">正在转换 %1/%2：%3</translation>
+    </message>
+    <message>
+        <location filename="../src/RasterConverter.cpp" line="178"/>
+        <source>Batch conversion complete: %1 succeeded, %2 failed out of %3 files</source>
+        <translation type="unfinished">批量转换完成：%1 成功，%2 失败，共 %3 个文件</translation>
+    </message>
+    <message>
+        <location filename="../src/RasterConverter.cpp" line="181"/>
+        <source>Failed files:</source>
+        <translation type="unfinished">失败的文件：</translation>
+    </message>
 </context>
 <context>
     <name>SceneTreeDock</name>
@@ -2408,6 +2618,101 @@ Triangles: %2</source>
     </message>
 </context>
 <context>
+    <name>VectorConverter</name>
+    <message>
+        <location filename="../src/VectorConverter.cpp" line="22"/>
+        <source>ESRI Shapefile</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/VectorConverter.cpp" line="23"/>
+        <source>GeoJSON</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/VectorConverter.cpp" line="24"/>
+        <source>KML</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/VectorConverter.cpp" line="25"/>
+        <source>GeoPackage</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/VectorConverter.cpp" line="26"/>
+        <source>GML</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/VectorConverter.cpp" line="27"/>
+        <source>CSV</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/VectorConverter.cpp" line="28"/>
+        <source>MapInfo TAB</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/VectorConverter.cpp" line="29"/>
+        <source>DXF</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/VectorConverter.cpp" line="90"/>
+        <location filename="../src/VectorConverter.cpp" line="149"/>
+        <source>Unsupported vector output format: %1</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/VectorConverter.cpp" line="96"/>
+        <location filename="../src/VectorConverter.cpp" line="155"/>
+        <source>GDAL driver not available: %1</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/VectorConverter.cpp" line="106"/>
+        <source>Failed to open vector: %1</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/VectorConverter.cpp" line="130"/>
+        <source>Converted: %1</source>
+        <translation type="unfinished">已转换：%1</translation>
+    </message>
+    <message>
+        <location filename="../src/VectorConverter.cpp" line="132"/>
+        <source>Failed to write vector: %1</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/VectorConverter.cpp" line="142"/>
+        <source>No input files specified</source>
+        <translation type="unfinished">未指定输入文件</translation>
+    </message>
+    <message>
+        <location filename="../src/VectorConverter.cpp" line="162"/>
+        <source>Cannot create output directory: %1</source>
+        <translation type="unfinished">无法创建输出目录：%1</translation>
+    </message>
+    <message>
+        <location filename="../src/VectorConverter.cpp" line="175"/>
+        <source>Converting %1/%2: %3</source>
+        <translation type="unfinished">正在转换 %1/%2：%3</translation>
+    </message>
+    <message>
+        <location filename="../src/VectorConverter.cpp" line="203"/>
+        <source>Batch conversion complete: %1 succeeded, %2 failed out of %3 files</source>
+        <translation type="unfinished">批量转换完成：%1 成功，%2 失败，共 %3 个文件</translation>
+    </message>
+    <message>
+        <location filename="../src/VectorConverter.cpp" line="206"/>
+        <source>Failed files:</source>
+        <translation type="unfinished">失败的文件：</translation>
+    </message>
+</context>
+<context>
     <name>VectorViewerWidget</name>
     <message>
         <location filename="../src/VectorViewerWidget.cpp" line="133"/>
@@ -2429,18 +2734,10 @@ Triangles: %2</source>
         <translation>欢迎使用 PicModelViewer</translation>
     </message>
     <message>
-        <source>Universal 3D Model Viewer</source>
-        <translation type="vanished">万能3D模型浏览器</translation>
-    </message>
-    <message>
         <location filename="../src/WelcomeWidget.cpp" line="50"/>
         <location filename="../src/WelcomeWidget.cpp" line="143"/>
         <source>Image / Vector / Model File Viewer</source>
         <translation>矢量模型文件浏览器</translation>
-    </message>
-    <message>
-        <source>Open Model</source>
-        <translation type="vanished">打开模型</translation>
     </message>
     <message>
         <location filename="../src/WelcomeWidget.cpp" line="62"/>
@@ -2453,10 +2750,6 @@ Triangles: %2</source>
         <location filename="../src/WelcomeWidget.cpp" line="145"/>
         <source>Recent Files</source>
         <translation>最近文件</translation>
-    </message>
-    <message>
-        <source>Tip: Drag any model file into the window to open it</source>
-        <translation type="vanished">提示：将任意模型文件拖入窗口即可打开</translation>
     </message>
     <message>
         <location filename="../src/WelcomeWidget.cpp" line="93"/>

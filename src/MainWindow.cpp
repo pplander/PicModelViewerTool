@@ -274,9 +274,9 @@ void MainWindow::setupMenuBar()
     m_screenshotAction->setStatusTip(tr("Save screenshot to file"));
     m_toolsMenu->addAction(m_screenshotAction);
 
-    m_batchConvertAction = new QAction(tr("Batch Convert..."), this);
+    m_batchConvertAction = new QAction(tr("Format Conversion..."), this);
     m_batchConvertAction->setIcon(QIcon(":/icons/batch-convert.svg"));
-    m_batchConvertAction->setStatusTip(tr("Convert models between different formats"));
+    m_batchConvertAction->setStatusTip(tr("Convert models, images, vectors and rasters between different formats"));
     m_toolsMenu->addAction(m_batchConvertAction);
 
     // OSG Handler menu under Tools
@@ -1242,6 +1242,10 @@ void MainWindow::changeEvent(QEvent* event)
         m_fullScreenAction->setStatusTip(tr("Toggle full screen mode"));
         m_screenshotAction->setText(tr("Take Screenshot"));
         m_screenshotAction->setStatusTip(tr("Save screenshot to file"));
+        if (m_batchConvertAction) {
+            m_batchConvertAction->setText(tr("Format Conversion..."));
+            m_batchConvertAction->setStatusTip(tr("Convert models, images, vectors and rasters between different formats"));
+        }
         m_aboutAction->setText(tr("About"));
 
         m_recentFilesMenu->setTitle(tr("&Recent Files"));

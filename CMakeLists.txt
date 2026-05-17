@@ -78,6 +78,9 @@ set(SOURCES
     src/I18nManager.cpp
     src/WelcomeWidget.cpp
     src/ModelConverter.cpp
+    src/ImageConverter.cpp
+    src/VectorConverter.cpp
+    src/RasterConverter.cpp
     src/BatchConvertDialog.cpp
     src/NodeEditorDock.cpp
     src/PreProcessManager.cpp
@@ -98,6 +101,9 @@ set(HEADERS
     src/I18nManager.h
     src/WelcomeWidget.h
     src/ModelConverter.h
+    src/ImageConverter.h
+    src/VectorConverter.h
+    src/RasterConverter.h
     src/BatchConvertDialog.h
     src/NodeEditorDock.h
     src/EditCommand.h

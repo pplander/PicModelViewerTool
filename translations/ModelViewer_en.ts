@@ -4,132 +4,179 @@
 <context>
     <name>BatchConvertDialog</name>
     <message>
-        <location filename="../src/BatchConvertDialog.cpp" line="29"/>
-        <location filename="../src/BatchConvertDialog.cpp" line="295"/>
-        <source>Batch Model Conversion</source>
-        <translation>Batch Model Conversion</translation>
+        <location filename="../src/BatchConvertDialog.cpp" line="266"/>
+        <location filename="../src/BatchConvertDialog.cpp" line="427"/>
+        <source>Format Conversion</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/BatchConvertDialog.cpp" line="35"/>
-        <source>Source Files</source>
-        <translation>Source Files</translation>
+        <location filename="../src/BatchConvertDialog.cpp" line="280"/>
+        <location filename="../src/BatchConvertDialog.cpp" line="430"/>
+        <source>Model</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/BatchConvertDialog.cpp" line="44"/>
-        <source>Add Files...</source>
-        <translation>Add Files...</translation>
+        <location filename="../src/BatchConvertDialog.cpp" line="288"/>
+        <location filename="../src/BatchConvertDialog.cpp" line="431"/>
+        <source>Image</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/BatchConvertDialog.cpp" line="45"/>
-        <source>Add Directory...</source>
-        <translation>Add Directory...</translation>
+        <location filename="../src/BatchConvertDialog.cpp" line="297"/>
+        <location filename="../src/BatchConvertDialog.cpp" line="432"/>
+        <source>Vector</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/BatchConvertDialog.cpp" line="46"/>
-        <source>Remove</source>
-        <translation>Remove</translation>
+        <location filename="../src/BatchConvertDialog.cpp" line="306"/>
+        <location filename="../src/BatchConvertDialog.cpp" line="433"/>
+        <source>Raster</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/BatchConvertDialog.cpp" line="47"/>
-        <source>Clear</source>
-        <translation>Clear</translation>
-    </message>
-    <message>
-        <location filename="../src/BatchConvertDialog.cpp" line="58"/>
-        <source>Output Settings</source>
-        <translation>Output Settings</translation>
-    </message>
-    <message>
-        <location filename="../src/BatchConvertDialog.cpp" line="63"/>
-        <source>Output Format:</source>
-        <translation>Output Format:</translation>
-    </message>
-    <message>
-        <location filename="../src/BatchConvertDialog.cpp" line="71"/>
-        <source>Output Directory:</source>
-        <translation>Output Directory:</translation>
-    </message>
-    <message>
-        <location filename="../src/BatchConvertDialog.cpp" line="73"/>
-        <source>Browse...</source>
-        <translation>Browse...</translation>
-    </message>
-    <message>
-        <location filename="../src/BatchConvertDialog.cpp" line="84"/>
+        <location filename="../src/BatchConvertDialog.cpp" line="314"/>
         <source>Ready</source>
         <translation>Ready</translation>
     </message>
     <message>
-        <location filename="../src/BatchConvertDialog.cpp" line="92"/>
+        <location filename="../src/BatchConvertDialog.cpp" line="321"/>
+        <location filename="../src/BatchConvertDialog.cpp" line="435"/>
         <source>Start Conversion</source>
         <translation>Start Conversion</translation>
     </message>
     <message>
-        <location filename="../src/BatchConvertDialog.cpp" line="94"/>
+        <location filename="../src/BatchConvertDialog.cpp" line="323"/>
+        <location filename="../src/BatchConvertDialog.cpp" line="436"/>
         <source>Close</source>
         <translation>Close</translation>
     </message>
     <message>
-        <location filename="../src/BatchConvertDialog.cpp" line="115"/>
-        <source>-- OSG Formats --</source>
-        <translation>-- OSG Formats --</translation>
+        <location filename="../src/BatchConvertDialog.cpp" line="381"/>
+        <source>Model converter unavailable</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/BatchConvertDialog.cpp" line="123"/>
-        <source>-- Assimp Formats --</source>
-        <translation>-- Assimp Formats --</translation>
-    </message>
-    <message>
-        <location filename="../src/BatchConvertDialog.cpp" line="156"/>
-        <source>Select Model Files</source>
-        <translation>Select Model Files</translation>
-    </message>
-    <message>
-        <location filename="../src/BatchConvertDialog.cpp" line="171"/>
-        <source>Select Directory Containing Models</source>
-        <translation>Select Directory Containing Models</translation>
-    </message>
-    <message>
-        <location filename="../src/BatchConvertDialog.cpp" line="210"/>
-        <source>Select Output Directory</source>
-        <translation>Select Output Directory</translation>
-    </message>
-    <message>
-        <location filename="../src/BatchConvertDialog.cpp" line="225"/>
-        <location filename="../src/BatchConvertDialog.cpp" line="232"/>
-        <location filename="../src/BatchConvertDialog.cpp" line="244"/>
-        <source>Error</source>
-        <translation>Error</translation>
-    </message>
-    <message>
-        <location filename="../src/BatchConvertDialog.cpp" line="225"/>
-        <source>Please select an output format</source>
-        <translation>Please select an output format</translation>
-    </message>
-    <message>
-        <location filename="../src/BatchConvertDialog.cpp" line="232"/>
-        <source>Please specify an output directory</source>
-        <translation>Please specify an output directory</translation>
-    </message>
-    <message>
-        <location filename="../src/BatchConvertDialog.cpp" line="244"/>
-        <source>No files to convert</source>
-        <translation>No files to convert</translation>
-    </message>
-    <message>
-        <location filename="../src/BatchConvertDialog.cpp" line="252"/>
-        <source>Converting...</source>
-        <translation>Converting...</translation>
-    </message>
-    <message>
-        <location filename="../src/BatchConvertDialog.cpp" line="276"/>
+        <location filename="../src/BatchConvertDialog.cpp" line="413"/>
         <source>Conversion Complete</source>
         <translation>Conversion Complete</translation>
     </message>
     <message>
-        <location filename="../src/BatchConvertDialog.cpp" line="280"/>
+        <location filename="../src/BatchConvertDialog.cpp" line="415"/>
         <source>Conversion Finished</source>
         <translation>Conversion Finished</translation>
+    </message>
+</context>
+<context>
+    <name>ConvertPanel</name>
+    <message>
+        <location filename="../src/BatchConvertDialog.cpp" line="33"/>
+        <source>Source Files</source>
+        <translation type="unfinished">Source Files</translation>
+    </message>
+    <message>
+        <location filename="../src/BatchConvertDialog.cpp" line="41"/>
+        <location filename="../src/BatchConvertDialog.cpp" line="143"/>
+        <source>Add Files...</source>
+        <translation type="unfinished">Add Files...</translation>
+    </message>
+    <message>
+        <location filename="../src/BatchConvertDialog.cpp" line="42"/>
+        <location filename="../src/BatchConvertDialog.cpp" line="144"/>
+        <source>Add Directory...</source>
+        <translation type="unfinished">Add Directory...</translation>
+    </message>
+    <message>
+        <location filename="../src/BatchConvertDialog.cpp" line="43"/>
+        <location filename="../src/BatchConvertDialog.cpp" line="145"/>
+        <source>Remove</source>
+        <translation type="unfinished">Remove</translation>
+    </message>
+    <message>
+        <location filename="../src/BatchConvertDialog.cpp" line="44"/>
+        <location filename="../src/BatchConvertDialog.cpp" line="146"/>
+        <source>Clear</source>
+        <translation type="unfinished">Clear</translation>
+    </message>
+    <message>
+        <location filename="../src/BatchConvertDialog.cpp" line="54"/>
+        <source>Output Settings</source>
+        <translation type="unfinished">Output Settings</translation>
+    </message>
+    <message>
+        <location filename="../src/BatchConvertDialog.cpp" line="58"/>
+        <location filename="../src/BatchConvertDialog.cpp" line="148"/>
+        <source>Output Format:</source>
+        <translation type="unfinished">Output Format:</translation>
+    </message>
+    <message>
+        <location filename="../src/BatchConvertDialog.cpp" line="66"/>
+        <location filename="../src/BatchConvertDialog.cpp" line="149"/>
+        <source>Output Directory:</source>
+        <translation type="unfinished">Output Directory:</translation>
+    </message>
+    <message>
+        <location filename="../src/BatchConvertDialog.cpp" line="69"/>
+        <location filename="../src/BatchConvertDialog.cpp" line="147"/>
+        <source>Browse...</source>
+        <translation type="unfinished">Browse...</translation>
+    </message>
+    <message>
+        <location filename="../src/BatchConvertDialog.cpp" line="155"/>
+        <source>Select Files</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/BatchConvertDialog.cpp" line="166"/>
+        <source>Select Directory</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/BatchConvertDialog.cpp" line="192"/>
+        <source>Select Output Directory</source>
+        <translation type="unfinished">Select Output Directory</translation>
+    </message>
+</context>
+<context>
+    <name>ImageConverter</name>
+    <message>
+        <location filename="../src/ImageConverter.cpp" line="79"/>
+        <source>Failed to read image: %1 (%2)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/ImageConverter.cpp" line="96"/>
+        <source>Failed to write image: %1 (%2)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/ImageConverter.cpp" line="100"/>
+        <source>Converted: %1</source>
+        <translation type="unfinished">Converted: %1</translation>
+    </message>
+    <message>
+        <location filename="../src/ImageConverter.cpp" line="110"/>
+        <source>No input files specified</source>
+        <translation type="unfinished">No input files specified</translation>
+    </message>
+    <message>
+        <location filename="../src/ImageConverter.cpp" line="117"/>
+        <source>Cannot create output directory: %1</source>
+        <translation type="unfinished">Cannot create output directory: %1</translation>
+    </message>
+    <message>
+        <location filename="../src/ImageConverter.cpp" line="132"/>
+        <source>Converting %1/%2: %3</source>
+        <translation type="unfinished">Converting %1/%2: %3</translation>
+    </message>
+    <message>
+        <location filename="../src/ImageConverter.cpp" line="157"/>
+        <source>Batch conversion complete: %1 succeeded, %2 failed out of %3 files</source>
+        <translation type="unfinished">Batch conversion complete: %1 succeeded, %2 failed out of %3 files</translation>
+    </message>
+    <message>
+        <location filename="../src/ImageConverter.cpp" line="160"/>
+        <source>Failed files:</source>
+        <translation type="unfinished">Failed files:</translation>
     </message>
 </context>
 <context>
@@ -151,6 +198,18 @@
         <location filename="../src/MainWindow.cpp" line="1224"/>
         <source>&amp;Tools</source>
         <translation>&amp;Tools</translation>
+    </message>
+    <message>
+        <location filename="../src/MainWindow.cpp" line="277"/>
+        <location filename="../src/MainWindow.cpp" line="1246"/>
+        <source>Format Conversion...</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/MainWindow.cpp" line="279"/>
+        <location filename="../src/MainWindow.cpp" line="1247"/>
+        <source>Convert models, images, vectors and rasters between different formats</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../src/MainWindow.cpp" line="341"/>
@@ -214,31 +273,31 @@
     </message>
     <message>
         <location filename="../src/MainWindow.cpp" line="231"/>
-        <location filename="../src/MainWindow.cpp" line="1251"/>
+        <location filename="../src/MainWindow.cpp" line="1255"/>
         <source>Solid</source>
         <translation>Solid</translation>
     </message>
     <message>
         <location filename="../src/MainWindow.cpp" line="238"/>
-        <location filename="../src/MainWindow.cpp" line="1252"/>
+        <location filename="../src/MainWindow.cpp" line="1256"/>
         <source>Wireframe</source>
         <translation>Wireframe</translation>
     </message>
     <message>
         <location filename="../src/MainWindow.cpp" line="244"/>
-        <location filename="../src/MainWindow.cpp" line="1253"/>
+        <location filename="../src/MainWindow.cpp" line="1257"/>
         <source>Points</source>
         <translation>Points</translation>
     </message>
     <message>
         <location filename="../src/MainWindow.cpp" line="250"/>
-        <location filename="../src/MainWindow.cpp" line="1254"/>
+        <location filename="../src/MainWindow.cpp" line="1258"/>
         <source>Solid + Wireframe</source>
         <translation>Solid + Wireframe</translation>
     </message>
     <message>
         <location filename="../src/MainWindow.cpp" line="227"/>
-        <location filename="../src/MainWindow.cpp" line="1249"/>
+        <location filename="../src/MainWindow.cpp" line="1253"/>
         <source>Display Mode</source>
         <translation>Display Mode</translation>
     </message>
@@ -248,11 +307,7 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Model Info</source>
-        <translation type="vanished">Model Info</translation>
-    </message>
-    <message>
-        <location filename="../src/MainWindow.cpp" line="1268"/>
+        <location filename="../src/MainWindow.cpp" line="1272"/>
         <source>Scene Tree</source>
         <translation>Scene Tree</translation>
     </message>
@@ -360,16 +415,6 @@
         <translation>Save screenshot to file</translation>
     </message>
     <message>
-        <location filename="../src/MainWindow.cpp" line="277"/>
-        <source>Batch Convert...</source>
-        <translation>Batch Convert...</translation>
-    </message>
-    <message>
-        <location filename="../src/MainWindow.cpp" line="279"/>
-        <source>Convert models between different formats</source>
-        <translation>Convert models between different formats</translation>
-    </message>
-    <message>
         <location filename="../src/MainWindow.cpp" line="283"/>
         <source>OSG &amp;Handlers</source>
         <translation>OSG &amp;Handlers</translation>
@@ -446,13 +491,13 @@
     </message>
     <message>
         <location filename="../src/MainWindow.cpp" line="346"/>
-        <location filename="../src/MainWindow.cpp" line="1256"/>
+        <location filename="../src/MainWindow.cpp" line="1260"/>
         <source>中文</source>
         <translation>Chinese</translation>
     </message>
     <message>
         <location filename="../src/MainWindow.cpp" line="351"/>
-        <location filename="../src/MainWindow.cpp" line="1257"/>
+        <location filename="../src/MainWindow.cpp" line="1261"/>
         <source>English</source>
         <translation>English</translation>
     </message>
@@ -464,36 +509,36 @@
     </message>
     <message>
         <location filename="../src/MainWindow.cpp" line="361"/>
-        <location filename="../src/MainWindow.cpp" line="1259"/>
-        <location filename="../src/MainWindow.cpp" line="1319"/>
+        <location filename="../src/MainWindow.cpp" line="1263"/>
         <location filename="../src/MainWindow.cpp" line="1323"/>
+        <location filename="../src/MainWindow.cpp" line="1327"/>
         <source>Dark</source>
         <translation>Dark</translation>
     </message>
     <message>
         <location filename="../src/MainWindow.cpp" line="367"/>
-        <location filename="../src/MainWindow.cpp" line="1260"/>
-        <location filename="../src/MainWindow.cpp" line="1320"/>
+        <location filename="../src/MainWindow.cpp" line="1264"/>
+        <location filename="../src/MainWindow.cpp" line="1324"/>
         <source>Light</source>
         <translation>Light</translation>
     </message>
     <message>
         <location filename="../src/MainWindow.cpp" line="372"/>
-        <location filename="../src/MainWindow.cpp" line="1261"/>
-        <location filename="../src/MainWindow.cpp" line="1321"/>
+        <location filename="../src/MainWindow.cpp" line="1265"/>
+        <location filename="../src/MainWindow.cpp" line="1325"/>
         <source>Nord</source>
         <translation>Nord</translation>
     </message>
     <message>
         <location filename="../src/MainWindow.cpp" line="377"/>
-        <location filename="../src/MainWindow.cpp" line="1262"/>
-        <location filename="../src/MainWindow.cpp" line="1322"/>
+        <location filename="../src/MainWindow.cpp" line="1266"/>
+        <location filename="../src/MainWindow.cpp" line="1326"/>
         <source>Solarized</source>
         <translation>Solarized</translation>
     </message>
     <message>
         <location filename="../src/MainWindow.cpp" line="388"/>
-        <location filename="../src/MainWindow.cpp" line="1245"/>
+        <location filename="../src/MainWindow.cpp" line="1249"/>
         <source>About</source>
         <translation>About</translation>
     </message>
@@ -511,7 +556,7 @@
     <message>
         <location filename="../src/MainWindow.cpp" line="424"/>
         <location filename="../src/MainWindow.cpp" line="795"/>
-        <location filename="../src/MainWindow.cpp" line="1264"/>
+        <location filename="../src/MainWindow.cpp" line="1268"/>
         <source>Ready</source>
         <translation>Ready</translation>
     </message>
@@ -542,10 +587,6 @@
         <location filename="../src/MainWindow.cpp" line="690"/>
         <source>Cannot delete the root node.</source>
         <translation>Cannot delete the root node.</translation>
-    </message>
-    <message>
-        <source>Open Model File</source>
-        <translation type="vanished">Open Model File</translation>
     </message>
     <message>
         <location filename="../src/MainWindow.cpp" line="815"/>
@@ -669,34 +710,34 @@
         <translation>A universal 3D model viewer based on Qt, OSG and Assimp.</translation>
     </message>
     <message>
-        <location filename="../src/MainWindow.cpp" line="1269"/>
+        <location filename="../src/MainWindow.cpp" line="1273"/>
         <source>Node Editor</source>
         <translation>Node Editor</translation>
     </message>
     <message>
-        <location filename="../src/MainWindow.cpp" line="1270"/>
+        <location filename="../src/MainWindow.cpp" line="1274"/>
         <source>Pre-Process Effects</source>
         <translation>Pre-Process Effects</translation>
     </message>
     <message>
-        <location filename="../src/MainWindow.cpp" line="1344"/>
+        <location filename="../src/MainWindow.cpp" line="1348"/>
         <source>Theme: %1</source>
         <translation>Theme: %1</translation>
     </message>
     <message>
-        <location filename="../src/MainWindow.cpp" line="1405"/>
+        <location filename="../src/MainWindow.cpp" line="1409"/>
         <source>%1 / %2</source>
         <translation>%1 / %2</translation>
     </message>
     <message>
         <location filename="../src/MainWindow.cpp" line="146"/>
-        <location filename="../src/MainWindow.cpp" line="1247"/>
+        <location filename="../src/MainWindow.cpp" line="1251"/>
         <source>&amp;Recent Files</source>
         <translation>&amp;Recent Files</translation>
     </message>
     <message>
         <location filename="../src/MainWindow.cpp" line="148"/>
-        <location filename="../src/MainWindow.cpp" line="1248"/>
+        <location filename="../src/MainWindow.cpp" line="1252"/>
         <source>Clear Recent</source>
         <translation>Clear Recent</translation>
     </message>
@@ -764,11 +805,7 @@
 <context>
     <name>ModelInfoDock</name>
     <message>
-        <source>Model Info</source>
-        <translation type="vanished">Model Info</translation>
-    </message>
-    <message>
-        <location filename="../src/MainWindow.cpp" line="1267"/>
+        <location filename="../src/MainWindow.cpp" line="1271"/>
         <location filename="../src/ModelInfoDock.cpp" line="13"/>
         <source>Info</source>
         <translation type="unfinished">Info</translation>
@@ -1109,26 +1146,14 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Node Geometry</source>
-        <translation type="vanished">Node Geometry</translation>
-    </message>
-    <message>
         <location filename="../src/ModelInfoDock.cpp" line="154"/>
         <source>Drawables</source>
         <translation>Drawables</translation>
     </message>
     <message>
-        <source>Node Bounding Box</source>
-        <translation type="vanished">Node Bounding Box</translation>
-    </message>
-    <message>
         <location filename="../src/ModelInfoDock.cpp" line="141"/>
         <source>(unnamed)</source>
         <translation>(unnamed)</translation>
-    </message>
-    <message>
-        <source>N/A</source>
-        <translation type="vanished">N/A</translation>
     </message>
 </context>
 <context>
@@ -2318,8 +2343,43 @@ Triangles: %2</translation>
         <translation>STEP (*.stp)</translation>
     </message>
     <message>
+        <location filename="../src/ImageConverter.cpp" line="51"/>
+        <source>All Supported Images (%1)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/ImageConverter.cpp" line="52"/>
+        <location filename="../src/RasterConverter.cpp" line="51"/>
+        <source>PNG (*.png)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/ImageConverter.cpp" line="53"/>
+        <location filename="../src/RasterConverter.cpp" line="52"/>
+        <source>JPEG (*.jpg *.jpeg)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/ImageConverter.cpp" line="54"/>
+        <source>BMP (*.bmp)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/ImageConverter.cpp" line="55"/>
+        <source>TIFF (*.tif *.tiff)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/ImageConverter.cpp" line="56"/>
+        <source>WebP (*.webp)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/ImageConverter.cpp" line="57"/>
         <location filename="../src/ModelConverter.cpp" line="91"/>
         <location filename="../src/ModelLoader.cpp" line="339"/>
+        <location filename="../src/RasterConverter.cpp" line="55"/>
+        <location filename="../src/VectorConverter.cpp" line="55"/>
         <source>All Files (*)</source>
         <translation>All Files (*)</translation>
     </message>
@@ -2379,6 +2439,156 @@ Triangles: %2</translation>
         <source>Simplify Mesh (%1%)</source>
         <translation>Simplify Mesh (%1%)</translation>
     </message>
+    <message>
+        <location filename="../src/RasterConverter.cpp" line="49"/>
+        <source>All Supported Rasters (%1)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/RasterConverter.cpp" line="50"/>
+        <source>GeoTIFF (*.tif *.tiff)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/RasterConverter.cpp" line="53"/>
+        <source>JPEG 2000 (*.jp2)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/RasterConverter.cpp" line="54"/>
+        <source>Erdas IMG (*.img)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/VectorConverter.cpp" line="48"/>
+        <source>All Supported Vectors (%1)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/VectorConverter.cpp" line="49"/>
+        <source>ESRI Shapefile (*.shp)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/VectorConverter.cpp" line="50"/>
+        <source>GeoJSON (*.geojson *.json)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/VectorConverter.cpp" line="51"/>
+        <source>KML (*.kml *.kmz)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/VectorConverter.cpp" line="52"/>
+        <source>GeoPackage (*.gpkg)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/VectorConverter.cpp" line="53"/>
+        <source>GML (*.gml)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/VectorConverter.cpp" line="54"/>
+        <source>CSV (*.csv)</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>RasterConverter</name>
+    <message>
+        <location filename="../src/RasterConverter.cpp" line="21"/>
+        <source>GeoTIFF</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/RasterConverter.cpp" line="22"/>
+        <source>PNG</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/RasterConverter.cpp" line="23"/>
+        <source>JPEG</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/RasterConverter.cpp" line="24"/>
+        <source>JPEG 2000</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/RasterConverter.cpp" line="25"/>
+        <source>Erdas IMG</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/RasterConverter.cpp" line="26"/>
+        <source>BMP</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/RasterConverter.cpp" line="27"/>
+        <source>GIF</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/RasterConverter.cpp" line="28"/>
+        <source>ENVI</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/RasterConverter.cpp" line="74"/>
+        <location filename="../src/RasterConverter.cpp" line="128"/>
+        <source>Unsupported raster output format: %1</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/RasterConverter.cpp" line="81"/>
+        <location filename="../src/RasterConverter.cpp" line="134"/>
+        <source>GDAL driver not available: %1</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/RasterConverter.cpp" line="91"/>
+        <source>Failed to open raster: %1</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/RasterConverter.cpp" line="109"/>
+        <source>Converted: %1</source>
+        <translation type="unfinished">Converted: %1</translation>
+    </message>
+    <message>
+        <location filename="../src/RasterConverter.cpp" line="111"/>
+        <source>Failed to write raster: %1</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/RasterConverter.cpp" line="121"/>
+        <source>No input files specified</source>
+        <translation type="unfinished">No input files specified</translation>
+    </message>
+    <message>
+        <location filename="../src/RasterConverter.cpp" line="141"/>
+        <source>Cannot create output directory: %1</source>
+        <translation type="unfinished">Cannot create output directory: %1</translation>
+    </message>
+    <message>
+        <location filename="../src/RasterConverter.cpp" line="154"/>
+        <source>Converting %1/%2: %3</source>
+        <translation type="unfinished">Converting %1/%2: %3</translation>
+    </message>
+    <message>
+        <location filename="../src/RasterConverter.cpp" line="178"/>
+        <source>Batch conversion complete: %1 succeeded, %2 failed out of %3 files</source>
+        <translation type="unfinished">Batch conversion complete: %1 succeeded, %2 failed out of %3 files</translation>
+    </message>
+    <message>
+        <location filename="../src/RasterConverter.cpp" line="181"/>
+        <source>Failed files:</source>
+        <translation type="unfinished">Failed files:</translation>
+    </message>
 </context>
 <context>
     <name>SceneTreeDock</name>
@@ -2405,6 +2615,101 @@ Triangles: %2</translation>
         <location filename="../src/SceneTreeDock.cpp" line="83"/>
         <source>(unnamed)</source>
         <translation>(unnamed)</translation>
+    </message>
+</context>
+<context>
+    <name>VectorConverter</name>
+    <message>
+        <location filename="../src/VectorConverter.cpp" line="22"/>
+        <source>ESRI Shapefile</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/VectorConverter.cpp" line="23"/>
+        <source>GeoJSON</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/VectorConverter.cpp" line="24"/>
+        <source>KML</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/VectorConverter.cpp" line="25"/>
+        <source>GeoPackage</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/VectorConverter.cpp" line="26"/>
+        <source>GML</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/VectorConverter.cpp" line="27"/>
+        <source>CSV</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/VectorConverter.cpp" line="28"/>
+        <source>MapInfo TAB</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/VectorConverter.cpp" line="29"/>
+        <source>DXF</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/VectorConverter.cpp" line="90"/>
+        <location filename="../src/VectorConverter.cpp" line="149"/>
+        <source>Unsupported vector output format: %1</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/VectorConverter.cpp" line="96"/>
+        <location filename="../src/VectorConverter.cpp" line="155"/>
+        <source>GDAL driver not available: %1</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/VectorConverter.cpp" line="106"/>
+        <source>Failed to open vector: %1</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/VectorConverter.cpp" line="130"/>
+        <source>Converted: %1</source>
+        <translation type="unfinished">Converted: %1</translation>
+    </message>
+    <message>
+        <location filename="../src/VectorConverter.cpp" line="132"/>
+        <source>Failed to write vector: %1</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/VectorConverter.cpp" line="142"/>
+        <source>No input files specified</source>
+        <translation type="unfinished">No input files specified</translation>
+    </message>
+    <message>
+        <location filename="../src/VectorConverter.cpp" line="162"/>
+        <source>Cannot create output directory: %1</source>
+        <translation type="unfinished">Cannot create output directory: %1</translation>
+    </message>
+    <message>
+        <location filename="../src/VectorConverter.cpp" line="175"/>
+        <source>Converting %1/%2: %3</source>
+        <translation type="unfinished">Converting %1/%2: %3</translation>
+    </message>
+    <message>
+        <location filename="../src/VectorConverter.cpp" line="203"/>
+        <source>Batch conversion complete: %1 succeeded, %2 failed out of %3 files</source>
+        <translation type="unfinished">Batch conversion complete: %1 succeeded, %2 failed out of %3 files</translation>
+    </message>
+    <message>
+        <location filename="../src/VectorConverter.cpp" line="206"/>
+        <source>Failed files:</source>
+        <translation type="unfinished">Failed files:</translation>
     </message>
 </context>
 <context>
@@ -2447,22 +2752,10 @@ Triangles: %2</translation>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Universal 3D Model Viewer</source>
-        <translation type="vanished">Universal 3D Model Viewer</translation>
-    </message>
-    <message>
-        <source>Open Model</source>
-        <translation type="vanished">Open Model</translation>
-    </message>
-    <message>
         <location filename="../src/WelcomeWidget.cpp" line="77"/>
         <location filename="../src/WelcomeWidget.cpp" line="145"/>
         <source>Recent Files</source>
         <translation>Recent Files</translation>
-    </message>
-    <message>
-        <source>Tip: Drag any model file into the window to open it</source>
-        <translation type="vanished">Tip: Drag any model file into the window to open it</translation>
     </message>
 </context>
 </TS>
